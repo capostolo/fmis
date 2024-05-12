@@ -1,0 +1,60 @@
+<?php namespace Fmis\Controllers;
+
+class FarmerController extends BaseController
+{
+
+  public function __construct()
+  {
+    helper(['form', 'url', 'session']);
+    $this->model = new \Fmis\Models\FarmerModel();
+	  $this->user = auth()->user();
+  }
+  
+  public function index()
+  { 
+    session()->remove('farmer_id');
+    session()->remove('farmer_name');
+    if ($this->user->inGroup('admin')) {
+      $data['rows'] = $this->model->findAll();
+      return view('\Fmis\Views\Farmer\list', $data);
+    }
+    else if ($this->user->inGroup('advisor')){
+      $data['rows'] = $this->model->where('advisor_id', user_id())->findAll();
+      return view('\Fmis\Views\Farmer\list', $data);
+    }
+    else if ($this->user->inGroup('user')){
+      $farmer = $this->model->where('user_id', user_id())->first();
+      if($farmer){
+        return redirect()->to('fmis/farmer/'.$farmer->id);
+      }
+      else {
+        return view('\Fmis\Views\Farmer\nodata');
+      }
+    }
+    else {
+      return view('\Fmis\Views\Farmer\nogroup');
+    }
+  }
+
+  public function newItem()
+  {
+    return view('\Fmis\Views\Farmer\add');
+  }
+  
+  public function showItem($id)
+  {
+    $crops = new \Fmis\Models\ParcelModel(); 
+    $data['crops'] = $crops->getCropList(['farmer_id' => $id]);
+    $data['farmer'] = false;
+    if ($this->user->inGroup('user')){
+      $data['farmer'] = true;
+    }
+    $data['row'] = $this->model->find($id);
+    if($data['row']){
+      session()->set('farmer_id', $id);
+      session()->set('farmer_name', $data['row']->farmer_firstname.' '.$data['row']->farmer_lastname);
+    }
+    return view('\Fmis\Views\Farmer\update', $data);
+    
+  }
+}
