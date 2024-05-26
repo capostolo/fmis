@@ -22,7 +22,8 @@ class FertilisationParcelModel extends Model
                               'fertiliser_application_id', 
                               'farming_stage_id', 
                               'fertilise_equipment_id', 
-                              'specialised_fertiliser_id', 
+                              'specialised_fertiliser_id',
+							  'total_quantity',
                               'carbon_footprint', 
                             ];
 
