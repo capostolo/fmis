@@ -21,18 +21,18 @@ class FertilisationParcelController extends BaseController
   public function newItem()
   {    
     $Fertiliser = new \Fmis\Models\FertiliserModel(); 
-		$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
-		$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
-		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
-		$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
-		$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
+	$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
+	$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
+	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
+	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
+	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
-		$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
-		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
-		$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
+	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
+	$data['farming_stage'] = $FarmingStage->findAll(); 
+	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
+	$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
 		
     
     session()->remove('fertilisation_parcel_id');
@@ -42,19 +42,19 @@ class FertilisationParcelController extends BaseController
   public function showItem($id)
   {    
     $Fertiliser = new \Fmis\Models\FertiliserModel(); 
-		$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
-		$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
-		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
-		$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
-		$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
+	$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
+	$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
+	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
+	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
+	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
     $Fertilisation = new \Fmis\Models\FertilisationModel();
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
-		$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
-		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
-		$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
+	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
+	$data['farming_stage'] = $FarmingStage->findAll(); 
+	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
+	$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
 		
     
     $data['row'] = $this->model->find($id);
@@ -71,10 +71,18 @@ class FertilisationParcelController extends BaseController
 
   public function saveItem()
   {   
-    $postdata = $this->request->getPost();
+    $Parcel = new \Fmis\Models\ParcelModel(); 
+	$postdata = $this->request->getPost();
     $item = new \Fmis\Entities\FertilisationParcelEntity();
     $item->fill($postdata);
     $item->parcel_id = session()->get('parcel_id');
+	$parcel_data = $Parcel->find($item->parcel_id);
+	if($item->unit_measurement_id == 1){
+		$item->total_quantity = $item_quantity_description * ($parcel_data->trees_number_ge4_years + $parcel_data->trees_number_l4_years);
+	}
+	else if($item->unit_measurement_id == 2){
+		$item->total_quantity = $item_quantity_description * $parcel_data->total_area;
+	}
     if(session()->get('fertilisation_parcel_id')){
       $item->id = session()->get('fertilisation_parcel_id');
     }
