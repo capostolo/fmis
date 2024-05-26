@@ -78,7 +78,8 @@ class FertilisationParcelController extends BaseController
     $item->parcel_id = session()->get('parcel_id');
 	$parcel_data = $Parcel->find($item->parcel_id);
 	if($item->unit_measurement_id == 1){
-		$item->total_quantity = $item->item_quantity_description * ($parcel_data->trees_number_ge4_years + $parcel_data->trees_number_l4_years);
+		$item->total_quantity = $item->quantity_description * ($parcel_data->trees_number_ge4_years + $parcel_data->trees_number_l4_years);
+		log_message('debug', 'q: '.$item->quantity_description.', ge4: '.$parcel_data->trees_number_ge4_years.', l4: '.$parcel_data->trees_number_l4_years);
 	}
 	else if($item->unit_measurement_id == 2){
 		$item->total_quantity = $item->item_quantity_description * $parcel_data->total_area;
