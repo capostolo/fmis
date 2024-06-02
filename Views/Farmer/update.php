@@ -2,14 +2,17 @@
 <?= $this->section('main') ?>
 <div class='container'>
   <h2 class='text-center'></h2>
-  <div class="row d-flex flex-column mb-3">
+  <div class="row d-flex flex-row justify-content-around mb-3">
     <h1 class="text-center">
       <?= $row->farmer_firstname.' '.$row->farmer_lastname ?>
       <small><small>  (ΑΦΜ: <?= $row->farmer_afm ?>)</small></small>
     </h1>
 	<?php if(! $farmer) { ?>
-    <div class="text-center">
+    <div class="p-2">
       <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
+    </div>
+    <div class="p-2">
+      <a class="btn btn-custom-green" href="<?= site_url('fmis/spd')?>">Σχέδιο Περιβαλλοντικής Διαχείρισης</a>
     </div>
 	<?php } ?>
   </div>

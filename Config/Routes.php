@@ -180,5 +180,6 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('parcel-leaf', 'ParcelLeafController::saveItem'); 
 	$routes->get('parcel-leaf/(:num)', 'ParcelLeafController::showItem/$1'); 
 	$routes->post('parcel-leaf/delete', 'ParcelLeafController::deleteItem'); 
-
+	$routes->get('spd', 'SpdController::index'); 
+	$routes->get('spd/(:num)', 'SpdController::showItem/$1'); 
 });

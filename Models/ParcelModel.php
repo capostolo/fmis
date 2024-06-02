@@ -29,6 +29,14 @@ class ParcelModel extends Model
 
   protected $useTimestamps = false;
 
+  public function getYears($where = null){
+    $builder = $this->db->table('parcel_years');
+    if($where){
+      $builder->where($where);
+    }
+    $query = $builder->get();
+    return $query->getResult();
+  }
 
   public function getCropList($where = null){
     $builder = $this->db->table('crop_list');
