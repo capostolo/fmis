@@ -10,7 +10,7 @@
                   <h3 class="text-custom-anthrax home-main-title mt-3 mb-3"><small>Διαχείριση γεωργικών εκμεταλλεύσεων</small></h3>
                   <hr class="divider my-4" />
                   <div class="text-center">
-                    <a class="btn btn-custom-green" href="<?= site_url('login') ?>">Συνδεθείτε</a>
+                    <a class="btn btn-custom-green" href="<?= site_url('login') ?>">Συνδεθείτε</a> 
                   </div>
               </div>
           </div>

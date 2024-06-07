@@ -27,6 +27,22 @@ class SpdController extends BaseController
     $data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
     $data['table5'] = $this->model->getTable5(['farmer_id' => $farmer, 'iacs_year' => $year]);
     return view('\Fmis\Views\Spd\show', $data);
+	/*  
+	$paths = new \Config\Paths();
+	require_once $paths->pdfDirectory . '/vendor/autoload.php';
+    $mpdf = new \Mpdf\Mpdf([
+      'mode' => 'utf-8',
+      'format' => [190, 236],
+      'orientation' => 'P'
+    ]);
+    $mpdf->use_kwt = true;
+    //$stylesheet = file_get_contents(base_url().'/assets/css/print.css');
+    //$mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+    $mpdf->WriteHTML(view('\Fmis\Views\Spd\show', $data));
+    $this->response->setHeader('Content-Type', 'application/pdf');
+    $mpdf->Output('filename.pdf', 'I');
+    //return view('\Yf\Apps\Views\app_print_data', $data);
+	*/
   }
 
 }

@@ -29,6 +29,7 @@
 						<th>31.6-Β</th>
 						<th>31.6-Γ</th>
 						<th>31.6-Δ</th>
+						<th>31.6-ΙΓ</th>
 						<th>31.6-Ε</th>
 						<th>31.6-ΣΤ</th>
 						<th>31.6-Ζ</th>
@@ -37,7 +38,6 @@
 						<th>31.6-Ι</th>
 						<th>31.6-ΙΑ</th>
 						<th>31.6-ΙΒ</th>
-						<th>31.6-ΙΓ</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,18 +48,18 @@
 						<td><?= $t->total_area ?></td>
 						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td>Schemis</td>
-						<td><?= ($t->ecoB == 1)? 'Ναι': ''?></td>
-						<td><?= ($t->ecoC == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoD == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoE == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoST == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoZ == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoH == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoU == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoI == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoIA == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoIB == 1)? 'Ναι': '' ?></td>
-						<td><?= ($t->ecoIC == 1)? 'Ναι': '' ?></td>
+						<td><?= ($t->ecoB == 1)? '<i class="bi bi-check"></i>' : ''?></td>
+						<td><?= ($t->ecoC == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoD == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoIC == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoE == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoST == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoZ == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoH == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoU == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoI == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoIA == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoIB == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -74,7 +74,7 @@
 					<tr>
 						<th>Δράση</th>
 						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
-						<th>Εχθρός / οί</th>
+						<th>Εχθρός</th>
 						<th>Εμπορική Ονομασία</th>
 						<th>Αριθμός ΑΑΔΑ / Απόφαση εγγραφή ΕΚΣΦΜ σκευάσματος</th>
 						<th>Συνιστώμενη ποσότητα</th>
@@ -91,7 +91,7 @@
 						<td><?= $t->product?></td>
 						<td><?= $t->aada?></td>
 						<td><?= $t->recommended_dose.' '.$t->unit?></td>
-						<td><?= $t->min_date.' έως '.$t->max_date?></td>
+						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
 						<td><?= $t->applied_dose.' '.$t->unit?></td>
 					</tr>
 				<?php } ?>
@@ -121,7 +121,7 @@
 						<td><?= $t->equipment_type ?></td>
 						<td><?= $t->cover_crop ?></td>
 						<td></td>
-						<td><?= $t->min_date.' έως '.$t->max_date?></td>
+						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
 					</tr>
 				<?php } ?>
 				<?php foreach ($table3a as $t) {?>
@@ -131,7 +131,7 @@
 						<td></td>
 						<td></td>
 						<td><?= $t->num_pruning ?></td>
-						<td><?= $t->min_date.' έως '.$t->max_date?></td>
+						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -139,7 +139,7 @@
 		</div>
 	</div>
 	<div class='row mt-5'>
-		<h5>ΠΙΝΑΚΑΣ 4 - ΧΡΗΣΗ ΕΞΟΠΛΙΣΜΟΥ & ΑΥΤΟΜΑΤΙΣΜΩΝ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΤΗΣ ΡΥΠΑΝΣΗΣ ΚΑΙ ΤΗΝ ΕΦΑΡΜΟΓΗ ΦΥΤΟΠΡΟΣΤΑΤΥΕΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ (31.6-Ζ,-Η, -Θ)</h5>
+		<h5>ΠΙΝΑΚΑΣ 4 - ΧΡΗΣΗ ΕΞΟΠΛΙΣΜΟΥ & ΑΥΤΟΜΑΤΙΣΜΩΝ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΤΗΣ ΡΥΠΑΝΣΗΣ ΚΑΙ ΤΗΝ ΕΦΑΡΜΟΓΗ ΦΥΤΟΠΡΟΣΤΑΤΕΥΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ (31.6-Ζ,-Η, -Θ)</h5>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -148,7 +148,7 @@
 						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
 						<th>Τύπος ακροφυσίων (31.6-Ζ)</th>
 						<th>Αριθμός ακροφυσίων (31.6-Ζ)</th>
-						<th>Έτος αγοράς εξοπλισμού (31.6-Ζ)</th>
+						<th>Έτος αγοράς εξοπλισμού (31.6-Ζ, -Θ)</th>
 						<th>Τύπος εξοπλισμού φυτοπροστασίας (31.6-Ζ)</th>
 						<th>Τύπος εξοπλισμού γεωργίας ακριβείας (31.6-Θ)</th>
 					</tr>
@@ -191,9 +191,9 @@
 						<td><?= $t->total_area ?></td>
 						<td><?= $t->type ?></td>
 						<td><?= $t->name ?></td>
-						<td></td>
+						<td><?= $t->category ?></td>
 						<td><?= $t->total_quantity.' '.$t->unit?></td>
-						<td><?= $t->min_date.' έως '.$t->max_date?></td>
+						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
