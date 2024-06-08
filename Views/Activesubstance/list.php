@@ -16,7 +16,7 @@
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped'>
+			<table class='table table-hover table-striped dmtable'>
 				<thead>
 					<tr>
             <th></th>
@@ -25,7 +25,7 @@
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<td><a href="<?= site_url('fmis/active-substance/'.$r->id) ?>" > <?= $r->active_substance_description ?> </a></td>
+							<td><a href="<?= site_url('fmis/active-substance/'.$r->id) ?>" > <?= $r->description ?> </a></td>
 						</tr>
 					<?php } ?>
 				</tbody>

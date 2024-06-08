@@ -11,12 +11,12 @@
     <div class='col-9'>
     </div>
     <div class='col-3'>
-      <a class='btn btn-primary form-control' href='<?= site_url('fmis/pruning-equipment/new') ?>'><?= lang('Fmis.new_item');?></a>
+      <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/pruning-equipment/new') ?>'><?= lang('Fmis.new_item');?></a>
     </div>
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped'>
+			<table class='table table-hover table-striped dmtable'>
 				<thead>
 					<tr>
             <th></th>
@@ -39,7 +39,7 @@
       </div>
       <div class='col-12'>
         <p class='text-center'>
-          <a class='btn btn-primary' href='<?= site_url('fmis/pruning-equipment/new') ?>'><?= lang('Fmis.new_item');?></a>
+          <a class='btn btn-custom-green' href='<?= site_url('fmis/pruning-equipment/new') ?>'><?= lang('Fmis.new_item');?></a>
         </p>
       </div>
 			<?php } ?>

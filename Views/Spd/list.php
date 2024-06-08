@@ -15,7 +15,7 @@
 	</div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped'>
+			<table class='table table-hover table-striped dmtable'>
 				<thead>
 					<tr>
 						<th><?= lang('Fmis.iacs_year');?></th>

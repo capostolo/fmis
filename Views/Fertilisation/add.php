@@ -19,7 +19,7 @@
 <div class='form-group col-3' > 
 
           <label class='control-label' for='fertiliser_id'><?= lang('Fmis.fertiliser_id') ?></label>
-          <select class='form-control' name='fertiliser_id' id='fertiliser_id' required>
+          <select class='form-control selectpicker' name='fertiliser_id' id='fertiliser_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required>
             <option value=''><?= lang('Fmis.fertiliser_id') ?></option>
             <?php foreach($fertiliser As $r) { ?>
             <option value='<?= $r->id ?>' > <?= $r->fertiliser_description ?> </option>

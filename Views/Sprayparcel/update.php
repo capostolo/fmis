@@ -17,7 +17,7 @@
     </div> 
     <div class='form-group col-4' > 
       <label class='control-label' for='protective_product_id'><?= lang('Fmis.protective_product_id') ?></label>
-      <select class='form-control' name='protective_product_id' id='protective_product_id' required>
+      <select class='form-control selectpicker' name='protective_product_id' id='protective_product_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required>
         <option value=''><?= lang('Fmis.protective_product_id') ?></option>
         <?php foreach($protective_product As $r) { 
         $protective_product_value = $row->protective_product_id ?? $directive->protective_product_id;
