@@ -37,8 +37,13 @@ class HarvestParcelController extends BaseController
       $dirData = $Harvesting->find($data['row']->harvesting_id);
       if($dirData && !$data['row']->harvesting_date){
         $data['directive'] = $dirData;
+		$SelectedEquipment = new \Fmis\Models\HarvestingEquipModel(); 
+		$data['selected_equipment'] = $SelectedEquipment->where(['harvesting_id' => $data['row']->harvesting_id])->findColumn('harvest_equipment_id');
         session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή συγκομιδής.');
       }
+	  else{
+		$data['selected_equipment'] = $SelectedEquipment->where(['harvest_parcel_id' => $id])->findColumn('harvest_equipment_id');
+	  }
     }
     return view('\Fmis\Views\Harvestparcel\update', $data);
   }
@@ -47,6 +52,8 @@ class HarvestParcelController extends BaseController
   {   
     $postdata = $this->request->getPost();
     $item = new \Fmis\Entities\HarvestParcelEntity();
+	$eq_selected = $postdata['harvest_equipment_id'];
+	unset($postdata['harvest_equipment_id']);
     $item->fill($postdata);
     $item->parcel_id = session()->get('parcel_id');
     if(session()->get('harvest_parcel_id')){
@@ -55,9 +62,18 @@ class HarvestParcelController extends BaseController
     if($this->model->save($item)){
       if($this->model->getInsertID() != 0){
         $item_id = $this->model->getInsertID();
+        $equipment = new \Fmis\Models\HarvestParcelEquipModel();
+        foreach($eq_selected As $key => $val){ 
+         $equipment->insert(array('harvest_parcel_id' => $item_id, 'harvest_equipment_id' => $val)); 
+        }
       }
       else {
         $item_id = $item->id;
+        $equipment = new \Fmis\Models\HarvestParcelEquipModel();
+        $equipment->where('harvest_parcel_id', $item_id)->delete();
+        foreach($eq_selected As $key => $val){ 
+         $equipment->insert(array('harvest_parcel_id' => $item_id, 'harvest_equipment_id' => $val)); 
+        }
       }
       return redirect()->to('fmis/parcel/'.session()->get('parcel_id'))->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }

@@ -2,24 +2,23 @@
 
 use CodeIgniter\Model;
 
-class HarvestEquipmentModel extends Model
+class HarvestingEquipModel extends Model
 {
   protected $DBGroup = 'fmis';
-  protected $table      = 'harvest_equipment';
+  protected $table      = 'harvesting_equip';
   protected $primaryKey = 'id';
 
   protected $useAutoIncrement = true;
 
-  protected $returnType     = 'Fmis\Entities\HarvestEquipmentEntity';
   protected $useSoftDeletes = false;
 
-  protected $allowedFields = ['harvest_equipment_description', 
-'model_description', 
-'hp', 
+  protected $allowedFields = ['harvesting_id',
+  'harvest_equipment_id', 
 ];
 
   protected $useTimestamps = false;
 
+  /*	
   public function modelList($where = null)
   {
     $builder = $this->db->table('harvesting_equip');
@@ -30,4 +29,5 @@ class HarvestEquipmentModel extends Model
     $query = $builder->get();
     return $query->getResultArray();
   }
+  */
 }

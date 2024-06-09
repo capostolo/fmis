@@ -30,8 +30,10 @@ class HarvestingController extends BaseController
   public function showItem($id)
   {    
     $HarvestEquipment = new \Fmis\Models\HarvestEquipmentModel(); 
+    $SelectedEquipment = new \Fmis\Models\HarvestingEquipModel(); 
 		
-    $data['harvest_equipment'] = $HarvestEquipment->findAll(); 
+    $data['harvest_equipment'] = $HarvestEquipment->findAll();
+	$data['selected_equipment'] = $SelectedEquipment->where(['harvesting_id' => $id])->findColumn('harvest_equipment_id');
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);
@@ -46,7 +48,9 @@ class HarvestingController extends BaseController
   {   
     $postdata = $this->request->getPost();
     $fi_selected = $postdata['fi_selected']; 
-		unset($postdata['fi_selected']);
+	unset($postdata['fi_selected']);
+	$eq_selected = $postdata['harvest_equipment_id'];
+	unset($postdata['harvest_equipment_id']);
     $item = new \Fmis\Entities\HarvestingEntity();
     $item->fill($postdata);
     $item->farmer_id = session()->get('farmer_id');
@@ -60,6 +64,10 @@ class HarvestingController extends BaseController
         foreach($fi_selected As $key => $val){ 
          $parcel->insert(array('harvesting_id' => $item_id, 'parcel_id' => $val)); 
         }
+        $equipment = new \Fmis\Models\HarvestingEquipModel();
+        foreach($eq_selected As $key => $val){ 
+         $equipment->insert(array('harvesting_id' => $item_id, 'harvest_equipment_id' => $val)); 
+        }
       }
       else {
         $item_id = $item->id;
@@ -67,7 +75,12 @@ class HarvestingController extends BaseController
         $parcel->where('harvesting_id', $item_id)->delete();
         foreach($fi_selected As $key => $val){ 
     		 $parcel->insert(array('harvesting_id' => $item_id, 'parcel_id' => $val)); 
-    		}
+    	}
+        $equipment = new \Fmis\Models\HarvestingEquipModel();
+        $equipment->where('harvesting_id', $item_id)->delete();
+        foreach($eq_selected As $key => $val){ 
+         $equipment->insert(array('harvesting_id' => $item_id, 'harvest_equipment_id' => $val)); 
+        }
       }
       
       return redirect()->to('fmis/farmer/'.session()->get('farmer_id'))->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');

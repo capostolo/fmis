@@ -11,22 +11,22 @@
 	echo form_open(site_url('fmis/harvesting'), $attributes);
 	?>
 	<div class='row'>
-		<div class='form-group col-3' > 
+		<div class='form-group col-4' > 
 
           <label class='control-label' for='dir_date'><?= lang('Fmis.dir_date') ?></label>
           <input type='text' class='form-control datepicker' name='dir_date' id='dir_date' value='<?= set_value('dir_date', $row->dir_date->toLocalizedString('d/M/Y')) ?>' required />
         </div> 
-<div class='form-group col-3' > 
+<div class='form-group col-8' > 
 
           <label class='control-label' for='harvest_equipment_id'><?= lang('Fmis.harvest_equipment_id') ?></label>
-          <select class='form-control' name='harvest_equipment_id' id='harvest_equipment_id' required>
+          <select class='form-control selectpicker' name='harvest_equipment_id[]' id='harvest_equipment_id' multiple required>
             <option value=''><?= lang('Fmis.harvest_equipment_id') ?></option>
             <?php foreach($harvest_equipment As $r) { ?>
-            <option value='<?= $r->id ?>' <?= set_select('harvest_equipment_id', $r->id, $r->id == $row->harvest_equipment_id) ?>> <?= $r->harvest_equipment_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('harvest_equipment_id', $r->id, in_array($r->id, $selected_equipment)) ?>> <?= $r->harvest_equipment_description ?> </option>
             <?php } ?>
           </select>
         </div> 
-<div class='form-group col-3'> 
+<div class='form-group col-12'> 
 
           <label class='control-label' for='stage_of_ripening'><?= lang('Fmis.stage_of_ripening') ?></label>
           <textarea class='form-control' name='stage_of_ripening' id='stage_of_ripening' required > <?= set_value('stage_of_ripening', $row->stage_of_ripening) ?></textarea>

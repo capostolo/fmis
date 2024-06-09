@@ -16,7 +16,7 @@
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped dstable'>
+			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
             <th>Εργασία</th>

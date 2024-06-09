@@ -16,20 +16,19 @@
           <label class='control-label' for='dir_date'><?= lang('Fmis.dir_date') ?></label>
           <input type='text' class='form-control datepicker' name='dir_date' id='dir_date' required />
         </div> 
-<div class='form-group col-4' > 
+<div class='form-group col-8' > 
 
           <label class='control-label' for='harvest_equipment_id'><?= lang('Fmis.harvest_equipment_id') ?></label>
-          <select class='form-control' name='harvest_equipment_id' id='harvest_equipment_id' required>
-            <option value=''><?= lang('Fmis.harvest_equipment_id') ?></option>
+          <select class='form-control selectpicker' name='harvest_equipment_id[]' id='harvest_equipment_id' multiple required title="<?= lang('Fmis.harvest_equipment_id') ?>">
             <?php foreach($harvest_equipment As $r) { ?>
             <option value='<?= $r->id ?>' > <?= $r->harvest_equipment_description ?> </option>
             <?php } ?>
           </select>
         </div> 
-<div class='form-group col-4'> 
+<div class='form-group col-12'> 
 
           <label class='control-label' for='stage_of_ripening'><?= lang('Fmis.stage_of_ripening') ?></label>
-          <input type='text' class='form-control' name='stage_of_ripening' id='stage_of_ripening' required />
+          <textarea type='text' class='form-control' name='stage_of_ripening' id='stage_of_ripening' required ></textarea>
         </div> 
 
 	</div>
