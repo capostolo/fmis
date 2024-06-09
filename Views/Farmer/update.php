@@ -7,6 +7,8 @@
       <?= $row->farmer_firstname.' '.$row->farmer_lastname ?>
       <small><small>  (ΑΦΜ: <?= $row->farmer_afm ?>)</small></small>
     </h1>
+  </div>
+  <div class="row d-flex flex-row justify-content-around mb-3">
 	<?php if(! $farmer) { ?>
     <div class="p-2">
       <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>

@@ -335,7 +335,7 @@
   });
   var viewextent = base.getSource().getProjection();
   var extent = vector.getSource().getExtent();
-  map.getView().fit(extent, map.getSize());  
+  map.getView().fit(extent,  {size: map.getSize(), padding: [200, 100, 200, 100]});  
 
   </script>
 <?= $this->endSection() ?>
