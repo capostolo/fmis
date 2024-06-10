@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg bg-custom-anthrax">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-custom-anthrax">
   <a class="navbar-brand text-white" href="http://www.agrenaos.gr">Agrenaos</a>
   <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
