@@ -1,12 +1,29 @@
-<?= $this->extend('Fmis\Views\base_view') ?>
-<?= $this->section('main') ?>
+<html>
+<head>
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 75%;
+}
+
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+}
+</style>
+</head>
+<body>
 <div class='container-fluid'>
 	<div class="text-custom-anthrax text-center">
-		<h2><?= lang('Fmis.spd');?></h2>
+		<h2 style="text-align: center;"><?= lang('Fmis.spd');?></h2>
 		<p class="lead"></p>
 		<p class=""></p>
 	</div>
-	<div class='row'>
+	<div class='row' style="font-size: 75%;">
 		<h5>ΠΙΝΑΚΑΣ 1 - ΣΤΟΙΧΕΙΑ ΑΓΡΟΤΕΜΑΧΙΩΝ ΑΝΑ ΠΑΡΕΜΒΑΣΗ</h5>
 		<div class="col-12">
 			<table>
@@ -48,25 +65,25 @@
 						<td><?= $t->total_area ?></td>
 						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td>Schemis</td>
-						<td><?= ($t->ecoB == 1)? '<i class="bi bi-check"></i>' : ''?></td>
-						<td><?= ($t->ecoC == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoD == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoIC == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoE == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoST == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoZ == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoH == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoU == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoI == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoIA == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
-						<td><?= ($t->ecoIB == 1)? '<i class="bi bi-check"></i>' : '' ?></td>
+						<td><?= ($t->ecoB == 1)? 'Ναι' : ''?></td>
+						<td><?= ($t->ecoC == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoD == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoIC == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoE == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoST == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoZ == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoH == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoU == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoI == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoIA == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoIB == 1)? 'Ναι' : '' ?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5'>
+	<div class='row mt-5' style="page-break-before: always;">
 		<h5>ΠΙΝΑΚΑΣ 2 - ΧΡΗΣΗ ΕΝΑΛΛΑΚΤΙΚΩΝ ΜΕΘΟΔΩΝ ΚΑΤΑΠΟΛΕΜΗΣΗΣ ΕΧΘΡΩΝ (31.6-Β, 31.6-Γ, 31.6-Δ, 31.6-ΙΓ)</h5>
 		<div class="col-12">
 			<table>
@@ -99,7 +116,7 @@
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5'>
+	<div class='row mt-5' style="page-break-before: always;">
 		<h5>ΠΙΝΑΚΑΣ 3 - ΟΡΘΕΣ ΓΕΩΡΓΙΚΕΣ ΠΡΑΚΤΙΚΕΣ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΕΙΣΡΟΩΝ (31.6-Ε,-ΣΤ)</h5>
 		<div class="col-12">
 			<table>
@@ -138,7 +155,7 @@
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5'>
+	<div class='row mt-5' style="page-break-before: always;">
 		<h5>ΠΙΝΑΚΑΣ 4 - ΧΡΗΣΗ ΕΞΟΠΛΙΣΜΟΥ & ΑΥΤΟΜΑΤΙΣΜΩΝ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΤΗΣ ΡΥΠΑΝΣΗΣ ΚΑΙ ΤΗΝ ΕΦΑΡΜΟΓΗ ΦΥΤΟΠΡΟΣΤΑΤΕΥΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ (31.6-Ζ,-Η, -Θ)</h5>
 		<div class="col-12">
 			<table>
@@ -169,7 +186,7 @@
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5'>
+	<div class='row mt-5' style="page-break-before: always;">
 		<h5>ΠΙΝΑΚΑΣ 5 - ΒΕΛΤΙΩΣΗ ΤΗΣ ΔΙΑΧΕΙΡΙΣΗΣ ΤΩΝ ΘΡΕΠΤΙΚΩΝ ΣΥΣΤΑΤΙΚΩΝ (31.6-Ι, -ΙΑ, -ΙΒ)</h5>
 		<div class="col-12">
 			<table>
@@ -201,8 +218,5 @@
 		</div>
 	</div>
 </div>
-<?= $this->endSection() ?>
-
-<?= $this->section('pageScripts') ?>
-
-<?= $this->endSection() ?>
+</body>
+</html>
