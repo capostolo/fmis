@@ -24,7 +24,7 @@
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<td><a href="<?= site_url('fmis/spd/'.$r->iacs_year) ?>" > <?= $r->iacs_year ?> </a></td>
+							<td><a href="<?= site_url('fmis/spd/'.$r->iacs_year) ?>" target="_blank"> <?= $r->iacs_year ?> </a></td>
 						</tr>
 					<?php } ?>
 				</tbody>

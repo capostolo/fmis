@@ -44,7 +44,6 @@
 <div class='form-group col-6' > 
 
           <label class='control-label' for='biodiversity_zone'><?= lang('Fmis.biodiversity_zone') ?></label>
-          <input type='text' class='form-control ' name='biodiversity_zone' id='biodiversity_zone' value='<?= set_value('biodiversity_zone', $row->biodiversity_zone) ?>' required />
           <select class='form-control' name='biodiversity_zone' id='biodiversity_zone' required>
             <option value=''><?= lang('Fmis.biodiversity_zone') ?></option>
             <option value='ΝΑΙ' <?= set_select('biodiversity_zone', 'ΝΑΙ', $r->biodiversity_zone == 'ΝΑΙ') ?>>ΝΑΙ</option>
