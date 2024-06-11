@@ -26,7 +26,7 @@
 			<a class='btn btn-default form-control' href="<?= site_url('fmis/spd') ?>"><?= lang('Fmis.go_back');?></a>
 		</div>
 		<div class='form-group col'>
-			<button class='btn btn-primary form-control' name='save' id='save'><?= lang('Fmis.save');?></button>
+			<button class='btn btn-custom-green form-control' name='save' id='save'><?= lang('Fmis.save');?></button>
 		</div>
       </div>
     </div>
