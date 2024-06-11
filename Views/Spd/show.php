@@ -175,9 +175,9 @@ th, td {
 					<tr>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><?= $beck_type ?></td>
+						<td><?= $beck_num ?></td>
+						<td><?= $equip_year ?></td>
 						<td><?= ($t->action == '31.6-Ζ')? $t->equipment_type: ''?></td>
 						<td><?= ($t->action == '31.6-Θ')? $t->equipment_type: ''?></td>
 					</tr>
