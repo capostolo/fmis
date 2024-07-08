@@ -21,6 +21,8 @@ class SpdController extends BaseController
   public function showItem($year)
   {    
     $farmer = session()->get('farmer_id');
+	$parcels = new \Fmis\Models\ParcelModel();
+	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL');
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	if (count($_GET) == 0) {
 		$data['iacs_year'] = $year;
@@ -50,7 +52,7 @@ class SpdController extends BaseController
 	$data['beck_type'] =  $_GET['beck_type'] ?? '';
 	$data['beck_num'] =  $_GET['beck_num'] ?? '';
 
-    $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
+    $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 	$mpdf->use_kwt = true;
 	$content = view('\Fmis\Views\Spd\show', $data);
 	$mpdf->WriteHTML($content);

@@ -33,16 +33,7 @@
       <select class='form-control selectpicker' name='protective_product_id' id='protective_product_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required>
         <option value=''><?= lang('Fmis.protective_product_id') ?></option>
         <?php foreach($protective_product As $r) { ?>
-        <option value='<?= $r->id ?>' > <?= $r->protective_product_description ?> </option>
-        <?php } ?>
-      </select>
-    </div> 
-    <div class='form-group col-3' > 
-      <label class='control-label' for='spray_equipment_id'><?= lang('Fmis.spray_equipment_id') ?></label>
-      <select class='form-control' name='spray_equipment_id' id='spray_equipment_id' required>
-        <option value=''><?= lang('Fmis.spray_equipment_id') ?></option>
-        <?php foreach($spray_equipment As $r) { ?>
-        <option value='<?= $r->id ?>' > <?= $r->spray_equipment_description ?> </option>
+        <option value='<?= $r->id ?>' data-scheme = '<?= $r->ecoscheme_id ?>' > <?= $r->protective_product_description ?> </option>
         <?php } ?>
       </select>
     </div> 
@@ -56,6 +47,15 @@
         <option value=''><?= lang('Fmis.unit_measurement_id') ?></option>
         <?php foreach($unit_measurement As $r) { ?>
         <option value='<?= $r->id ?>' > <?= $r->unit_measurement_description ?> </option>
+        <?php } ?>
+      </select>
+    </div> 
+    <div class='form-group col-3' > 
+      <label class='control-label' for='spray_equipment_id'><?= lang('Fmis.spray_equipment_id') ?></label>
+      <select class='form-control' name='spray_equipment_id' id='spray_equipment_id' required>
+        <option value=''><?= lang('Fmis.spray_equipment_id') ?></option>
+        <?php foreach($spray_equipment As $r) { ?>
+        <option value='<?= $r->id ?>' > <?= $r->spray_equipment_description ?> </option>
         <?php } ?>
       </select>
     </div> 
@@ -116,5 +116,27 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<script>
+$('#protective_product_id').change(function (){
+	var scheme =  $('#protective_product_id option:selected').data('scheme');
+	if(scheme == ''){
+		$("label[for = 'dose']").text('<?= lang('Fmis.dose_spray');?>')
+		$('#unit_measurement_id option:gt(0)').remove();
+		$("#unit_measurement_id").append($('<option/>', { value: "9", text: "κυβ. εκατοστά (ml)"}));
+		$("#unit_measurement_id").append($('<option/>', { value: "10", text: "γραμμάρια (gr)"}));
+	}
+	else if(scheme == '2'){
+		$("label[for = 'dose']").text('<?= lang('Fmis.dose_attract');?>')
+		$('#unit_measurement_id option:gt(0)').remove();
+		$("#unit_measurement_id").append($('<option/>', { value: "15", text: "αριθμός/στρέμμα", selected: "selected" }));
+	}
+	else {
+		$("label[for = 'dose']").text('<?= lang('Fmis.dose_other');?>')
+		$('#unit_measurement_id option:gt(0)').remove();
+		$("#unit_measurement_id").append($('<option/>', { value: "12", text: "άτομα/στρέμμα"}));
+		$("#unit_measurement_id").append($('<option/>', { value: "13", text: "άτομα/m2"}));
+		$("#unit_measurement_id").append($('<option/>', { value: "14", text: "άτομα/δένδρο"}));
+	}
+});
+</script>
 <?= $this->endSection() ?>

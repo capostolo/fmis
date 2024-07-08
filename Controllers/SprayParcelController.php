@@ -25,7 +25,7 @@ class SprayParcelController extends BaseController
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
     $data['protective_product'] = $ProtectiveProduct->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where('id = 9 OR id = 10')->findAll(); 
+		$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
 		$data['spray_equipment'] = $SprayEquipment->findAll(); 
     session()->remove('spray_parcel_id');
@@ -40,7 +40,7 @@ class SprayParcelController extends BaseController
 		$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
     $Spray = new \Fmis\Models\SprayModel();
     $data['protective_product'] = $ProtectiveProduct->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where('id = 9 OR id = 10')->findAll(); 
+		$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
 		$data['spray_equipment'] = $SprayEquipment->findAll(); 
     $data['row'] = $this->model->find($id);

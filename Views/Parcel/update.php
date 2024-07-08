@@ -12,52 +12,87 @@
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <label class="label" for="code">Κωδικος αγροτεμαχιου</label>
-              <input type="text" class="form-control" name="code" id="code" placeholder="Κωδικός αγροτεμαχίου" value="<?= set_value('code', $row->code) ?>" required>
+              <label class="label" for="code">Κωδικός αγροτεμαχίου</label>
+              <input type="text" class="form-control" name="code" id="code" placeholder="Κωδικός αγροτεμαχίου" value="<?= set_value('code', $row->code) ?>" readonly >
             </div>
           </div>
           <div class="col-12">
             <div class="form-group ">
               <input type="hidden" class="form-control" name="cultivation_code" id="cultivation_code" value="<?= set_value('cultivation_code', $row->cultivation_code) ?>">
-              <label class="label" for="poiCategoryName">Κατηγορια καλλιεργειας</label>
+              <label class="label" for="poiCategoryName">Κατηγορία καλλιέργειας</label>
               <input type="text" class="form-control" name="poiCategoryName" id="poiCategoryName" placeholder="Κατηγορία Καλλιέργειας" value="<?= set_value('poiCategoryName', $row->poiCategoryName) ?>" readonly>
             </div>
           </div>
           <div class="col-12">
             <div class="form-group ">
               <input type="hidden" class="form-control" name="cultivar_code" id="cultivar_code" value="<?= set_value('cultivar_code', $row->cultivar_code) ?>">
-              <label class="label" for="app_fi_poiDescription">Καλλιεργεια</label>
-              <input type="text" class="form-control" name="poiDescription" id="poiDescription" placeholder="Καλλιέργεια" value="<?= set_value('poiDescription', $row->poiDescription) ?>" autocomplete="off" required>
+              <label class="label" for="app_fi_poiDescription">Καλλιέργεια</label>
+              <input type="text" class="form-control" name="poiDescription" id="poiDescription" placeholder="Καλλιέργεια" value="<?= set_value('poiDescription', $row->poiDescription) ?>" autocomplete="off" readonly >
             </div>
           </div>
           <div class="col-12">
             <div class="form-group">
-              <label class="label" for="total_area">Επιλεξιμη εκταση (ha)</label>
-              <input type="text" class="form-control decimalnumber" name="total_area" id="total_area" placeholder="Επιλέξιμη έκταση (ha)" value="<?= set_value('total_area', number_format($row->total_area, 2, ',', '.')) ?>" required>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              <label class="label" for="co_ownership_percent">% Συνιδιοκτησιας</label>
-              <input type="text" class="form-control" name="co_ownership_percent" id="co_ownership_percent" placeholder="% Συνιδιοκτησίας" value="<?= set_value('co_ownership_percent', number_format($row->co_ownership_percent, 2, ',', '.')) ?>" required>
+              <label class="label" for="total_area">Επιλέξιμη έκταση (ha)</label>
+              <input type="text" class="form-control decimalnumber" name="total_area" id="total_area" placeholder="Επιλέξιμη έκταση (ha)" value="<?= set_value('total_area', number_format($row->total_area, 2, ',', '.')) ?>" readonly >
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <label class="label" for="co_ownership_percent">Αρ. δενδρων ≥ 4 ετων </label>
-              <input type="text" class="form-control" name="trees_number_ge4_years" id="trees_number_ge4_years" placeholder="Αρ. δένδρων ≥ 4 ετών" value="<?= set_value('trees_number_ge4_years', $row->trees_number_ge4_years) ?>" >
+              <label class="label" for="co_ownership_percent">% Συνιδιοκτησίας</label>
+              <input type="text" class="form-control" name="co_ownership_percent" id="co_ownership_percent" placeholder="% Συνιδιοκτησίας" value="<?= set_value('co_ownership_percent', number_format($row->co_ownership_percent, 2, ',', '.')) ?>" readonly >
+            </div>
+          </div>
+        </div>
+		<?php if ($row->cultivation_code == '15' ||
+				  $row->cultivation_code == '19' ||
+				  $row->cultivation_code == '21' ||
+				  $row->cultivation_code == '37' ||
+				  $row->cultivation_code == '45.2' ||
+				  $row->cultivation_code == '49' ||
+				  $row->cultivation_code == '66' ||
+				  $row->cultivation_code == '67') { ?>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="label" for="trees_number_ge4_years">Αρ. δένδρων ≥ 4 ετων </label>
+              <input type="text" class="form-control" name="trees_number_ge4_years" id="trees_number_ge4_years" placeholder="Αρ. δένδρων ≥ 4 ετών" value="<?= set_value('trees_number_ge4_years', $row->trees_number_ge4_years) ?>" readonly>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <label class="label" for="co_ownership_percent">Αρ. δενδρων < 4 ετων </label>
-              <input type="text" class="form-control" name="trees_number_l4_years" id="trees_number_l4_years" placeholder="Αρ. δένδρων < 4 ετών" value="<?= set_value('trees_number_l4_years', $row->trees_number_l4_years) ?>" >
+              <label class="label" for="trees_number_l4_years">Αρ. δένδρων < 4 ετων </label>
+              <input type="text" class="form-control" name="trees_number_l4_years" id="trees_number_l4_years" placeholder="Αρ. δένδρων < 4 ετών" value="<?= set_value('trees_number_l4_years', $row->trees_number_l4_years) ?>" readonly>
+            </div>
+          </div>
+        </div>
+		<?php } 
+		 if ($row->cultivation_code == '28.1' ||
+			$row->cultivation_code == '36.2' ||
+			$row->cultivation_code == '36.3' ) { ?>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="label" for="vineyards_l4_years">Αμπελώνας ≥ 3 ετών </label>
+              <input type="text" class="form-control" name="vineyards_ge3_years" id="vineyards_ge3_years" placeholder="Αμπελώνας ≥ 3 ετών" value="<?= set_value('vineyards_ge3_years', ($row->vineyards_ge3_years == 1)? 'Ναι': 'Όχι') ?>" readonly>
+            </div>
+          </div>
+        </div>
+		<?php } ?>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label class="label" for="is_irrigated">Αρδευόμενο</label>
+              <input type="text" class="form-control" name="is_irrigated" id="is_irrigated" placeholder="Αρδευόμενο" value="<?= set_value('is_irrigated', ($row->is_irrigated == 1)? 'Ναι': 'Όχι') ?>" readonly >
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+              <label class="label" for="irrigation_method_code">Μέθοδος άρδευσης</label>
+              <input type="text" class="form-control" name="irrigation_method_code" id="irrigation_method_code" placeholder="Μέθοδος άρδευσης" value="<?= set_value('irrigation_method_code', $row->irrigation_method_code) ?>" readonly >
             </div>
           </div>
         </div>
@@ -68,19 +103,19 @@
           <div class="col-4">
             <div class="form-group">
               <label class="label" for="balance_n">Αζωτο (N, kg)</label>
-              <input type="text" class="form-control" name="balance_n" id="balance_n" placeholder="Άζωτο (N)" value="<?= set_value('balance_n', number_format($nutrients['nitrogen'] * $row->total_area, 2, ',', '.') ) ?>" disabled>
+              <input type="text" class="form-control" name="balance_n" id="balance_n" placeholder="Άζωτο (N)" value="<?= set_value('balance_n', number_format($nutrients['nitrogen'] * $row->total_area, 2, ',', '.') ) ?>" readonly>
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label class="label" for="balance_p">Φωσφορος (P, kg)</label>
-              <input type="text" class="form-control" name="balance_p" id="balance_p" placeholder="Φώσφορος (P)" value="<?= set_value('balance_p', number_format($nutrients['phosphorus'] * $row->total_area, 2, ',', '.')) ?>" disabled>
+              <input type="text" class="form-control" name="balance_p" id="balance_p" placeholder="Φώσφορος (P)" value="<?= set_value('balance_p', number_format($nutrients['phosphorus'] * $row->total_area, 2, ',', '.')) ?>" readonly>
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label class="label" for="balance_k">Καλιο (K, kg)</label>
-              <input type="text" class="form-control" name="balance_k" id="balance_k" placeholder="Κάλιο (K)" value="<?= set_value('balance_k', number_format($nutrients['potassium'] * $row->total_area, 2, ',', '.')) ?>" disabled>
+              <input type="text" class="form-control" name="balance_k" id="balance_k" placeholder="Κάλιο (K)" value="<?= set_value('balance_k', number_format($nutrients['potassium'] * $row->total_area, 2, ',', '.')) ?>" readonly>
             </div>
           </div>
         </div>

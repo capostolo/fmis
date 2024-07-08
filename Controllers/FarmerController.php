@@ -14,6 +14,8 @@ class FarmerController extends BaseController
   { 
     session()->remove('farmer_id');
     session()->remove('farmer_name');
+    session()->remove('farmer_afm');
+    session()->remove('farmer_fathername');
     if ($this->user->inGroup('admin')) {
       $data['rows'] = $this->model->findAll();
       return view('\Fmis\Views\Farmer\list', $data);
@@ -53,6 +55,8 @@ class FarmerController extends BaseController
     if($data['row']){
       session()->set('farmer_id', $id);
       session()->set('farmer_name', $data['row']->farmer_firstname.' '.$data['row']->farmer_lastname);
+      session()->set('farmer_afm', $data['row']->farmer_afm);
+      session()->set('farmer_fathername', $data['row']->farmer_fathername);
     }
     return view('\Fmis\Views\Farmer\update', $data);
     

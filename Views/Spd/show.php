@@ -18,13 +18,134 @@ th, td {
 </head>
 <body>
 <div class='container-fluid'>
-	<div class="text-custom-anthrax text-center">
-		<h2 style="text-align: center;"><?= lang('Fmis.spd');?></h2>
-		<p class="lead"></p>
-		<p class=""></p>
+	<div class='row' style="font-size: 100%;">
+		<div class="text-custom-anthrax text-center">
+			<h2 style="text-align: center;">Σχέδιο Περιβαλλοντικής Διαχείρισης (ΣΠΔ) στο πλαίσιο των Οικολογικών Προγραμμάτων (ecoschemes) του ΣΣ ΚΑΠ</h2>
+			<h3 style="text-align: center;">Παρέμβαση Π1-31.6 Ενίσχυση παραγωγών για την παραγωγή φιλικών για το περιβάλλον πρακτικών διαχείρισης, με τη χρήση ψηφιακής εφαρμογής διαχείρισης εισροών και περιβαλλοντικών παραμέτρων</h3>
+			<h4 style="text-align: center;">Δράση 31.6-Α Χρήση της ψηφιακής εφαρμογής και σύνταξη Σχεδίου Περιβαλλοντικής Διαχείρισης (ΣΠΔ)</h4>
+		</div>
+		<div class="col-12">
+			<table width="100%">
+				<tr>
+					<td width="25%">Έτος ΕΑΕ:</td>
+					<td width="25%"><?= $iacs_year?></td>
+					<td width="25%">Ημερομηνία κατάρτισης:</td>
+					<td width="25%"></td>
+				</tr>
+			</table>
+		</div>
+		<br/>
+		<div class="col-12 mt-2">
+			<table width="100%">
+				<tr>
+					<td colspan="4">Στοιχεία αιτούντα γεωργού</td>
+				</tr>
+				<tr>
+					<td width="25%">ΑΦΜ:</td>
+					<td width="25%"><?= session()->get('farmer_afm')?></td>
+					<td width="25%">Ονοματεπώνυμο γεωργού / νόμιμου εκπροσώπου νομικού προσώπου:</td>
+					<td width="25%"><?= session()->get('farmer_name')?></td>
+				</tr>
+				<tr>
+					<td>Τύπος προσώπου (Φυσικό ή Νομικό Πρόσωπο):</td>
+					<td>Φυσικό πρόσωπο</td>
+					<td>Πατρώνυμο:</td>
+					<td><?= session()->get('farmer_fathername')?></td>
+				</tr>
+				<tr>
+					<td>Επωνυμία (στην περίπτωση νομικού προσώπου):</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<br/>
+		<div class="col-12 mt-2">
+			<table width="100%">
+				<tr>
+					<td colspan="2">Στοιχεία έδρας εκμετάλλευσης</td>
+				</tr>
+				<tr>
+					<td width="50%">Περιφέρεια έδρας εκμετάλλευσης:</td>
+					<td width="50%"></td>
+				</tr>
+				<tr>
+					<td>Περιφερειακή ενότητα έδρας εκμετάλλευσης:</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Δημοτική – Τοπική Κοινότητα έδρας εκμετάλλευσης:</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<br/>
+		<div class="col-12 mt-2">
+			<table width="100%">
+				<tr>
+					<td colspan="4">Στοιχεία τεχνικού συμβούλου (Γεωπόνος (ΠΕ))</td>
+				</tr>
+				<tr>
+					<td width="25%">ΑΦΜ επιβλέποντα τεχνικού συμβούλου:</td>
+					<td width="25%"></td>
+					<td colspan="2">Σε περίπτωση απασχόλησης του τεχνικού συμβούλου σε νομικό πρόσωπο, συμπληρώστε τα στοιχεία του νομικού προσώπου: </td>
+				</tr>
+				<tr>
+					<td>Αριθμός Μητρώου ΓΕΩΤΕΕ::</td>
+					<td></td>
+					<td width="25%">ΑΦΜ νομικού προσώπου: </td>
+					<td width="25%"></td>
+				</tr>
+				<tr>
+					<td>Επώνυμο:</td>
+					<td></td>
+					<td>Επωνυμία νομικού προσώπου:</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Όνομα:</td>
+					<td></td>
+					<td colspan="2">Σχέση εργασίας τεχνικού συμβούλου με το νομικό πρόσωπο (τσεκάρετε με «Χ» κατά περίπτωση: </td>
+				</tr>
+				<tr>
+					<td rowspan="4" colspan="2"></td>
+					<td>Μισθωτός</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Μέτοχος</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Με δελτίο παροχής υπηρεσιών </td>
+					<td></td>
+				</tr>
+				<tr>
+					<td style="height: 50px; vertical-align: top;">Άλλο (συνοπτική περιγραφή)</td>
+					<td></td>
+				</tr>
+			</table>
+		<br/>
+		<div class="col-12 mt-2">
+			<table width="100%"  style="border: 0px; border-collapse:collapse;">
+				<tr>
+					<td rowspan="3" width="50%" style="border-style: hidden!important;"></td>
+					<td width="50%">Ο συντάκτης - Τεχνικός σύμβουλος</td>
+				</tr>
+				<tr>
+					<td style="height: 100px; vertical-align: bottom;">(Υπογραφή- σφραγίδα)</td>
+				</tr>
+				<tr>
+					<td style="height: 50px; vertical-align: bottom;">(Ημερομηνία)</td>
+				</tr>
+			</table>
+		</div>
+		</div>
 	</div>
+	<pagebreak orientation="L">
 	<div class='row' style="font-size: 75%;">
-		<h5>ΠΙΝΑΚΑΣ 1 - ΣΤΟΙΧΕΙΑ ΑΓΡΟΤΕΜΑΧΙΩΝ ΑΝΑ ΠΑΡΕΜΒΑΣΗ</h5>
+		<h3>ΠΙΝΑΚΑΣ 1 - ΣΤΟΙΧΕΙΑ ΑΓΡΟΤΕΜΑΧΙΩΝ ΑΝΑ ΠΑΡΕΜΒΑΣΗ</h3>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -58,7 +179,9 @@ th, td {
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach ($table1 as $t) {?>
+				<?php foreach ($table1 as $t) {
+					$eco = $t->ecoB + $t->ecoC + $t->ecoD + $t->ecoE + $t->ecoST + $t->ecoZ + $t->ecoH + $t->ecoU + $t->ecoI + $t->ecoIA + $t->ecoIB + $t->ecoIC;
+					if ($eco > 0) {?>
 					<tr>
 						<td><?= $t->location ?></td>
 						<td><?= $t->code ?></td>
@@ -69,7 +192,13 @@ th, td {
 						<td><?= ($t->ecoC == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoD == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoIC == 1)? 'Ναι' : '' ?></td>
-						<td><?= ($t->ecoE == 1)? 'Ναι' : '' ?></td>
+						<td><?= ($t->ecoE == 1)? 'Ναι' : ''
+
+
+
+
+						
+						?></td>
 						<td><?= ($t->ecoST == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoZ == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoH == 1)? 'Ναι' : '' ?></td>
@@ -78,13 +207,15 @@ th, td {
 						<td><?= ($t->ecoIA == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoIB == 1)? 'Ναι' : '' ?></td>
 					</tr>
-				<?php } ?>
+				<?php } } ?>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5' style="page-break-before: always;">
-		<h5>ΠΙΝΑΚΑΣ 2 - ΧΡΗΣΗ ΕΝΑΛΛΑΚΤΙΚΩΝ ΜΕΘΟΔΩΝ ΚΑΤΑΠΟΛΕΜΗΣΗΣ ΕΧΘΡΩΝ (31.6-Β, 31.6-Γ, 31.6-Δ, 31.6-ΙΓ)</h5>
+	</pagebreak>
+	<pagebreak orientation="L">
+	<div class='row mt-5' style="font-size: 75%;">
+		<h3>ΠΙΝΑΚΑΣ 2 - ΧΡΗΣΗ ΕΝΑΛΛΑΚΤΙΚΩΝ ΜΕΘΟΔΩΝ ΚΑΤΑΠΟΛΕΜΗΣΗΣ ΕΧΘΡΩΝ (31.6-Β, 31.6-Γ, 31.6-Δ, 31.6-ΙΓ)</h3>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -116,8 +247,10 @@ th, td {
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5' style="page-break-before: always;">
-		<h5>ΠΙΝΑΚΑΣ 3 - ΟΡΘΕΣ ΓΕΩΡΓΙΚΕΣ ΠΡΑΚΤΙΚΕΣ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΕΙΣΡΟΩΝ (31.6-Ε,-ΣΤ)</h5>
+	</pagebreak>
+	<pagebreak orientation="L">
+	<div class='row mt-5' style="font-size: 75%;">
+		<h3>ΠΙΝΑΚΑΣ 3 - ΟΡΘΕΣ ΓΕΩΡΓΙΚΕΣ ΠΡΑΚΤΙΚΕΣ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΕΙΣΡΟΩΝ (31.6-Ε,-ΣΤ)</h3>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -155,8 +288,10 @@ th, td {
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5' style="page-break-before: always;">
-		<h5>ΠΙΝΑΚΑΣ 4 - ΧΡΗΣΗ ΕΞΟΠΛΙΣΜΟΥ & ΑΥΤΟΜΑΤΙΣΜΩΝ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΤΗΣ ΡΥΠΑΝΣΗΣ ΚΑΙ ΤΗΝ ΕΦΑΡΜΟΓΗ ΦΥΤΟΠΡΟΣΤΑΤΕΥΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ (31.6-Ζ,-Η, -Θ)</h5>
+	</pagebreak>
+	<pagebreak orientation="L">
+	<div class='row mt-5' style="font-size: 75%;">
+		<h3>ΠΙΝΑΚΑΣ 4 - ΧΡΗΣΗ ΕΞΟΠΛΙΣΜΟΥ & ΑΥΤΟΜΑΤΙΣΜΩΝ ΓΙΑ ΤΗ ΜΕΙΩΣΗ ΤΗΣ ΡΥΠΑΝΣΗΣ ΚΑΙ ΤΗΝ ΕΦΑΡΜΟΓΗ ΦΥΤΟΠΡΟΣΤΑΤΕΥΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ (31.6-Ζ,-Η, -Θ)</h3>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -186,8 +321,10 @@ th, td {
 			</table>
 		</div>
 	</div>
-	<div class='row mt-5' style="page-break-before: always;">
-		<h5>ΠΙΝΑΚΑΣ 5 - ΒΕΛΤΙΩΣΗ ΤΗΣ ΔΙΑΧΕΙΡΙΣΗΣ ΤΩΝ ΘΡΕΠΤΙΚΩΝ ΣΥΣΤΑΤΙΚΩΝ (31.6-Ι, -ΙΑ, -ΙΒ)</h5>
+	</pagebreak>
+	<pagebreak orientation="L">
+	<div class='row mt-5' style="font-size: 75%;">
+		<h3>ΠΙΝΑΚΑΣ 5 - ΒΕΛΤΙΩΣΗ ΤΗΣ ΔΙΑΧΕΙΡΙΣΗΣ ΤΩΝ ΘΡΕΠΤΙΚΩΝ ΣΥΣΤΑΤΙΚΩΝ (31.6-Ι, -ΙΑ, -ΙΒ)</h3>
 		<div class="col-12">
 			<table>
 				<thead>
@@ -211,6 +348,63 @@ th, td {
 						<td><?= $t->category ?></td>
 						<td><?= $t->total_quantity.' '.$t->unit?></td>
 						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</pagebreak>
+	<pagebreak orientation="L">
+	<div class='row mt-5' style="font-size: 75%;">
+		<h3>ΠΙΝΑΚΑΣ 6 - ΨΗΦΙΑΚΗ ΕΦΑΡΜΟΓΗ ΔΙΑΧΕΙΡΙΣΗΣ ΕΙΣΡΟΩΝ & ΠΑΡΑΚΟΛΟΥΘΗΣΗΣ ΠΕΡΙΒΑΛΛΟΝΤΙΚΩΝ ΠΑΡΑΜΕΤΡΩΝ (31.6-Α)</h3>
+		<h3>Ονομασία πιστοποιημένης ψηφιακής εφαρμογής: SCHEMIS</h3>
+		<h3>Τομείς που καλύπτει η εφαρμογή: Άρδευση, Διαχείριση εδάφους, Κλάδεμα, Λίπανση, Μαζική παγίδευση, Συγκομιδή, 
+		Φυτοπροστασία</h3>
+		<div class="col-12">
+			<table width="100%">
+				<thead>
+					<tr>
+						<th>Περιγραφή συμβουλής που αντλήθηκε από την ψηφιακή εφαρμογή</th>
+						<th>Περιγραφή του τρόπου υιοθέτησης της συμβουλής από το γεωργό</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($table6 as $t) {?>
+					<tr>
+						<td><?= $t->farm_practice. ' ('. $t->location. ', '. $t->dir_date->toLocalizedString('d/M/Y'). ')' ?></td>
+						<td>
+							<?php
+								$nonadoption = "";
+								$adoption = array();
+								if ($t->application_date == null) {
+									$nonadoption = "Η συμβουλή δεν υλοποιήθηκε.";
+								}
+								else {
+									if ($t->product_check == 0) {
+										$adoption[] = "στο προϊόν";
+									}
+									if ($t->quantity_check == 0) {
+										$adoption[] = "στην ποσότητα";
+									}
+									if ($t->application_check == 0) {
+										$adoption[] = "στον τρόπο εφαρμογής";
+									}
+									if ($t->stage_check == 0) {
+										$adoption[] = "στο στάδιο καλλιέργειας";
+									}
+								}
+								if ($nonadoption != "") {
+									echo $nonadoption;
+								}
+								else if(count($adoption) > 0) {
+									echo "Η συμβουλή υιοθετήθηκε στις ".$t->application_date->toLocalizedString('d/M/Y'). " με διαφορά ".implode(', ', $adoption);
+								}
+								else {
+									echo "Η συμβουλή υιοθετήθηκε πλήρως στις ".$t->application_date->toLocalizedString('d/M/Y');
+								}
+							?>
+						</td>
 					</tr>
 				<?php } ?>
 				</tbody>
