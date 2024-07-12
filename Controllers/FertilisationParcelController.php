@@ -80,8 +80,11 @@ class FertilisationParcelController extends BaseController
 	if($item->unit_measurement_id == 1 || $item->unit_measurement_id == 3){
 		$item->total_quantity = $item->quantity_description * ($parcel_data->trees_number_ge4_years + $parcel_data->trees_number_l4_years);
 	}
-	else if($item->unit_measurement_id == 2 || $item->unit_measurement_id == 4){
+	else if($item->unit_measurement_id == 2){
 		$item->total_quantity = $item->item_quantity_description * $parcel_data->total_area * 10;
+	}
+	else if($item->unit_measurement_id == 4){
+		$item->total_quantity = $item->item_quantity_description * $item->parcel_quantity / 100;
 	}
     if(session()->get('fertilisation_parcel_id')){
       $item->id = session()->get('fertilisation_parcel_id');

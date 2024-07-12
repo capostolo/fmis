@@ -45,6 +45,10 @@
             <?php } ?>
           </select>
         </div> 
+    <div class='form-group col-3' > 
+      <label class='control-label' for='parcel_quantity'><?= lang('Fmis.parcel_quantity') ?></label>
+      <input type='text' class='form-control ' name='parcel_quantity' id='parcel_quantity' value='<?= set_value('parcel_quantity', $r->parcel_quantity) ?>' />
+    </div> 
 <div class='form-group col-3' > 
 
           <label class='control-label' for='fertiliser_application_id'><?= lang('Fmis.fertiliser_application_id') ?></label>
@@ -114,5 +118,24 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
+<script>
+$( document ).ready(function() {
+    adaptParcelQuantity();
+});
+$('#unit_measurement_id').change(function (){
+	adaptParcelQuantity();
+});
 
+function adaptParcelQuantity(){
+	var unit_id =  $('#unit_measurement_id').val();
+	if(unit_id == '4'){
+		$('#parcel_quantity').prop('disabled', false);
+		$('#parcel_quantity').prop('required', true);
+	}
+	else {
+		$('#parcel_quantity').prop('disabled', true);
+		$('#parcel_quantity').prop('required', false);
+	}	
+};
+</script>
 <?= $this->endSection() ?>

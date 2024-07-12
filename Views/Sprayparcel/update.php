@@ -28,7 +28,7 @@
     </div> 
     <div class='form-group col-4' > 
       <label class='control-label' for='parcel_quantity'><?= lang('Fmis.parcel_quantity') ?></label>
-      <input type='text' class='form-control ' name='parcel_quantity' id='parcel_quantity' value='<?= set_value('parcel_quantity', $row->parcel_quantity) ?>'required />
+      <input type='text' class='form-control ' name='parcel_quantity' id='parcel_quantity' value='<?= set_value('parcel_quantity', $row->parcel_quantity) ?>' required />
     </div> 
     <div class='form-group col-4' > 
       <label class='control-label' for='spray_equipment_id'><?= lang('Fmis.spray_equipment_id') ?></label>
