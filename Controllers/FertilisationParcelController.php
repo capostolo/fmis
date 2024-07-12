@@ -28,7 +28,7 @@ class FertilisationParcelController extends BaseController
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-	$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
@@ -50,7 +50,7 @@ class FertilisationParcelController extends BaseController
     $Fertilisation = new \Fmis\Models\FertilisationModel();
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-	$data['unit_measurement'] = $UnitMeasurement->where('id = 1 OR id = 2')->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
@@ -77,12 +77,11 @@ class FertilisationParcelController extends BaseController
     $item->fill($postdata);
     $item->parcel_id = session()->get('parcel_id');
 	$parcel_data = $Parcel->find($item->parcel_id);
-	if($item->unit_measurement_id == 1){
+	if($item->unit_measurement_id == 1 || $item->unit_measurement_id == 3){
 		$item->total_quantity = $item->quantity_description * ($parcel_data->trees_number_ge4_years + $parcel_data->trees_number_l4_years);
-		log_message('debug', 'q: '.$item->quantity_description.', ge4: '.$parcel_data->trees_number_ge4_years.', l4: '.$parcel_data->trees_number_l4_years);
 	}
-	else if($item->unit_measurement_id == 2){
-		$item->total_quantity = $item->item_quantity_description * $parcel_data->total_area;
+	else if($item->unit_measurement_id == 2 || $item->unit_measurement_id == 4){
+		$item->total_quantity = $item->item_quantity_description * $parcel_data->total_area * 10;
 	}
     if(session()->get('fertilisation_parcel_id')){
       $item->id = session()->get('fertilisation_parcel_id');
