@@ -24,6 +24,7 @@ class SpdController extends BaseController
 	$parcels = new \Fmis\Models\ParcelModel();
 	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL');
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
+	$data['iacs_year'] = $year;
 	if (count($_GET) == 0) {
 		$data['iacs_year'] = $year;
 		$data['ecoZ'] = false;
