@@ -21,7 +21,7 @@ class FertiliserModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
+  
   public function modelList($where = null)
   {
     $builder = $this->db->table('fertiliser_list');
@@ -31,5 +31,5 @@ class FertiliserModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\FertiliserEntity');
   }
-  */
+  
 }

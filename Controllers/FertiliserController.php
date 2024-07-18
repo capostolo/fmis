@@ -15,7 +15,7 @@ class FertiliserController extends BaseController
       $data['rows'] = $this->model->modelList(['fertiliser_where' => session()->get('fertiliser_where')]);
     }
     else{
-      $data['rows'] = $this->model->findAll();
+      $data['rows'] = $this->model->modelList();
     }
     return view('\Fmis\Views\Fertiliser\list', $data);
   }
@@ -33,10 +33,7 @@ class FertiliserController extends BaseController
 
   public function showItem($id)
   {    
-    
-    
-    
-    $data['row'] = $this->model->find($id);
+	$data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('fertiliser_id', $id);
     }

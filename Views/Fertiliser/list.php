@@ -19,13 +19,19 @@
 			<table class='table table-hover table-striped dmtable'>
 				<thead>
 					<tr>
-            <th></th>
+						<th><?= lang('Fmis.fertiliser');?></th>
+						<th width="15%"><?= lang('Fmis.nutrient_content');?></th>
+						<th width="15%"><?= lang('Fmis.mineral_content');?></th>
+						<th width="15%"><?= lang('Fmis.ecoscheme_id');?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/fertiliser/'.$r->id) ?>" > <?= $r->fertiliser_description ?> </a></td>
+							<td><?= $r->nutrient_content ?> </td>
+							<td><?= $r->mineral_content ?> </td>
+							<td><?= $r->code ?> </td>
 						</tr>
 					<?php } ?>
 				</tbody>
