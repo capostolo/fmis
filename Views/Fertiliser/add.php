@@ -19,15 +19,14 @@
 <div class='form-group col-3' > 
 
           <label class='control-label' for='nutrient_content'><?= lang('Fmis.nutrient_content') ?></label>
-          <input type='text' class='form-control ' name='nutrient_content' id='nutrient_content' required />
+          <input type='text' class='form-control ' name='nutrient_content' id='nutrient_content'  />
         </div> 
 <div class='form-group col-3' > 
 
           <label class='control-label' for='mineral_content'><?= lang('Fmis.mineral_content') ?></label>
-          <input type='text' class='form-control ' name='mineral_content' id='mineral_content' required />
+          <input type='text' class='form-control ' name='mineral_content' id='mineral_content'  />
         </div> 
 
-	</div>
 <div class='form-group col-3' > 
 
           <label class='control-label' for='ecoscheme_id'><?= lang('Fmis.ecoscheme_id') ?></label>
@@ -38,6 +37,7 @@
             <?php } ?>
           </select>
         </div>   
+	</div>
 	<div class='row'>
 		<div class='form-group col'>
 			<a class='btn btn-default form-control' href="<?php echo site_url('fmis/fertiliser') ?>"><?= lang('Fmis.go_back');?></a>

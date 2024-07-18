@@ -19,12 +19,12 @@
 <div class='form-group col-2' > 
 
           <label class='control-label' for='nutrient_content'><?= lang('Fmis.nutrient_content') ?></label>
-          <input type='text' class='form-control ' name='nutrient_content' id='nutrient_content' value='<?= set_value('nutrient_content', $row->nutrient_content) ?>' required />
+          <input type='text' class='form-control ' name='nutrient_content' id='nutrient_content' value='<?= set_value('nutrient_content', $row->nutrient_content) ?>'  />
         </div> 
 <div class='form-group col-2' > 
 
           <label class='control-label' for='mineral_content'><?= lang('Fmis.mineral_content') ?></label>
-          <input type='text' class='form-control ' name='mineral_content' id='mineral_content' value='<?= set_value('mineral_content', $row->mineral_content) ?>' required />
+          <input type='text' class='form-control ' name='mineral_content' id='mineral_content' value='<?= set_value('mineral_content', $row->mineral_content) ?>'  />
         </div> 
 <div class='form-group col-4' > 
 
