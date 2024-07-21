@@ -11,7 +11,7 @@
 			<span class="text-custom-green">Παρακολούθησης Περιβαλλοντικών Παραμέτρων</span>
 			<span class="text-custom-anthrax">σε γεωργικές εκμεταλλεύσεις</span>
 		  </h2>
-                  <div class="col-10 mt-5">
+                  <div class="col-12 mt-5">
                   	<img class="img-fluid" src="<?= base_url() ?>/assets/images/schemis.jpg" />
                   </div>
                   <hr class="divider my-4" />
