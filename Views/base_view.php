@@ -13,6 +13,7 @@
       <link rel="stylesheet" href="<?= base_url() ?>/assets/css/jquery-ui.min.css" />
       <link rel="stylesheet" href="<?= base_url() ?>/assets/css/wizard.css" />
       <link rel="stylesheet" href="<?= base_url() ?>/assets/css/custom.css" />
+      <link rel="stylesheet" href="<?= base_url() ?>/assets/css/agrenaos.css" />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">

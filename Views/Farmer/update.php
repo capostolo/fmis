@@ -174,7 +174,7 @@
                 $color = 'text-danger';
               }
             ?>
-              <span class="<?= $color ?>"><i class="bi bi-bullseye" title="Διαχείριση εδάφους"></i><?= $f->soil_management_num ?></span>
+              <span class="<?= $color ?>"><i class="icon-soil-mgt" title="Διαχείριση εδάφους"></i><?= $f->soil_management_num ?></span>
             <?php } ?>
             <?php if($f->pruning_num) {
               $color = 'text-success';
@@ -182,7 +182,7 @@
                 $color = 'text-danger';
               }
             ?>
-              <span class="<?= $color ?>"><i class="bi bi-scissors"  title="Κλάδεμα"></i><?= $f->pruning_num ?></span>
+              <span class="<?= $color ?>"><i class="icon-pruning"  title="Κλάδεμα"></i><?= $f->pruning_num ?></span>
             <?php } ?>
             <?php if($f->irrigation_num) {
               $color = 'text-success';
@@ -190,7 +190,7 @@
                 $color = 'text-danger';
               }
             ?>
-              <span class="<?= $color ?>"><i class="bi bi-droplet"  title="Άρδευση"></i><?= $f->irrigation_num ?></span>
+              <span class="<?= $color ?>"><i class="icon-irrigation"  title="Άρδευση"></i><?= $f->irrigation_num ?></span>
             <?php } ?>
             <?php if($f->fertilisation_num) {
               $color = 'text-success';
@@ -198,7 +198,7 @@
                 $color = 'text-danger';
               }
             ?>
-            <span class="<?= $color ?>"><i class="bi bi-capsule"  title="Λίπανση"></i><?= $f->fertilisation_num ?></span>
+            <span class="<?= $color ?>"><i class="icon-fertilisation"  title="Λίπανση"></i><?= $f->fertilisation_num ?></span>
             <?php } ?>
             <?php if($f->spray_num) {
               $color = 'text-success';
@@ -206,7 +206,7 @@
                 $color = 'text-danger';
               }
             ?>
-              <span class="<?= $color ?>"><i class="bi bi-bug"  title="Φυτοπροστασία"></i><?= $f->spray_num ?></span>
+              <span class="<?= $color ?>"><i class="icon-ppp"  title="Φυτοπροστασία"></i><?= $f->spray_num ?></span>
             <?php } ?>
             <?php if($f->mass_trapping_num) {
               $color = 'text-success';
@@ -214,7 +214,7 @@
                 $color = 'text-danger';
               }
             ?>
-              <span class="<?= $color ?>"><i class="bi bi-bag"  title="Μαζική παγίδευση"></i><?= $f->mass_trapping_num ?></span>
+              <span class="<?= $color ?>"><i class="icon-trapping"  title="Μαζική παγίδευση"></i><?= $f->mass_trapping_num ?></span>
             <?php } ?>
           </td>
         </tr>
