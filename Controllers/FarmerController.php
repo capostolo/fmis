@@ -16,7 +16,7 @@ class FarmerController extends BaseController
     session()->remove('farmer_name');
     session()->remove('farmer_afm');
     session()->remove('farmer_fathername');
-    if ($this->user->inGroup('admin')) {
+    if ($this->user->inGroup('admin') || $this->user->inGroup('test')) {
       $data['rows'] = $this->model->findAll();
       return view('\Fmis\Views\Farmer\list', $data);
     }
