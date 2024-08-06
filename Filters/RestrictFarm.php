@@ -37,7 +37,7 @@ class RestrictFarm implements FilterInterface
       $my_apps = $appModel->where(['user_id' => user_id(), 'id' => $farmer])
                     ->findAll();
     }
-    else if ($user->inGroup('admin')){
+    else if ($user->inGroup('admin') || $user->inGroup('test')){
       $my_apps = $appModel->findAll();
     }
     $my_apps_size = sizeof($my_apps);

@@ -35,7 +35,7 @@ class RestrictParcel implements FilterInterface
       $my_apps = $appModel->where(['user_id' => user_id()])
                     ->findAll();
     }
-    else if ($user->inGroup('admin')){
+    else if ($user->inGroup('admin') || $user->inGroup('test')){
       return;
     }
     $parcelModel = new \Fmis\Models\ParcelModel();
