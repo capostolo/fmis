@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+	<section id="about">
     <div class="brochure-wrapper container-fluid pt-5 pb-5">
         <div class="login-button justify-content-center d-flex">
             <a href="login" class="py-3 px-5">Συνδεθείτε</a>
@@ -169,7 +170,9 @@
             </div>
         </div>
     </div>
-    <div class="manual-wrapper container-fluid pb-5" id="manual">
+    </section>
+	<section class="pt-5" id="manual">
+	<div class="manual-wrapper container-fluid pb-5" id="manualdiv">
         <div class="manual-container pb-5">
             <div class="row">
                 <div class="col-12 mb-5">
@@ -177,7 +180,7 @@
                 </div>
                 <div class="col-lg-6 my-lg-0 my-4">
                     <div class="item-wrapper d-flex justify-content-center flex-column align-items-center">
-                        <a href="<?= base_url() ?>/assets/files/manual_advisor.pdf" class="item one d-flex justify-content-center flex-column align-items-center">
+                        <a href="<?= base_url() ?>assets/files/manual_advisor.pdf" class="item one d-flex justify-content-center flex-column align-items-center">
 
                             <h3 class="text-white mb-4">Σύμβουλος</h3>
                             <img src="assets/css/images/user.png">
@@ -191,7 +194,7 @@
                 </div>
                 <div class="col-lg-6 my-lg-0 my-4">
                     <div class="item-wrapper d-flex justify-content-center flex-column align-items-center">
-                        <a href="<?= base_url() ?>/assets/files/manual_farmer.pdf" class="item two d-flex justify-content-center flex-column align-items-center">
+                        <a href="<?= base_url() ?>assets/files/manual_farmer.pdf" class="item two d-flex justify-content-center flex-column align-items-center">
                             <h3 class="text-white  mb-4">Παραγωγός</h3>
                             <img src="assets/css/images/user.png">
 
@@ -206,7 +209,9 @@
 
         </div>
     </div>
-    <div class="contact-wrapper container-fluid" id="contact">
+    </section>
+	<section id="contact">
+	<div class="contact-wrapper container-fluid" id="contactdiv">
         <div class="contact-container">
             <div class="row pt-5">
                 <div class="col-12 contact-logo bg-white py-5 d-flex justify-content-center">
@@ -234,6 +239,7 @@
 
         </div>
     </div>
+	</section>
 
 <?= $this->endSection() ?>
 
