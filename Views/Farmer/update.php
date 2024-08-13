@@ -14,6 +14,9 @@
       <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
     </div>
     <div class="p-2">
+      <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#inputoutput">Εισροές - εκροές</button>
+    </div>
+    <div class="p-2">
       <a class="btn btn-custom-green" href="<?= site_url('fmis/spd')?>">Σχέδιο Περιβαλλοντικής Διαχείρισης</a>
     </div>
 	<?php } ?>
@@ -143,6 +146,44 @@
           </div>
         </div>
         <a class="overlay-link" href="<?= site_url('fmis/harvesting')?>"></a>
+      </div>
+    </div>
+  </div>
+  <div class='row mt-3 align-items-center justify-content-center pb-0 collapse' id='inputoutput'>
+    <div class="col-lg-3 col-md-4 col-sm-12 route-card">
+      <div class="route-card-container-small px-4 pt-4 pb-4 my-2">
+        <div class="route-card-small-front">
+          <div class="mt-md-0 mt-4">
+            <h2>Εισροές</h2>
+            <h3>Διαχείριση εισροών</h3>
+            <p>Διαχειριστείτε τις προμήθειες εισροών στην εκμετάλλευση</p>
+          </div>
+        </div>
+        <div class="route-card-small-back">
+          <div class="d-flex flex-column align-items-start">
+            <h3 class="mt-2 mb-2">Διαχείριση εισροών</h3>
+            <p>Διαχειριστείτε τις προμήθειες εισροών στην εκμετάλλευση</p>
+          </div>
+        </div>
+        <a class="overlay-link" href="<?= site_url('fmis/farm-inputs')?>"></a>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-12 route-card">
+      <div class="route-card-container-small px-4 pt-4 pb-4 my-2">
+        <div class="route-card-small-front">
+          <div class="mt-md-0 mt-4">
+            <h2>Εκροές</h2>
+            <h3>Διαχείριση εκροών</h3>
+            <p>Διαχειριστείτε τις πωλήσεις προϊόντων από την εκμετάλλευση</p>
+          </div>
+        </div>
+        <div class="route-card-small-back">
+          <div class="d-flex flex-column align-items-start">
+            <h3 class="mt-2 mb-2">Διαχείριση εκροών</h3>
+            <p>Διαχειριστείτε τις πωλήσεις προϊόντων από την εκμετάλλευση</p>
+          </div>
+        </div>
+        <a class="overlay-link" href="<?= site_url('fmis/farm-outputs')?>"></a>
       </div>
     </div>
   </div>

@@ -27,7 +27,20 @@
           Επικοινωνία
         </a>
       </div>
-      <?php } } ?>
+      <?php } }
+	  else { ?>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="#manual" id="navbarManual">
+          Εγχειρίδιο χρήσης
+        </a>
+      </div>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="#contact" id="navbarContact">
+          Επικοινωνία
+        </a>
+      </div>
+	  
+	  <?php } ?>
     </div>
     <div class="navbar-nav ml-auto navbar-right-top">
       <?php if(auth()->loggedIn()){ 

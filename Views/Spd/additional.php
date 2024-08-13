@@ -2,7 +2,7 @@
 <?= $this->section('main') ?>
 <div class='container'>
 	<div class="text-custom-anthrax text-center">
-		<h2>Πρόσθετες πληροφορίες για τις δράσεις 31.6-Ζ και Θ </h2>
+		<h2>Πρόσθετες πληροφορίες για τη δράση 31.6-Ζ </h2>
 		<p class="lead"></p>
 		<p class=""></p>
 	</div>
@@ -10,11 +10,11 @@
 	<div class='row'>
           <div class="form-group col-4">
             <label for="beck_type" class="control-label"><?= lang('Fmis.beck_type');?> </label>
-            <input type="text" class="form-control" name="beck_type" id="beck_type">
+            <input type="text" class="form-control" name="beck_type" id="beck_type" required>
           </div>
           <div class="form-group col-4">
             <label for="beck_num" class="control-label"><?= lang('Fmis.beck_num');?> </label>
-            <input type="text" class="form-control" name="beck_num" id="beck_num">
+            <input type="text" class="form-control" name="beck_num" id="beck_num" required>
           </div>
           <div class="form-group col-4">
             <label for="equip_year" class="control-label"><?= lang('Fmis.equip_year');?> </label>

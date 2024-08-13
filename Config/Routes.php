@@ -182,4 +182,27 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('parcel-leaf/delete', 'ParcelLeafController::deleteItem'); 
 	$routes->get('spd', 'SpdController::index'); 
 	$routes->get('spd/(:num)', 'SpdController::showItem/$1'); 
+	$routes->get('farm-inputs', 'FarmInputsController::index'); 
+	$routes->get('farm-inputs/fertilisers', 'FarmInputsController::listFertilisers'); 
+	$routes->get('farm-inputs/ppp', 'FarmInputsController::listPpp'); 
+	$routes->get('farm-inputs/new', 'FarmInputsController::newItem'); 
+	$routes->post('farm-inputs', 'FarmInputsController::saveItem'); 
+	$routes->get('farm-inputs/(:num)', 'FarmInputsController::showItem/$1'); 
+	$routes->post('farm-inputs/delete', 'FarmInputsController::deleteItem'); 
+	$routes->get('farm-outputs', 'FarmOutputsController::index'); 
+	$routes->get('farm-outputs/new', 'FarmOutputsController::newItem'); 
+	$routes->post('farm-outputs', 'FarmOutputsController::saveItem'); 
+	$routes->get('farm-outputs/(:num)', 'FarmOutputsController::showItem/$1'); 
+	$routes->post('farm-outputs/delete', 'FarmOutputsController::deleteItem'); 
+	$routes->get('supplier', 'SupplierController::index'); 
+	$routes->get('supplier/new', 'SupplierController::newItem'); 
+	$routes->post('supplier', 'SupplierController::saveItem'); 
+	$routes->get('supplier/(:num)', 'SupplierController::showItem/$1'); 
+	$routes->post('supplier/delete', 'SupplierController::deleteItem'); 
+	$routes->get('buyer', 'BuyerController::index'); 
+	$routes->get('buyer/new', 'BuyerController::newItem'); 
+	$routes->post('buyer', 'BuyerController::saveItem'); 
+	$routes->get('buyer/(:num)', 'BuyerController::showItem/$1'); 
+	$routes->post('buyer/delete', 'BuyerController::deleteItem'); 
 });
+	
