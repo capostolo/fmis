@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
   <head>
       <title>Agrenaos</title>
       <meta charset='utf-8' />

@@ -180,7 +180,7 @@
                 </div>
                 <div class="col-lg-6 my-lg-0 my-4">
                     <div class="item-wrapper d-flex justify-content-center flex-column align-items-center">
-                        <a href="<?= base_url() ?>assets/files/manual_advisor.pdf" class="item one d-flex justify-content-center flex-column align-items-center">
+                        <a href="<?= site_url('assets/files/manual_advisor.pdf') ?>" target="_blank" class="item one d-flex justify-content-center flex-column align-items-center">
 
                             <h3 class="text-white mb-4">Σύμβουλος</h3>
                             <img src="assets/css/images/user.png">
@@ -194,7 +194,7 @@
                 </div>
                 <div class="col-lg-6 my-lg-0 my-4">
                     <div class="item-wrapper d-flex justify-content-center flex-column align-items-center">
-                        <a href="<?= base_url() ?>assets/files/manual_farmer.pdf" class="item two d-flex justify-content-center flex-column align-items-center">
+                        <a href="<?= site_url('assets/files/manual_farmer.pdf') ?>" class="item two d-flex justify-content-center flex-column align-items-center">
                             <h3 class="text-white  mb-4">Παραγωγός</h3>
                             <img src="assets/css/images/user.png">
 
