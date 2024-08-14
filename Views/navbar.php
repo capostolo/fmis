@@ -1,17 +1,20 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-custom-anthrax">
-  <a class="navbar-brand text-white" href="http://www.agrenaos.gr">Agrenaos</a>
+  <a class="navbar-brand text-white" style="padding-top: 0px; !important" href="http://www.agrenaos.gr">Agrenaos</a>
+  <div class="navbar-brand" style="padding-top: 0px; !important">
+    <img src="<?= site_url('assets/css/images/logo_sm.png') ?>" alt="">
+  </div>
   <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <div class="nav-item ">
-        <a class="nav-link text-white" href="<?= site_url('fmis/farmer')  ?>" id="navbarHome">
-          Αρχική
-        </a>
-      </div>
       <?php if(auth()->loggedIn()){
         if (auth()->user()->inGroup('admin')) { ?>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="<?= site_url('fmis/farmer')  ?>" id="navbarHome">
+        <i class="bi bi-house-door-fill"></i>
+        </a>
+      </div>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuParams" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Παράμετροι
@@ -29,6 +32,11 @@
       </div>
       <?php } }
 	  else { ?>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="<?= site_url()  ?>" id="navbarHome">
+        <i class="bi bi-house-door-fill"></i>
+        </a>
+      </div>
       <div class="nav-item ">
         <a class="nav-link text-white" href="#manual" id="navbarManual">
           Εγχειρίδιο χρήσης
