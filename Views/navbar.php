@@ -12,7 +12,7 @@
         if (auth()->user()->inGroup('admin')) { ?>
       <div class="nav-item ">
         <a class="nav-link text-white" href="<?= site_url('fmis/farmer')  ?>" id="navbarHome">
-        <i class="bi bi-house-door-fill"></i>
+			Αρχική
         </a>
       </div>
       <div class="nav-item dropdown">
@@ -34,7 +34,7 @@
 	  else { ?>
       <div class="nav-item ">
         <a class="nav-link text-white" href="<?= site_url()  ?>" id="navbarHome">
-        <i class="bi bi-house-door-fill"></i>
+			Αρχική
         </a>
       </div>
       <div class="nav-item ">
