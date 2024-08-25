@@ -50,7 +50,7 @@ class SoilManagementBulkController extends BaseController
       session()->set('soil_management_id', $id);
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\SoilManagementParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Soilmanagementparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()
