@@ -2,7 +2,7 @@
 <?= $this->section('main') ?>
 <div class='container'>
   <div class="text-custom-anthrax text-center">
-    <h2><?= lang('Fmis.soil_management');?></h2>
+    <h2><?= lang('Fmis.soil_management_bulk');?></h2>
     <p class="lead"></p>
     <p class=""></p>
   </div>
