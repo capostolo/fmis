@@ -27,7 +27,7 @@ class FertilisationBulkController extends BaseController
     $crops = new \Fmis\Models\ParcelModel(); 
 	$data['crops'] = $crops->getShortList(['farmer_id' => session()->get('farmer_id')]);
     session()->remove('fertilisation_id');
-    return view('\Fmis\Views\FertilisationParcel\add_bulk', $data ?? array());
+    return view('\Fmis\Views\Fertilisationparcel\add_bulk', $data ?? array());
   }
 
   public function showItem($id)
@@ -54,7 +54,7 @@ class FertilisationBulkController extends BaseController
       session()->set('fertilisation_id', $id);
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\FertilisationParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Fertilisationparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()

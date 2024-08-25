@@ -51,7 +51,7 @@ class SprayBulkController extends BaseController
 	  }
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\SprayParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Sprayparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()

@@ -43,7 +43,7 @@ class PruningBulkController extends BaseController
       session()->set('pruning_id', $id);
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\PruningParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Pruningparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()

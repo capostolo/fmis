@@ -38,7 +38,7 @@ class MassTrappingBulkController extends BaseController
       session()->set('mass_trapping_id', $id);
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\MassTrappingParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Masstrappingparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()

@@ -21,7 +21,7 @@ class IrrigationBulkController extends BaseController
     $crops = new \Fmis\Models\ParcelModel(); 
 	$data['crops'] = $crops->getShortList(['farmer_id' => session()->get('farmer_id')]);
     session()->remove('irrigation_id');
-    return view('\Fmis\Views\IrrigationParcel\add_bulk', $data ?? array());
+    return view('\Fmis\Views\Irrigationparcel\add_bulk', $data ?? array());
   } 
 
   public function showItem($id)
@@ -42,7 +42,7 @@ class IrrigationBulkController extends BaseController
       session()->set('irrigation_id', $id);
     }
 	$data['disabled'] = 'disabled';
-    return view('\Fmis\Views\IrrigationParcel\update_bulk_dir', $data);
+    return view('\Fmis\Views\Irrigationparcel\update_bulk_dir', $data);
   }
 
   public function saveItem()
