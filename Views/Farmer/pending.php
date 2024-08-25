@@ -27,7 +27,7 @@
 			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
-						<th>Οδηγία</th>
+						<th>Οδηγία που εκκρεμεί</th>
 						<th>Ημερομηνία</th>
 					</tr>
 				</thead>
