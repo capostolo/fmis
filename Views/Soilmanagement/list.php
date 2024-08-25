@@ -27,7 +27,7 @@
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<td><a href="<?= site_url('fmis/soil-management/'.$r->id) ?>" > <?= $r->dir_date->toLocalizedString('d/M/Y') ?> </a></td>
+							<td data-sort="'<?= $r->dir_date?>'"><a href="<?= site_url('fmis/soil-management/'.$r->id) ?>" > <?= $r->dir_date->toLocalizedString('d/M/Y') ?> </a></td>
 							<td><?= $r->farming_stage_description ?></td>
 							<td><?= $r->work_type_description ?></td>
 						</tr>

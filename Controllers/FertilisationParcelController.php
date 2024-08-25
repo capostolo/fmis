@@ -61,8 +61,9 @@ class FertilisationParcelController extends BaseController
     if($data['row']){
       session()->set('fertilisation_parcel_id', $id);
       $dirData = $Fertilisation->find($data['row']->fertilisation_id);
+	  $data['directive'] = new \Fmis\Entities\FertilisationParcelEntity();
       if($dirData && !$data['row']->fertilisation_date){
-        $data['directive'] = $dirData;
+        $data['directive']->fill($dirData->toArray());
         session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή λίπανσης.');
       }
     }

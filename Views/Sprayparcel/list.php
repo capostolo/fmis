@@ -28,8 +28,8 @@
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/spray-parcel/'.$r->spray_parcel_id) ?>" > <?= lang('Fmis.sparcel') ?> </a></td>
-							<td><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
-							<td><?= ($r->dir_date && !$r->application_date)? 'Εκκρεμής' : $r->application_date->toLocalizedString('d/M/Y') ?> </a></td>
+							<td data-sort="'<?= $r->dir_date?>'"><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
+							<td data-sort="'<?= $r->application_date?>'"><?= ($r->dir_date && !$r->application_date)? 'Εκκρεμής' : $r->application_date->toLocalizedString('d/M/Y') ?> </a></td>
 						</tr>
 					<?php } ?>
 				</tbody>

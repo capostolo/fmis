@@ -196,8 +196,8 @@
                 ?>
                   <tr class="<?= ($r->dir_date && !$r->application_date)? 'text-danger' : '' ?>">
                     <td><a href="<?= site_url('fmis/'.$practice.'-parcel/'.$r->practice_parcel_id) ?>" > <?= $r->farm_practice ?> </a> <a href='<?= site_url('fmis/'.$practice.'-parcel') ?>'><i class="bi bi-search"></i></a></td>
-                    <td><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
-                    <td>
+                    <td data-sort="'<?= $r->dir_date?>'"><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
+                    <td data-sort="'<?= $r->application_date?>'">
                       <?= ($r->dir_date && !$r->application_date)? 'Εκκρεμής' : $r->application_date->toLocalizedString('d/M/Y') ?>
                     </td>
                   </tr>
@@ -257,7 +257,7 @@
               <tbody>
                 <?php foreach ($calendaranalysis As $r) {?>
                   <tr>
-                    <td>
+                    <td data-sort="'<?= $r->date_analysis?>'">
                       <a href="<?= site_url('fmis/parcel-'.$r->type.'/'.$r->analysis_id) ?>" > <?= $r->date_analysis->toLocalizedString('d/M/Y') ?> </a> 
                     </td>
                     <td><?= $r->analysis_type ?></td>

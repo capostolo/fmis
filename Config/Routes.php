@@ -1,11 +1,12 @@
 <?php
 
 $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($routes) {
-  $routes->get('', 'HomeController::index'); 
-  $routes->get('farmer', 'FarmerController::index'); 
-  $routes->get('farmer/new', 'FarmerController::newItem'); 
-  $routes->get('farmer/(:num)', 'FarmerController::showItem/$1', ['filter' => 'restrict-farm']);
-  $routes->get('parcel/(:num)', 'ParcelController::showItem/$1', ['filter' => 'restrict-parcel']);
+	$routes->get('', 'HomeController::index'); 
+	$routes->get('farmer', 'FarmerController::index'); 
+	$routes->get('farmer/new', 'FarmerController::newItem'); 
+	$routes->get('farmer/(:num)', 'FarmerController::showItem/$1', ['filter' => 'restrict-farm']);
+	$routes->get('farmer/pending', 'FarmerController::showPendingDir');
+	$routes->get('parcel/(:num)', 'ParcelController::showItem/$1', ['filter' => 'restrict-parcel']);
 	$routes->get('fertiliser', 'FertiliserController::index'); 
 	$routes->get('fertiliser/new', 'FertiliserController::newItem'); 
 	$routes->post('fertiliser', 'FertiliserController::saveItem'); 
@@ -46,6 +47,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('fertilisation-parcel', 'FertilisationParcelController::saveItem'); 
 	$routes->get('fertilisation-parcel/(:num)', 'FertilisationParcelController::showItem/$1'); 
 	$routes->post('fertilisation-parcel/delete', 'FertilisationParcelController::deleteItem'); 
+	$routes->post('fertilisation-bulk', 'FertilisationBulkController::saveItem'); 
+	$routes->get('fertilisation-bulk/(:num)', 'FertilisationBulkController::showItem/$1'); 
+	$routes->get('fertilisation-bulk-new', 'FertilisationBulkController::newItem'); 
+	$routes->post('fertilisation-bulk-new', 'FertilisationBulkController::saveBulk'); 
 	$routes->get('trap', 'TrapController::index'); 
 	$routes->get('trap/new', 'TrapController::newItem'); 
 	$routes->post('trap', 'TrapController::saveItem'); 
@@ -61,6 +66,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('mass-trapping-parcel', 'MassTrappingParcelController::saveItem'); 
 	$routes->get('mass-trapping-parcel/(:num)', 'MassTrappingParcelController::showItem/$1'); 
 	$routes->post('mass-trapping-parcel/delete', 'MassTrappingParcelController::deleteItem'); 
+	$routes->post('mass-trapping-bulk', 'MassTrappingBulkController::saveItem'); 
+	$routes->get('mass-trapping-bulk/(:num)', 'MassTrappingBulkController::showItem/$1'); 
+	$routes->get('mass-trapping-bulk-new', 'MassTrappingBulkController::newItem'); 
+	$routes->post('mass-trapping-bulk-new', 'MassTrappingBulkController::saveBulk'); 
 	$routes->get('protective-product', 'ProtectiveProductController::index'); 
 	$routes->get('protective-product/new', 'ProtectiveProductController::newItem'); 
 	$routes->post('protective-product', 'ProtectiveProductController::saveItem'); 
@@ -85,6 +94,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('spray-parcel', 'SprayParcelController::saveItem'); 
 	$routes->get('spray-parcel/(:num)', 'SprayParcelController::showItem/$1'); 
 	$routes->post('spray-parcel/delete', 'SprayParcelController::deleteItem'); 
+	$routes->post('spray-bulk', 'SprayBulkController::saveItem'); 
+	$routes->get('spray-bulk/(:num)', 'SprayBulkController::showItem/$1'); 
+	$routes->get('spray-bulk-new', 'SprayBulkController::newItem'); 
+	$routes->post('spray-bulk-new', 'SprayBulkController::saveBulk'); 
 	$routes->get('pruning-type', 'PruningTypeController::index'); 
 	$routes->get('pruning-type/new', 'PruningTypeController::newItem'); 
 	$routes->post('pruning-type', 'PruningTypeController::saveItem'); 
@@ -105,6 +118,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('pruning-parcel', 'PruningParcelController::saveItem'); 
 	$routes->get('pruning-parcel/(:num)', 'PruningParcelController::showItem/$1'); 
 	$routes->post('pruning-parcel/delete', 'PruningParcelController::deleteItem'); 
+	$routes->post('pruning-bulk', 'PruningBulkController::saveItem'); 
+	$routes->get('pruning-bulk/(:num)', 'PruningBulkController::showItem/$1'); 
+	$routes->get('pruning-bulk-new', 'PruningBulkController::newItem'); 
+	$routes->post('pruning-bulk-new', 'PruningBulkController::saveBulk'); 
 	$routes->get('work-type', 'WorkTypeController::index'); 
 	$routes->get('work-type/new', 'WorkTypeController::newItem'); 
 	$routes->post('work-type', 'WorkTypeController::saveItem'); 
@@ -135,6 +152,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('soil-management-parcel', 'SoilManagementParcelController::saveItem'); 
 	$routes->get('soil-management-parcel/(:num)', 'SoilManagementParcelController::showItem/$1'); 
 	$routes->post('soil-management-parcel/delete', 'SoilManagementParcelController::deleteItem'); 
+	$routes->post('soil-management-bulk', 'SoilManagementBulkController::saveItem'); 
+	$routes->get('soil-management-bulk/(:num)', 'SoilManagementBulkController::showItem/$1'); 
+	$routes->get('soil-management-bulk-new', 'SoilManagementBulkController::newItem'); 
+	$routes->post('soil-management-bulk-new', 'SoilManagementBulkController::saveBulk'); 
 	$routes->get('irrigation-equipment', 'IrrigationEquipmentController::index'); 
 	$routes->get('irrigation-equipment/new', 'IrrigationEquipmentController::newItem'); 
 	$routes->post('irrigation-equipment', 'IrrigationEquipmentController::saveItem'); 
@@ -150,6 +171,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('irrigation-parcel', 'IrrigationParcelController::saveItem'); 
 	$routes->get('irrigation-parcel/(:num)', 'IrrigationParcelController::showItem/$1'); 
 	$routes->post('irrigation-parcel/delete', 'IrrigationParcelController::deleteItem'); 
+	$routes->post('irrigation-bulk', 'IrrigationBulkController::saveItem'); 
+	$routes->get('irrigation-bulk/(:num)', 'IrrigationBulkController::showItem/$1'); 
+	$routes->get('irrigation-bulk-new', 'IrrigationBulkController::newItem'); 
+	$routes->post('irrigation-bulk-new', 'IrrigationBulkController::saveBulk'); 
 	$routes->get('harvest-equipment', 'HarvestEquipmentController::index'); 
 	$routes->get('harvest-equipment/new', 'HarvestEquipmentController::newItem'); 
 	$routes->post('harvest-equipment', 'HarvestEquipmentController::saveItem'); 

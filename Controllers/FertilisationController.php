@@ -18,18 +18,18 @@ class FertilisationController extends BaseController
   public function newItem()
   {    
     $Fertiliser = new \Fmis\Models\FertiliserModel(); 
-		$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
-		$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
-		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
-		$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
-		$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
+	$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
+	$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
+	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
+	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
+	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
-		$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
-		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
-		$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
+	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
+	$data['farming_stage'] = $FarmingStage->findAll(); 
+	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
+	$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $crops->getShortList(['farmer_id' => session()->get('farmer_id')]);
@@ -39,22 +39,22 @@ class FertilisationController extends BaseController
 
   public function showItem($id)
   {    
-    $Fertiliser = new \Fmis\Models\FertiliserModel(); 
-		$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
-		$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
-		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
-		$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
-		$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
+	$Fertiliser = new \Fmis\Models\FertiliserModel(); 
+	$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
+	$FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel(); 
+	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
+	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
+	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
     $data['fertiliser'] = $Fertiliser->findAll(); 
-		$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
-		$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
-		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
-		$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
+	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
+	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
+	$data['farming_stage'] = $FarmingStage->findAll(); 
+	$data['fertilise_equipment'] = $FertiliseEquipment->findAll(); 
+	$data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll(); 
 		
     $crops = new \Fmis\Models\ParcelModel(); 
-		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);
+	$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);
     $data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('fertilisation_id', $id);

@@ -25,7 +25,7 @@
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<td><a href="<?= site_url('fmis/harvesting/'.$r->id) ?>" > <?= $r->dir_date->toLocalizedString('d/M/Y') ?> </a></td>
+							<td data-sort="'<?= $r->dir_date?>'"><a href="<?= site_url('fmis/harvesting/'.$r->id) ?>" > <?= $r->dir_date->toLocalizedString('d/M/Y') ?> </a></td>
 						</tr>
 					<?php } ?>
 				</tbody>

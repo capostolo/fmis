@@ -61,4 +61,10 @@ class FarmerController extends BaseController
     return view('\Fmis\Views\Farmer\update', $data);
     
   }
+  
+  public function showPendingDir()
+  {
+	$data['rows'] = $this->model->getPendingDir(['farmer_id' => session()->get('farmer_id')]);
+    return view('\Fmis\Views\Farmer\pending', $data);
+  }
 }

@@ -8,7 +8,7 @@
 	</div>
 	<?php
 	$attributes = array('class' => 'form', 'id' => 'update-item');
-	echo form_open(site_url('fmis/fertilisation'), $attributes);
+	echo form_open(site_url('fmis/fertilisation-bulk'), $attributes);
 	?>
 	<div class='row'>
 		<div class='form-group col-3' > 
@@ -106,15 +106,46 @@
 			<?php } ?>
 			</tbody>
 		</table>
-      </div>
+		</div>
     </div>
+	<div class='row mt-3'>
+		<div class="col-12 text-center">
+			<h4>
+				Πρόσθετες πληροφορίες εφαρμογής
+			</h4>
+		</div>
+		<?php if($row->unit_measurement_id == 4){ ?>
+		<div class="form-group col-4">
+			<label for="start_date" class="control-label"><?= lang('Fmis.practice_start_date');?> </label>
+			<input type="text" class="form-control datepicker" name="start_date" id="start_date" required>
+		</div>
+		<div class="form-group col-4">
+			<label for="end_date" class="control-label"><?= lang('Fmis.practice_end_date');?> </label>
+			<input type="text" class="form-control datepicker" name="end_date" id="end_date" required>
+		</div>
+		<div class='form-group col-4' > 
+			<label class='control-label' for='parcel_quantity'><?= lang('Fmis.parcel_quantity') ?></label>
+			<input type='text' class='form-control ' name='parcel_quantity' id='parcel_quantity' value='<?= set_value('parcel_quantity', $r->parcel_quantity) ?>' />
+		</div> 
+		<?php } 
+		else {?>
+		<div class="form-group col-6">
+			<label for="start_date" class="control-label"><?= lang('Fmis.practice_start_date');?> </label>
+			<input type="text" class="form-control datepicker" name="start_date" id="start_date" required>
+		</div>
+		<div class="form-group col-6">
+			<label for="end_date" class="control-label"><?= lang('Fmis.practice_end_date');?> </label>
+			<input type="text" class="form-control datepicker" name="end_date" id="end_date" required>
+		</div>
+		<?php } ?>
+	</div>
 
-	<div class='row'>
+	<div class='row mt-3'>
 		<div class='form-group col'>
 			<a class='btn btn-default form-control' href="<?= site_url('fmis/farmer/'.session()->get('farmer_id')) ?>"><?= lang('Fmis.go_back');?></a>
 		</div>
 		<div class='form-group col'>
-			<button class='btn btn-custom-green form-control' name='new' id='newfeedform'><?= lang('Fmis.save');?></button>
+			<button class='btn btn-custom-green form-control' name='new' id='newfeedform'><?= lang('Fmis.apply');?></button>
 		</div>
 	</div>
 	<?php echo form_close() ?>

@@ -29,7 +29,7 @@
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/farm-inputs/'.$r->id) ?>" > <?= $r->description ?> </a></td>
-							<td><?= $r->invoice_date->toLocalizedString('d/M/Y') ?></td>
+							<td data-sort="'<?= $r->invoice_date?>'"><?= $r->invoice_date->toLocalizedString('d/M/Y') ?></td>
 							<td><?= $r->quantity.' '.$r->unit ?></td>
 							<td><?= $r->remaining_quantity.' '.$r->unit ?></td>
 						</tr>

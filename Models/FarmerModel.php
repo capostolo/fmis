@@ -17,15 +17,12 @@ class FarmerModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
-  public function modelList($where = null)
-  {
-    $builder = $this->db->table('farming_stage_list');
+  public function getPendingDir($where = null){
+    $builder = $this->db->table('farm_dir_pending');
     if($where){
       $builder->where($where);
     }
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\FarmerEntity');
   }
-  */
 }

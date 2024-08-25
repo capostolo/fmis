@@ -14,6 +14,9 @@
       <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
     </div>
     <div class="p-2">
+      <a class="btn btn-custom-green" href="<?= site_url('fmis/farmer/pending')?>">Μαζική καταγραφή</a>
+    </div>
+    <div class="p-2">
       <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#inputoutput">Εισροές - εκροές</button>
     </div>
     <div class="p-2">
