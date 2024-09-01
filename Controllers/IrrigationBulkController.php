@@ -14,7 +14,7 @@ class IrrigationBulkController extends BaseController
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 	$IrrigationEquipment = new \Fmis\Models\IrrigationEquipmentModel(); 
 		
-    $data['unit_measurement'] = $UnitMeasurement->findAll(); 
+    $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'irrigation'])->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 	$data['irrigation_equipment'] = $IrrigationEquipment->findAll(); 
 		
@@ -23,6 +23,21 @@ class IrrigationBulkController extends BaseController
     session()->remove('irrigation_id');
     return view('\Fmis\Views\Irrigationparcel\add_bulk', $data ?? array());
   } 
+  public function newGlobalItem()
+  {
+    $UnitMeasurement = new \Fmis\Models\UnitMeasurementModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $IrrigationEquipment = new \Fmis\Models\IrrigationEquipmentModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'irrigation'])->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['irrigation_equipment'] = $IrrigationEquipment->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('irrigation_id');
+    return view('\Fmis\Views\Irrigationparcel\add_global', $data ?? array());
+  }
 
   public function showItem($id)
   {    
@@ -31,7 +46,7 @@ class IrrigationBulkController extends BaseController
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 	$IrrigationEquipment = new \Fmis\Models\IrrigationEquipmentModel(); 
 		
-    $data['unit_measurement'] = $UnitMeasurement->findAll(); 
+    $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'irrigation'])->findAll();
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 	$data['irrigation_equipment'] = $IrrigationEquipment->findAll(); 
 		
@@ -84,6 +99,34 @@ class IrrigationBulkController extends BaseController
 			}
 		}		
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+	}
+
+	public function saveGlobal()
+	{   
+		$IrrigationParcel = new \Fmis\Models\IrrigationParcelModel();
+		$Parcel = new \Fmis\Models\ParcelModel();
+		$postdata = $this->request->getPost();
+		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+
+		// If cultivar_code is provided, further filter the parcels
+		if (!empty($postdata['cultivar_code'])) {
+			$where['cultivar_code'] = $postdata['cultivar_code'];
+		}
+
+		$parcels = $Parcel->getByAdvisor($where);
+
+		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\IrrigationParcelEntity();
+			$item->fill($postdata);
+			$item->parcel_id = $parcel->id;
+			$item->irrigation_date = randomDate($postdata['start_date'], $postdata['end_date']);
+
+			if (!$IrrigationParcel->save($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+			}
+		}
+
+    	return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
 
 }

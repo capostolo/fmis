@@ -28,6 +28,26 @@ class SoilManagementBulkController extends BaseController
     return view('\Fmis\Views\Soilmanagementparcel\add_bulk', $data ?? array());
   }
 
+  public function newGlobalItem()
+  {
+    $WorkType = new \Fmis\Models\WorkTypeModel();
+    $PlantSpeciesSow = new \Fmis\Models\PlantSpeciesSowModel();
+    $CoverCropSpecies = new \Fmis\Models\CoverCropSpeciesModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $PloughEquipment = new \Fmis\Models\PloughEquipmentModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['work_type'] = $WorkType->findAll();
+    $data['plant_species_sow'] = $PlantSpeciesSow->findAll();
+    $data['cover_crop_species'] = $CoverCropSpecies->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['plough_equipment'] = $PloughEquipment->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('soil_management_id');
+    return view('\Fmis\Views\Soilmanagementparcel\add_global', $data ?? array());
+  }
+
   public function showItem($id)
   {    
     $SoilManagement = new \Fmis\Models\SoilManagementModel();
@@ -93,5 +113,33 @@ class SoilManagementBulkController extends BaseController
 		}		
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
+
+public function saveGlobal()
+{
+	$SoilManagementParcel = new \Fmis\Models\SoilManagementParcelModel();
+	$Parcel = new \Fmis\Models\ParcelModel();
+	$postdata = $this->request->getPost();
+	$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+
+	// If cultivar_code is provided, further filter the parcels
+	if (!empty($postdata['cultivar_code'])) {
+		$where['cultivar_code'] = $postdata['cultivar_code'];
+	}
+
+	$parcels = $Parcel->getByAdvisor($where);
+
+	foreach ($parcels as $parcel) {
+		$item = new \Fmis\Entities\SoilManagementParcelEntity();
+		$item->fill($postdata);
+		$item->parcel_id = $parcel->id;
+		$item->soil_management_date = randomDate($postdata['start_date'], $postdata['end_date']);
+
+		if (!$SoilManagementParcel->save($item)) {
+			return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+		}
+	}
+
+	return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+}
 
 }

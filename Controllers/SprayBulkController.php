@@ -25,6 +25,24 @@ class SprayBulkController extends BaseController
     session()->remove('spray_id');
     return view('\Fmis\Views\Sprayparcel\add_bulk', $data ?? array());
   }
+
+  public function newGlobalItem()
+  {
+    $ProtectiveProduct = new \Fmis\Models\ProtectiveProductModel();
+    $UnitMeasurement = new \Fmis\Models\UnitMeasurementModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $SprayEquipment = new \Fmis\Models\SprayEquipmentModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['protective_product'] = $ProtectiveProduct->findAll();
+    $data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['spray_equipment'] = $SprayEquipment->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('spray_id');
+    return view('\Fmis\Views\Sprayparcel\add_global', $data ?? array());
+  }
   
   public function showItem($id)
   {    
@@ -92,6 +110,34 @@ class SprayBulkController extends BaseController
 				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο ".$parcel_data->code);
 			}
 		}		
+		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+	}
+
+	public function saveGlobal()
+	{
+		$SprayParcel = new \Fmis\Models\SprayParcelModel();
+		$Parcel = new \Fmis\Models\ParcelModel();
+		$postdata = $this->request->getPost();
+		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+
+		// If cultivar_code is provided, further filter the parcels
+		if (!empty($postdata['cultivar_code'])) {
+			$where['cultivar_code'] = $postdata['cultivar_code'];
+		}
+
+		$parcels = $Parcel->getByAdvisor($where);
+
+		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\SprayParcelEntity();
+			$item->fill($postdata);
+			$item->parcel_id = $parcel->id;
+			$item->spray_date = randomDate($postdata['start_date'], $postdata['end_date']);
+
+			if (!$SprayParcel->save($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+			}
+		}
+
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
 

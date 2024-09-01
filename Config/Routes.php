@@ -51,6 +51,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('fertilisation-bulk/(:num)', 'FertilisationBulkController::showItem/$1'); 
 	$routes->get('fertilisation-bulk-new', 'FertilisationBulkController::newItem'); 
 	$routes->post('fertilisation-bulk-new', 'FertilisationBulkController::saveBulk'); 
+	$routes->get('fertilisation-global-new', 'FertilisationBulkController::newGlobalItem'); 
+	$routes->post('fertilisation-global-new', 'FertilisationBulkController::saveGlobal'); 
 	$routes->get('trap', 'TrapController::index'); 
 	$routes->get('trap/new', 'TrapController::newItem'); 
 	$routes->post('trap', 'TrapController::saveItem'); 
@@ -70,6 +72,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('mass-trapping-bulk/(:num)', 'MassTrappingBulkController::showItem/$1'); 
 	$routes->get('mass-trapping-bulk-new', 'MassTrappingBulkController::newItem'); 
 	$routes->post('mass-trapping-bulk-new', 'MassTrappingBulkController::saveBulk'); 
+	$routes->get('mass-trapping-global-new', 'MassTrappingBulkController::newGlobalItem'); 
+	$routes->post('mass-trapping-global-new', 'MassTrappingBulkController::saveGlobal'); 
 	$routes->get('protective-product', 'ProtectiveProductController::index'); 
 	$routes->get('protective-product/new', 'ProtectiveProductController::newItem'); 
 	$routes->post('protective-product', 'ProtectiveProductController::saveItem'); 
@@ -98,6 +102,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('spray-bulk/(:num)', 'SprayBulkController::showItem/$1'); 
 	$routes->get('spray-bulk-new', 'SprayBulkController::newItem'); 
 	$routes->post('spray-bulk-new', 'SprayBulkController::saveBulk'); 
+	$routes->get('spray-global-new', 'SprayBulkController::newGlobalItem'); 
+	$routes->post('spray-global-new', 'SprayBulkController::saveGlobal'); 
 	$routes->get('pruning-type', 'PruningTypeController::index'); 
 	$routes->get('pruning-type/new', 'PruningTypeController::newItem'); 
 	$routes->post('pruning-type', 'PruningTypeController::saveItem'); 
@@ -122,6 +128,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('pruning-bulk/(:num)', 'PruningBulkController::showItem/$1'); 
 	$routes->get('pruning-bulk-new', 'PruningBulkController::newItem'); 
 	$routes->post('pruning-bulk-new', 'PruningBulkController::saveBulk'); 
+	$routes->get('pruning-global-new', 'PruningBulkController::newGlobalItem'); 
+	$routes->post('pruning-global-new', 'PruningBulkController::saveGlobal'); 
 	$routes->get('work-type', 'WorkTypeController::index'); 
 	$routes->get('work-type/new', 'WorkTypeController::newItem'); 
 	$routes->post('work-type', 'WorkTypeController::saveItem'); 
@@ -156,6 +164,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('soil-management-bulk/(:num)', 'SoilManagementBulkController::showItem/$1'); 
 	$routes->get('soil-management-bulk-new', 'SoilManagementBulkController::newItem'); 
 	$routes->post('soil-management-bulk-new', 'SoilManagementBulkController::saveBulk'); 
+	$routes->get('soil-management-global-new', 'SoilManagementBulkController::newGlobalItem'); 
+	$routes->post('soil-management-global-new', 'SoilManagementBulkController::saveGlobal'); 
 	$routes->get('irrigation-equipment', 'IrrigationEquipmentController::index'); 
 	$routes->get('irrigation-equipment/new', 'IrrigationEquipmentController::newItem'); 
 	$routes->post('irrigation-equipment', 'IrrigationEquipmentController::saveItem'); 
@@ -175,6 +185,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('irrigation-bulk/(:num)', 'IrrigationBulkController::showItem/$1'); 
 	$routes->get('irrigation-bulk-new', 'IrrigationBulkController::newItem'); 
 	$routes->post('irrigation-bulk-new', 'IrrigationBulkController::saveBulk'); 
+	$routes->get('irrigation-global-new', 'IrrigationBulkController::newGlobalItem'); 
+	$routes->post('irrigation-global-new', 'IrrigationBulkController::saveGlobal'); 
 	$routes->get('harvest-equipment', 'HarvestEquipmentController::index'); 
 	$routes->get('harvest-equipment/new', 'HarvestEquipmentController::newItem'); 
 	$routes->post('harvest-equipment', 'HarvestEquipmentController::saveItem'); 
@@ -228,6 +240,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('buyer/new', 'BuyerController::newItem'); 
 	$routes->post('buyer', 'BuyerController::saveItem'); 
 	$routes->get('buyer/(:num)', 'BuyerController::showItem/$1'); 
-	$routes->post('buyer/delete', 'BuyerController::deleteItem'); 
+	$routes->post('buyer/delete', 'BuyerController::deleteItem');
+	$routes->post('get-cultivar-codes', 'ParamSoController::getCultivarCodes'); 
 });
 	

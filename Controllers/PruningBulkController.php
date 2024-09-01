@@ -24,6 +24,21 @@ class PruningBulkController extends BaseController
     return view('\Fmis\Views\Pruningparcel\add_bulk', $data ?? array());
   }
  
+  public function newGlobalItem()
+  {
+    $PruningType = new \Fmis\Models\PruningTypeModel();
+    $PruningEquipment = new \Fmis\Models\PruningEquipmentModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['pruning_type'] = $PruningType->findAll();
+    $data['pruning_equipment'] = $PruningEquipment->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('pruning_id');
+    return view('\Fmis\Views\Pruningparcel\add_global', $data ?? array());
+  }
 
   public function showItem($id)
   {    
@@ -86,4 +101,33 @@ class PruningBulkController extends BaseController
 		}		
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
+
+	public function saveGlobal()
+	{
+		$PruningParcel = new \Fmis\Models\PruningParcelModel();
+		$Parcel = new \Fmis\Models\ParcelModel();
+		$postdata = $this->request->getPost();
+		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+
+		// If cultivar_code is provided, further filter the parcels
+		if (!empty($postdata['cultivar_code'])) {
+			$where['cultivar_code'] = $postdata['cultivar_code'];
+		}
+
+		$parcels = $Parcel->getByAdvisor($where);
+
+		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\PruningParcelEntity();
+			$item->fill($postdata);
+			$item->parcel_id = $parcel->id;
+			$item->pruning_date = randomDate($postdata['start_date'], $postdata['end_date']);
+
+			if (!$PruningParcel->save($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+			}
+		}
+
+		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+	}
+	
 }

@@ -21,6 +21,19 @@ class MassTrappingBulkController extends BaseController
     session()->remove('mass_trapping_id');
     return view('\Fmis\Views\Masstrappingparcel\add_bulk', $data ?? array());
   } 
+  public function newGlobalItem()
+  {
+    $Trap = new \Fmis\Models\TrapModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['trap'] = $Trap->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('mass_trapping_id');
+    return view('\Fmis\Views\Masstrappingparcel\add_global', $data ?? array());
+  }
 
   public function showItem($id)
   {    
@@ -79,6 +92,34 @@ class MassTrappingBulkController extends BaseController
 				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο ".$parcel_data->code);
 			}
 		}		
+		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+	}
+	
+	public function saveGlobal()
+	{
+		$MassTrappingParcel = new \Fmis\Models\MassTrappingParcelModel();
+		$Parcel = new \Fmis\Models\ParcelModel();
+		$postdata = $this->request->getPost();
+		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+
+		// If cultivar_code is provided, further filter the parcels
+		if (!empty($postdata['cultivar_code'])) {
+			$where['cultivar_code'] = $postdata['cultivar_code'];
+		}
+
+		$parcels = $Parcel->getByAdvisor($where);
+
+		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\MassTrappingParcelEntity();
+			$item->fill($postdata);
+			$item->parcel_id = $parcel->id;
+			$item->mass_trapping_date = randomDate($postdata['start_date'], $postdata['end_date']);
+
+			if (!$MassTrappingParcel->save($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+			}
+		}
+
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
 }

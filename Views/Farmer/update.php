@@ -191,6 +191,9 @@
     </div>
   </div>
   <div class='row mt-3'>
+    <h4 class="mx-auto">
+        Αγροτεμάχια στην εκμετάλλευση
+    </h4>
     <div class="col-12">
      <table class="table table-striped text-custom-anthrax dtable">
       <thead>

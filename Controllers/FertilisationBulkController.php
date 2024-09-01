@@ -30,6 +30,28 @@ class FertilisationBulkController extends BaseController
     return view('\Fmis\Views\Fertilisationparcel\add_bulk', $data ?? array());
   }
 
+  public function newGlobalItem()
+  {
+    $Fertiliser = new \Fmis\Models\FertiliserModel();
+    $UnitMeasurement = new \Fmis\Models\UnitMeasurementModel();
+    $FertiliserApplication = new \Fmis\Models\FertiliserApplicationModel();
+    $FarmingStage = new \Fmis\Models\FarmingStageModel();
+    $FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel();
+    $SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel();
+    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+
+    $data['fertiliser'] = $Fertiliser->findAll();
+    $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll();
+    $data['fertiliser_application'] = $FertiliserApplication->findAll();
+    $data['farming_stage'] = $FarmingStage->findAll();
+    $data['fertilise_equipment'] = $FertiliseEquipment->findAll();
+    $data['specialised_fertiliser'] = $SpecialisedFertiliser->findAll();
+    $data['cultivation_codes'] = $ParamCatso->findAll();
+
+    session()->remove('fertilisation_id');
+    return view('\Fmis\Views\Fertilisationparcel\add_global', $data ?? array());
+  }
+
   public function showItem($id)
   {    
 	$Fertiliser = new \Fmis\Models\FertiliserModel(); 
@@ -120,4 +142,41 @@ class FertilisationBulkController extends BaseController
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
   
+	public function saveGlobal()
+	{
+		$FertilisationParcel = new \Fmis\Models\FertilisationParcelModel();
+		$Parcel = new \Fmis\Models\ParcelModel();
+		$postdata = $this->request->getPost();
+		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+	
+		// If cultivar_code is provided, further filter the parcels
+		if (!empty($postdata['cultivar_code'])) {
+			$where['cultivar_code'] = $postdata['cultivar_code'];
+		}
+	
+		$parcels = $Parcel->getByAdvisor($where);
+	
+		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\FertilisationParcelEntity();
+			$item->fill($postdata);
+			$item->parcel_id = $parcel->id;
+			$item->fertilisation_date = randomDate($postdata['start_date'], $postdata['end_date']);
+	
+			if ($item->unit_measurement_id == 1 || $item->unit_measurement_id == 3) {
+				$item->total_quantity = $item->quantity_description * ($parcel->trees_number_ge4_years + $parcel->trees_number_l4_years);
+			} else if ($item->unit_measurement_id == 2) {
+				$item->total_quantity = $item->quantity_description * $parcel->total_area * 10;
+			} else if ($item->unit_measurement_id == 4) {
+				$item->total_quantity = $item->quantity_description * $postdata['parcel_quantity'] / 100;
+			}
+	
+			if (!$FertilisationParcel->save($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
+			}
+		}
+	
+		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+	}
+		
 }
+

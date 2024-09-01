@@ -101,4 +101,11 @@ class ParcelModel extends Model
     return $query->getResult('Fmis\Entities\ParcelEntity');
   }
   
+  public function getByAdvisor($where)
+  {
+      $builder = $this->db->table('parcel_advisor');
+      $builder->where($where);
+      $query = $builder->get();
+      return $query->getResult('Fmis\Entities\ParcelEntity');
+  }
 }
