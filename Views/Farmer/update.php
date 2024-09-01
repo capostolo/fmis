@@ -10,17 +10,17 @@
   </div>
   <div class="row d-flex flex-row justify-content-around mb-3">
 	<?php if(! $farmer) { ?>
-    <div class="p-2">
-      <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
+    <div class="col-3">
+      <button class="btn btn-custom-green dropdown-toggle form-control" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
     </div>
-    <div class="p-2">
-      <a class="btn btn-custom-green" href="<?= site_url('fmis/farmer/pending')?>">Μαζική καταγραφή</a>
+    <div class="col-2">
+      <a class="btn btn-custom-green form-control" href="<?= site_url('fmis/farmer/pending')?>">Μαζική καταγραφή</a>
     </div>
-    <div class="p-2">
-      <button class="btn btn-custom-green dropdown-toggle" data-toggle="collapse" data-target="#inputoutput">Εισροές - εκροές</button>
+    <div class="col-3">
+      <button class="btn btn-custom-green dropdown-toggle form-control" data-toggle="collapse" data-target="#inputoutput">Εισροές - εκροές</button>
     </div>
-    <div class="p-2">
-      <a class="btn btn-custom-green" href="<?= site_url('fmis/spd')?>">Σχέδιο Περιβαλλοντικής Διαχείρισης</a>
+    <div class="col-4">
+      <a class="btn btn-custom-green form-control" href="<?= site_url('fmis/spd')?>">Σχέδιο Περιβαλλοντικής Διαχείρισης</a>
     </div>
 	<?php } ?>
   </div>

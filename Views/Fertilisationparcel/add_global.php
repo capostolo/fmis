@@ -24,7 +24,7 @@
     </div>
     <div class="col-6">
       <div class='form-group' > 
-        <label class='control-label' for='cultivar_code'><?= lang('Fmis.cultivar_code') ?> (<?= lang('Fmis.optional') ?>)</label>
+        <label class='control-label' for='cultivar_code'><?= lang('Fmis.cultivar_code') ?></label>
         <select class='form-control selectpicker' name='cultivar_code' id='cultivar_code' data-live-search='true'>
           <option value=''><?= lang('Fmis.select_cultivar_code') ?></option>
         </select>

@@ -4,13 +4,31 @@
 	<h2 class='text-center'><?= lang('Fmis.farmer');?></h2>
 	<div class='row'>
 		<?php if(count($rows) > 0){?>
-    <div class='col-9'>
+    <div class='col-3'>
+		<div class="dropdown text-right">
+			<button class="btn btn-custom-green dropdown-toggle form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Μαζική καταγραφή
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="<?= site_url('fmis/fertilisation-global-new') ?>"><?= lang('Fmis.fparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/pruning-global-new') ?>"><?= lang('Fmis.pparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/soil-management-global-new') ?>"><?= lang('Fmis.smparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/mass-trapping-global-new') ?>"><?= lang('Fmis.mparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/irrigation-global-new') ?>"><?= lang('Fmis.iparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/spray-global-new') ?>"><?= lang('Fmis.sparcel');?></a>
+			</div>
+		</div>        
+    </div>
+    <div class='col-6'>
     </div>
     <div class='col-3'>
       <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/farmer/new') ?>'><?= lang('Fmis.new_item');?></a>
     </div>
  </div>
 	<div class='row mt-3'>
+		<h4 class="mx-auto">
+			Κατάλογος παραγωγών
+		</h4>
 		<div class='col-12'>
 			<table class='table table-hover table-striped dtable'>
 				<thead>
