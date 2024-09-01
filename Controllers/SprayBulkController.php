@@ -32,7 +32,7 @@ class SprayBulkController extends BaseController
     $UnitMeasurement = new \Fmis\Models\UnitMeasurementModel();
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
     $SprayEquipment = new \Fmis\Models\SprayEquipmentModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['protective_product'] = $ProtectiveProduct->findAll();
     $data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll();

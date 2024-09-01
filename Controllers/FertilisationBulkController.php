@@ -38,7 +38,7 @@ class FertilisationBulkController extends BaseController
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
     $FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel();
     $SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['fertiliser'] = $Fertiliser->findAll();
     $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll();

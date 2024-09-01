@@ -35,7 +35,7 @@ class SoilManagementBulkController extends BaseController
     $CoverCropSpecies = new \Fmis\Models\CoverCropSpeciesModel();
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
     $PloughEquipment = new \Fmis\Models\PloughEquipmentModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['work_type'] = $WorkType->findAll();
     $data['plant_species_sow'] = $PlantSpeciesSow->findAll();

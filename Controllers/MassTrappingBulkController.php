@@ -25,7 +25,7 @@ class MassTrappingBulkController extends BaseController
   {
     $Trap = new \Fmis\Models\TrapModel();
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['trap'] = $Trap->findAll();
     $data['farming_stage'] = $FarmingStage->findAll();
@@ -94,7 +94,7 @@ class MassTrappingBulkController extends BaseController
 		}		
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
-	
+
 	public function saveGlobal()
 	{
 		$MassTrappingParcel = new \Fmis\Models\MassTrappingParcelModel();

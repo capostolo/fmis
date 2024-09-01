@@ -29,7 +29,7 @@ class PruningBulkController extends BaseController
     $PruningType = new \Fmis\Models\PruningTypeModel();
     $PruningEquipment = new \Fmis\Models\PruningEquipmentModel();
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['pruning_type'] = $PruningType->findAll();
     $data['pruning_equipment'] = $PruningEquipment->findAll();
@@ -129,5 +129,5 @@ class PruningBulkController extends BaseController
 
 		return redirect()->to('fmis/farmer/pending')->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
 	}
-	
+
 }

@@ -28,7 +28,7 @@ class IrrigationBulkController extends BaseController
     $UnitMeasurement = new \Fmis\Models\UnitMeasurementModel();
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
     $IrrigationEquipment = new \Fmis\Models\IrrigationEquipmentModel();
-    $ParamCatso = new \Fmis\Models\ParamCatSoModel();
+    $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
     $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'irrigation'])->findAll();
     $data['farming_stage'] = $FarmingStage->findAll();
