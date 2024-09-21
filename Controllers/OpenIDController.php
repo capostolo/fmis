@@ -18,20 +18,18 @@ class OpenIDController extends BaseController
 	$oidc = new \Jumbojett\OpenIDConnectClient($issuer, $cid, $secret);
 
 	$oidc->authenticate();
-	$oidc->requestUserInfo();
+	//$oidc->requestUserInfo();
 
-	$data['attributes'] = array();
+	$attributes = array();
 	foreach($oidc as $key=> $value) {
 		if(is_array($value)){
 				$v = implode(', ', $value);
 		}else{
 				$v = $value;
 		}
-		$data['attributes'][$key] = $v;
+		$attributes[$key] = $v;
 	}
-
-
-    return view('\Fmis\Views\OpenID\list', $data);
+	session()->set('openid_attr', $attributes);
 
   }
 }
