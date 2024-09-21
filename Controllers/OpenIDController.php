@@ -18,7 +18,7 @@ class OpenIDController extends BaseController
 	$oidc = new \Jumbojett\OpenIDConnectClient($issuer, $cid, $secret);
 
 	$oidc->authenticate();
-	//$oidc->requestUserInfo();
+	$oidc->requestUserInfo();
 
 	$attributes = array();
 	foreach($oidc as $key=> $value) {
