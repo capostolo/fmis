@@ -242,5 +242,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('buyer/(:num)', 'BuyerController::showItem/$1'); 
 	$routes->post('buyer/delete', 'BuyerController::deleteItem');
 	$routes->post('get-cultivar-codes', 'ParamSoController::getCultivarCodes'); 
+	$routes->get('photo', 'ParcelController::getPhoto');
+	
+	$routes->get('openid-connect', 'OpenIDController::index');
 });
 	
