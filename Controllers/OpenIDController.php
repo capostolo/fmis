@@ -19,8 +19,9 @@ class OpenIDController extends BaseController
 	$oidc = new \Jumbojett\OpenIDConnectClient($cid, $secret, $issuer, $provider);
 
 	$oidc->authenticate();
-	$token = $oidc->access_token;
-	$afm = $oidc->tin;
+	$oidc->requestUserInfo();
+	$token = $oidc->getAccessToken();
+	$afm = $oidc->getVerifiedClaims('tin');
 	$options = [
 		'baseURI' => 'https://eae.opekepe.gr/api/v1/',
 		'headers' => [
@@ -35,7 +36,6 @@ class OpenIDController extends BaseController
 	$client = service('curlrequest', $options);
 	$response = $client->get('applications');
 	var_dump($response);
-
 
   }
 }
