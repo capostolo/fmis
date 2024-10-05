@@ -11,7 +11,12 @@ class FarmerEntity extends Entity
       $this->attributes['farmer_dtebirth'] = null;
       return $this;
     }
-    $thedate = Time::createFromFormat('d/m/Y', $dateString, 'Europe/Athens');
+	if(str_contains($dateString, '-')){  
+		$thedate = Time::createFromFormat('Y-m-d', $dateString, 'Europe/Athens');
+	}
+	else {
+		$thedate = Time::createFromFormat('d/m/Y', $dateString, 'Europe/Athens');
+	}
     $this->attributes['farmer_dtebirth'] = $thedate->toDateString();
     return $this;
   }

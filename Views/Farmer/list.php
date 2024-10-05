@@ -7,7 +7,7 @@
     <div class='col-3'>
 		<div class="dropdown text-right">
 			<button class="btn btn-custom-green dropdown-toggle form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Μαζική καταγραφή
+				<i class="bi bi-list-check"></i> Μαζική καταγραφή
 			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item" href="<?= site_url('fmis/fertilisation-global-new') ?>"><?= lang('Fmis.fparcel');?></a>
@@ -22,9 +22,10 @@
     <div class='col-6'>
     </div>
     <div class='col-3'>
-      <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/farmer/new') ?>'><?= lang('Fmis.new_item');?></a>
+      <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/openid-connect') ?>'><?= lang('Fmis.new_item');?></a>
     </div>
- </div>
+	</div>
+	<hr>
 	<div class='row mt-3'>
 		<h4 class="mx-auto">
 			Κατάλογος παραγωγών

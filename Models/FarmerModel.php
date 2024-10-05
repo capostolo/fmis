@@ -13,9 +13,9 @@ class FarmerModel extends Model
   protected $returnType     = 'Fmis\Entities\FarmerEntity';
   protected $useSoftDeletes = false;
 
-  protected $allowedFields = [];
+  protected $allowedFields = ['farmer_afm', 'farmer_firstname', 'farmer_lastname', 'farmer_fathername', 'farmer_mobile', 'farmer_email', 'farmer_dtebirth'];
 
-  protected $useTimestamps = false;
+  protected $useTimestamps = true;
 
   public function getPendingDir($where = null){
     $builder = $this->db->table('farm_dir_pending');

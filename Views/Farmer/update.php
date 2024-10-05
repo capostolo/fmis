@@ -10,20 +10,50 @@
   </div>
   <div class="row d-flex flex-row justify-content-around mb-3">
 	<?php if(! $farmer) { ?>
-    <div class="col-3">
-      <button class="btn btn-custom-green dropdown-toggle form-control" data-toggle="collapse" data-target="#practices">Οδηγίες διαχείρισης</button>
-    </div>
-    <div class="col-2">
-      <a class="btn btn-custom-green form-control" href="<?= site_url('fmis/farmer/pending')?>">Μαζική καταγραφή</a>
-    </div>
-    <div class="col-3">
-      <button class="btn btn-custom-green dropdown-toggle form-control" data-toggle="collapse" data-target="#inputoutput">Εισροές - εκροές</button>
-    </div>
-    <div class="col-4">
-      <a class="btn btn-custom-green form-control" href="<?= site_url('fmis/spd')?>">Σχέδιο Περιβαλλοντικής Διαχείρισης</a>
-    </div>
+	<div class="d-flex align-items-center text-custom-green setprop" data-toggle="collapse" data-target="#practices">
+	  <div class="display-4">
+		<i class="bi bi-signpost"></i>
+	  </div>
+	  <div>
+		<div class="h6">Οδηγίες</div>
+		<div class="h6">διαχείρισης</div>
+	  </div>
+	</div>
+	<div class="d-flex align-items-center text-custom-green">
+	  <div class="display-4">
+		<i class="bi bi-list-check"></i>
+	  </div>
+	<a href="<?= site_url('fmis/farmer/pending')?>" style="display: flex; text-decoration: none; color: inherit;">
+	  <div>
+		<div class="h6">Μαζική</div>
+		<div class="h6">καταγραφή</div>
+	  </div>
+	</a>
+	</div>
+	<div class="d-flex align-items-center text-custom-green setprop" data-toggle="collapse" data-target="#inputoutput">
+	  <div class="display-4">
+		<i class="bi bi-arrow-left-right"></i>
+	  </div>
+	  <div>
+		<div class="h6">Εισροές</div>
+		<div class="h6">εκροές</div>
+	  </div>
+	</div>
+	<div class="d-flex align-items-center text-custom-green">
+	<a href="<?= site_url('fmis/spd')?>" style="display: flex; text-decoration: none; color: inherit;">
+	  <div class="display-4">
+		<i class="bi bi-journal-richtext"></i>
+	  </div>
+	  <div>
+		<div class="h6">Σχέδιο</div>
+		<div class="h6">Περιβαλλοντικής</div>
+		<div class="h6">Διαχείρισης</div>
+	  </div>
+	</a>
+	</div>
 	<?php } ?>
   </div>
+	<hr>
   <div class='row mt-3 align-items-center justify-content-center pb-0 collapse' id='practices'>
     <div class="col-lg-3 col-md-4 col-sm-12 route-card">
       <div class="route-card-container-small px-4 pt-4 pb-4 my-2">

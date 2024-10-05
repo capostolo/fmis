@@ -18,10 +18,11 @@ class ParcelModel extends Model
                               'co_ownership_percent', 
                               'cultivation_code', 
                               'cultivar_code', 
-                              'farmer_id', 
+                              'farmer_id',
+							  'iacs_year',
                               'location', 
                               'community_code', 
-                              'geom64',
+                              'geomwkt',
                               'balance_n',
                               'balance_p',
                               'balance_k'
