@@ -7,6 +7,7 @@ return [
   'go_back' =>  'Επιστροφή',
   'save'  => 'Αποθήκευση',
   'apply'  => 'Καταγραφή',
+  'issue'  => 'Έκδοση',
   'fparcel' => 'Λίπανση',
   'pparcel' => 'Κλάδεμα',
   'mparcel' => 'Μαζική παγίδευση',
@@ -228,4 +229,12 @@ return [
 'buyer_name' => 'Επωνυμία', 
 'buyer_afm' => 'ΑΦΜ', 
 'buyer' => 'Στοιχεία αγοραστή', 
+'advisor_id' => 'Επιβλέπων σύμβουλος',
+'advisor' => 'Επιβλέποντες σύμβουλοι',
+'advisor_firstname' => 'Όνομα',
+'advisor_lastname' => 'Επώνυμο',
+'advisor_afm' => 'ΑΦΜ',
+'advisor_geotee' => 'Αρ. Μητρώου ΓΕΩΤΕΕ',
+'advisor_employment' => 'Σχέση εργασίας',
+	
 ];

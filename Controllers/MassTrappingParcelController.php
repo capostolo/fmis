@@ -39,9 +39,11 @@ class MassTrappingParcelController extends BaseController
     if($data['row']){
       session()->set('mass_trapping_parcel_id', $id);
       $dirData = $MassTrapping->find($data['row']->mass_trapping_id);
-      if($dirData && !$data['row']->mass_trapping_date){
+      if($dirData){ 
         $data['directive'] = $dirData;
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή μαζικής παγίδευσης.');
+		if (!$data['row']->mass_trapping_date){
+			session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή μαζικής παγίδευσης.');
+		}
       }
     }
     return view('\Fmis\Views\Masstrappingparcel\update', $data);

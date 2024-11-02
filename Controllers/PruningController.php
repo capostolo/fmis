@@ -40,6 +40,7 @@ class PruningController extends BaseController
     $data['pruning_type'] = $PruningType->findAll(); 
 		$data['pruning_equipment'] = $PruningEquipment->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
+	$data['disabled'] = '';	
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);

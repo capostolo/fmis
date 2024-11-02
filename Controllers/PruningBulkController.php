@@ -104,11 +104,13 @@ class PruningBulkController extends BaseController
 
 	public function saveGlobal()
 	{
+	    $Pruning = new \Fmis\Models\PruningModel();
 		$PruningParcel = new \Fmis\Models\PruningParcelModel();
 		$Parcel = new \Fmis\Models\ParcelModel();
 		$postdata = $this->request->getPost();
+		$farmer_id = '';
+		
 		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
-
 		// If cultivar_code is provided, further filter the parcels
 		if (!empty($postdata['cultivar_code'])) {
 			$where['cultivar_code'] = $postdata['cultivar_code'];
@@ -117,10 +119,24 @@ class PruningBulkController extends BaseController
 		$parcels = $Parcel->getByAdvisor($where);
 
 		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\PruningEntity();
+			$item->fill($postdata);
+			$item->dir_date = randomDirDate($postdata['start_date']);
+			if ($farmer_id != $parcel->farmer_id){
+				$farmer_id = $parcel->farmer_id;
+				$item->farmer_id = $farmer_id;
+				if (!$Pruning->insert($item)) {
+					return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταχώριση της συμβουλής.");
+				}
+				else {
+					$pruning_id = $Pruning->insertID();
+				}
+			}
 			$item = new \Fmis\Entities\PruningParcelEntity();
 			$item->fill($postdata);
 			$item->parcel_id = $parcel->id;
 			$item->pruning_date = randomDate($postdata['start_date'], $postdata['end_date']);
+			$item->pruning_id = $pruning_id;
 
 			if (!$PruningParcel->save($item)) {
 				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);

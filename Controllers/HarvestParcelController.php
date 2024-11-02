@@ -35,11 +35,13 @@ class HarvestParcelController extends BaseController
     if($data['row']){
       session()->set('harvest_parcel_id', $id);
       $dirData = $Harvesting->find($data['row']->harvesting_id);
-      if($dirData && !$data['row']->harvesting_date){
+      if($dirData){
         $data['directive'] = $dirData;
 		$SelectedEquipment = new \Fmis\Models\HarvestingEquipModel(); 
 		$data['selected_equipment'] = $SelectedEquipment->where(['harvesting_id' => $data['row']->harvesting_id])->findColumn('harvest_equipment_id');
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή συγκομιδής.');
+		 if (!$data['row']->harvesting_date){ 
+        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή συγκομιδής.');
+		 }
       }
 	  else{
 		$data['selected_equipment'] = $SelectedEquipment->where(['harvest_parcel_id' => $id])->findColumn('harvest_equipment_id');

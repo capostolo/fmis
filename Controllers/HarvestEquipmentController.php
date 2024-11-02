@@ -63,7 +63,7 @@ class HarvestEquipmentController extends BaseController
         
       }
       
-      return redirect()->to('harvest-equipment/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+      return redirect()->to('fmis/harvest-equipment/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }
     else {
       return redirect()->back()->withInput()->with('error', "Σφάλμα.");

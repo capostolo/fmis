@@ -17,6 +17,15 @@ class FarmerModel extends Model
 
   protected $useTimestamps = true;
 
+  public function getList($where = null){
+    $builder = $this->db->table('farmer_list');
+    if($where){
+      $builder->where($where);
+    }
+    $query = $builder->get();
+    return $query->getResult('Fmis\Entities\FarmerEntity');
+  }
+
   public function getPendingDir($where = null){
     $builder = $this->db->table('farm_dir_pending');
     if($where){
@@ -25,4 +34,5 @@ class FarmerModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\FarmerEntity');
   }
+	
 }

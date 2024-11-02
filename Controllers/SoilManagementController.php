@@ -48,6 +48,7 @@ class SoilManagementController extends BaseController
 		$data['cover_crop_species'] = $CoverCropSpecies->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
 		$data['plough_equipment'] = $PloughEquipment->findAll(); 
+	$data['disabled'] = '';	
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);

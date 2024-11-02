@@ -47,11 +47,21 @@
           <?= lang('Fmis.no_data');?>
         </p>
       </div>
-      <div class='col-12'>
-        <p class='text-center'>
-          <a class='btn btn-custom-green' href='<?= site_url('fmis/farming-stage/new') ?>'><?= lang('Fmis.new_item');?></a>
-        </p>
-      </div>
+		<div class='col-12 mb-3'>
+			<div class="dropdown text-center">
+			  <button class="btn btn-custom-green dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<?= lang('Fmis.new_item');?>
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="<?= site_url('fmis/fertilisation-bulk-new') ?>"><?= lang('Fmis.fparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/pruning-bulk-new') ?>"><?= lang('Fmis.pparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/soil-management-bulk-new') ?>"><?= lang('Fmis.smparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/mass-trapping-bulk-new') ?>"><?= lang('Fmis.mparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/irrigation-bulk-new') ?>"><?= lang('Fmis.iparcel');?></a>
+				<a class="dropdown-item" href="<?= site_url('fmis/spray-bulk-new') ?>"><?= lang('Fmis.sparcel');?></a>
+			  </div>
+			</div>        
+		</div>
 			<?php } ?>
 		</div>
 	</div>

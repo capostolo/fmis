@@ -34,6 +34,7 @@ class HarvestingController extends BaseController
 		
     $data['harvest_equipment'] = $HarvestEquipment->findAll();
 	$data['selected_equipment'] = $SelectedEquipment->where(['harvesting_id' => $id])->findColumn('harvest_equipment_id');
+	$data['disabled'] = '';	
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);

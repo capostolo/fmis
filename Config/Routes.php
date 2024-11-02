@@ -218,7 +218,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('parcel-leaf/(:num)', 'ParcelLeafController::showItem/$1'); 
 	$routes->post('parcel-leaf/delete', 'ParcelLeafController::deleteItem'); 
 	$routes->get('spd', 'SpdController::index'); 
-	$routes->get('spd/(:num)', 'SpdController::showItem/$1'); 
+	$routes->post('spd', 'SpdController::showItem'); 
 	$routes->get('farm-inputs', 'FarmInputsController::index'); 
 	$routes->get('farm-inputs/fertilisers', 'FarmInputsController::listFertilisers'); 
 	$routes->get('farm-inputs/ppp', 'FarmInputsController::listPpp'); 
@@ -243,6 +243,10 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('buyer/delete', 'BuyerController::deleteItem');
 	$routes->post('get-cultivar-codes', 'ParamSoController::getCultivarCodes'); 
 	$routes->get('photo', 'ParcelController::getPhoto');
+	$routes->get('advisor', 'AdvisorController::index');
+	$routes->get('advisor/new', 'AdvisorController::newItem');
+	$routes->get('advisor/(:num)', 'AdvisorController::showItem/$1');
+	$routes->post('advisor', 'AdvisorController::saveItem');
 	
 	$routes->get('openid-connect', 'OpenIDController::index');
 });

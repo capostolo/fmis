@@ -51,9 +51,11 @@ class SoilManagementParcelController extends BaseController
     if($data['row']){
       session()->set('soil_management_parcel_id', $id);
       $dirData = $SoilManagement->find($data['row']->soil_management_id);
-      if($dirData && !$data['row']->soil_management_date){
+      if($dirData){
         $data['directive'] = $dirData;
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή διαχείρισης εδάφους.');
+		if (!$data['row']->soil_management_date){  
+        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή διαχείρισης εδάφους.');
+		}
       }
     }
     return view('\Fmis\Views\Soilmanagementparcel\update', $data);

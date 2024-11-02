@@ -45,7 +45,7 @@ class FertilisationController extends BaseController
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
-		
+	$data['disabled'] = '';	
     $data['fertiliser'] = $Fertiliser->findAll(); 
 	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 

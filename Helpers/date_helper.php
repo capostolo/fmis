@@ -32,5 +32,29 @@ function randomDate($firstDate, $secondDate, $format = 'd/m/Y'): string
     return date($format, mt_rand($secondDateTimeStamp, $firstDateTimeStamp));
 }
 
+/**
+ * Random Directive Date
+ *
+ * This function will return a random date between 1 and 1 days prior to a given date.
+ *
+ * Note: The format of the dates you provide usually do not matter, function will try and evalutate it.
+ * Note: It does not matter if the first date specified is greater than or less than the second date, either works.
+ *
+ * @see https://www.php.net/manual/en/function.date.php for specifying the returning date format.
+ *
+ * @param string $firstDate A string representing the first date.
+ * @param string $format By default returns in Y-m-d, but you can use any format php date supports.
+ * @return string Returns a random date between 1 and 1 days prior to the $firstDate.
+ */
+function randomDirDate($firstDate, $format = 'd/m/Y'): string
+{
+    $firstDateTime = Time::createFromFormat($format, $firstDate, 'Europe/Athens');
+
+    $firstDateTimeStamp = $firstDateTime->getTimestamp();
+    $firstDirDateTimeStamp = $firstDateTime->getTimestamp() - 1296000;
+    $secondDirDateTimeStamp = $firstDateTime->getTimestamp() - 86400;
+
+	return date($format, mt_rand($firstDirDateTimeStamp, $secondDirDateTimeStamp));
+}
 
 ?>

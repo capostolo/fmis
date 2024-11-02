@@ -47,9 +47,11 @@ class SprayParcelController extends BaseController
     if($data['row']){
       session()->set('spray_parcel_id', $id);
       $dirData = $Spray->find($data['row']->spray_id);
-      if($dirData && !$data['row']->spray_date){
+      if($dirData){
         $data['directive'] = $dirData;
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή φυτοπροστασίας.');
+		if (!$data['row']->spray_date){
+        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή φυτοπροστασίας.');
+		}
       }
     }
     return view('\Fmis\Views\Sprayparcel\update', $data);

@@ -116,10 +116,12 @@ class SoilManagementBulkController extends BaseController
 
 public function saveGlobal()
 {
+    $SoilManagement = new \Fmis\Models\SoilManagementModel();
 	$SoilManagementParcel = new \Fmis\Models\SoilManagementParcelModel();
 	$Parcel = new \Fmis\Models\ParcelModel();
 	$postdata = $this->request->getPost();
 	$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+	$farmer_id = '';
 
 	// If cultivar_code is provided, further filter the parcels
 	if (!empty($postdata['cultivar_code'])) {
@@ -129,10 +131,24 @@ public function saveGlobal()
 	$parcels = $Parcel->getByAdvisor($where);
 
 	foreach ($parcels as $parcel) {
+		$item = new \Fmis\Entities\SoilManagementEntity();
+		$item->fill($postdata);
+		$item->dir_date = randomDirDate($postdata['start_date']);
+		if ($farmer_id != $parcel->farmer_id){
+			$farmer_id = $parcel->farmer_id;
+			$item->farmer_id = $farmer_id;
+			if (!$SoilManagement->insert($item)) {
+				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταχώριση της συμβουλής.");
+			}
+			else {
+				$soil_management_id = $SoilManagement->insertID();
+			}
+		}
 		$item = new \Fmis\Entities\SoilManagementParcelEntity();
 		$item->fill($postdata);
 		$item->parcel_id = $parcel->id;
 		$item->soil_management_date = randomDate($postdata['start_date'], $postdata['end_date']);
+		$item->soil_management_id = $soil_management_id;
 
 		if (!$SoilManagementParcel->save($item)) {
 			return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);

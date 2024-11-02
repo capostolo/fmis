@@ -12,21 +12,28 @@ class SpdController extends BaseController
   
   public function index()
   {    
-    $farmer = session()->get('farmer_id');
 	$parcels = new \Fmis\Models\ParcelModel();
-	$data['rows'] = $parcels->getYears(['farmer_id' => $farmer]);
+	$advisors = new \Fmis\Models\AdvisorModel();
+	$data['advisors'] = $advisors->where(['parent_id' => session()->get('advisor_id')])->findAll();  
+	$data['rows'] = $parcels->getYears(['farmer_id' => session()->get('farmer_id')]);
     return view('\Fmis\Views\Spd\list', $data);
   }
 
-  public function showItem($year)
+  public function showItem()
   {    
-    $farmer = session()->get('farmer_id');
+    $postdata = $this->request->getPost();
+	$year = $postdata['iacs_year'];
+	$farmer = session()->get('farmer_id');
 	$parcels = new \Fmis\Models\ParcelModel();
+	$advisors = new \Fmis\Models\AdvisorModel();
+	$data['user'] = $user = auth()->user();
+	$data['advisor'] = $advisors->find($postdata['advisor_id']);
 	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL');
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	$data['iacs_year'] = $year;
 	if (count($_GET) == 0) {
 		$data['iacs_year'] = $year;
+		$data['advisor_id'] = $postdata['advisor_id'];
 		$data['ecoZ'] = false;
 		$data['ecoU'] = false;
 		foreach ($data['table4'] As $t) {

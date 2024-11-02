@@ -6,43 +6,37 @@
 		<p class="lead"></p>
 		<p class=""></p>
 	</div>
+	<form method="post" action="<?= site_url('fmis/spd') ?>">
 	<div class='row'>
-	<?php if(count($rows) > 0){?>
-		<div class='col-9'>
-		</div>
-		<div class='col-3'>
-		</div>
+		<div class='form-group col-6' > 
+          <label class='control-label' for='iacs_year'><?= lang('Fmis.iacs_year') ?></label>
+          <select class='form-control' name='iacs_year' id='iacs_year' required>
+            <option value=''><?= lang('Fmis.iacs_year') ?></option>
+            <?php foreach($rows As $r) { ?>
+            <option value='<?= $r->iacs_year ?>' > <?= $r->iacs_year ?> </option>
+            <?php } ?>
+          </select>
+        </div>
+		<div class='form-group col-6' > 
+          <label class='control-label' for='advisor_id'><?= lang('Fmis.advisor_id') ?></label>
+          <select class='form-control' name='advisor_id' id='advisor_id' >
+            <option value=''><?= lang('Fmis.advisor_id') ?></option>
+            <?php foreach($advisors As $r) { ?>
+            <option value='<?= $r->id ?>' > <?= $r->advisor_firstname.' '.$r->advisor_lastname ?> </option>
+            <?php } ?>
+          </select>
+        </div>
 	</div>
-	<div class='row mt-3'>
-		<div class='col-12'>
-			<table class='table table-hover table-striped dmtable'>
-				<thead>
-					<tr>
-						<th><?= lang('Fmis.iacs_year');?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($rows As $r) { ?>
-						<tr>
-							<td><a href="<?= site_url('fmis/spd/'.$r->iacs_year) ?>" target="_blank"> <?= $r->iacs_year ?> </a><i class="ag-irrigation ag-small ag-default"></i></td>
-						</tr>
-					<?php } ?>
-				</tbody>
-			</table>
-	<?php }
-	else {?>
-		<div class='col-12'>
-			<p class='lead text-center'>
-			  <?= lang('Fmis.no_data');?>
-			</p>
+	<div class='row'>
+		<div class='form-group col'>
+			<a class='btn btn-default form-control' href="<?= site_url('fmis/farmer') ?>"><?= lang('Fmis.go_back');?></a>
 		</div>
-		<div class='col-12'>
-			<p class='text-center'>
-			</p>
+		<div class='form-group col'>
+			<button class='btn btn-custom-green form-control' name='save' id='save'><?= lang('Fmis.issue');?></button>
 		</div>
-	<?php } ?>
-		</div>
-	</div>
+      </div>
+    </div>
+	</form>	
 </div>
 <?= $this->endSection() ?>
 

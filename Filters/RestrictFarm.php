@@ -33,7 +33,7 @@ class RestrictFarm implements FilterInterface
       $my_apps = $appModel->where(['advisor_id' => user_id(), 'id' => $farmer])
                     ->findAll();
     }
-    else if ($user->inGroup('farmer')){
+    else if ($user->inGroup('user')){
       $my_apps = $appModel->where(['user_id' => user_id(), 'id' => $farmer])
                     ->findAll();
     }

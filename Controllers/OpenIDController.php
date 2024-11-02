@@ -23,6 +23,9 @@ class OpenIDController extends BaseController
 	$token = $oidc->getAccessToken();
 	$idtoken = $oidc->getIdToken();
 	$afm = $oidc->getVerifiedClaims('tin');
+	//echo $token;
+	//echo 'AFM: '.$afm;
+	  
 	$options = [
 		'baseURI' => 'https://eae.opekepe.gr/api/v1/',
 		'headers' => [
@@ -53,7 +56,10 @@ class OpenIDController extends BaseController
 	$farmer_id = $farmerModel->getInsertID();
 	
 	//Create new parcel
+	$parcelModel = new \Fmis\Models\ParcelModel();
+	$parcelSchemeModel = new \Fmis\Models\ParcelSchemeModel();
 	$parcel = new \Fmis\Entities\ParcelEntity(); 
+	$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
 	$parcel->farmer_id = $farmer_id;
 	$parcel->iacs_year = 2024;
 	foreach ($data->field_list as $p) {
@@ -71,10 +77,16 @@ class OpenIDController extends BaseController
 			$parcel->trees_number_ge4_years = $c->trees_number_ge4_years;
 			$parcel->trees_number_l4_years = $c->trees_number_l4_years;
 			$parcel->is_cultivation_ge3_years = $c->is_cultivation_ge3_years;
+			$parcelModel->insert($parcel);
+			$parcel_id = $parcelModel->getInsertID();
+			foreach ($p->field_ecoscheme_subsidy_list as $e) {
+				$parcel_scheme->parcel_id = $parcel_id;
+				$parcel_scheme->ecoscheme_subsidy_code = $e->ecoscheme_subsidy_code;
+				$parcelSchemeModel->insert($parcel_scheme);
+			}
 		}
-		$parcelModel = new \Fmis\Models\ParcelModel();
-		$parcelModel->insert($parcel);
 	}
 	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
+	
   }
 }

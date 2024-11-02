@@ -16,7 +16,7 @@
         Για την καταχώριση των δεδομένων της εκμετάλλευσή σας ακολουθήστε τον παρακάτω σύνδεσμο ή επικοινωνήστε με το γεωργικό σας σύμβουλο.
       </p>
       <p class="text-center">
-        <a class="btn btn-custom-green" href="<?= site_url('fmis/farmer/new') ?>">Προσθήκη νέας εκμετάλλευσης</a>
+        <a class="btn btn-custom-green" href="<?= site_url('fmis/openid-connect') ?>">Προσθήκη νέας εκμετάλλευσης</a>
       </p>
     </div> 
     <div class='col-2'>

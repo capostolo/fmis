@@ -88,38 +88,38 @@ th, td {
 				</tr>
 				<tr>
 					<td width="25%">ΑΦΜ επιβλέποντα τεχνικού συμβούλου:</td>
-					<td width="25%"></td>
+					<td width="25%"><?= $advisor->advisor_afm ?? '' ?></td>
 					<td colspan="2">Σε περίπτωση απασχόλησης του τεχνικού συμβούλου σε νομικό πρόσωπο, συμπληρώστε τα στοιχεία του νομικού προσώπου: </td>
 				</tr>
 				<tr>
 					<td>Αριθμός Μητρώου ΓΕΩΤΕΕ::</td>
-					<td></td>
+					<td><?= $advisor->advisor_geotee ?? '' ?></td>
 					<td width="25%">ΑΦΜ νομικού προσώπου: </td>
-					<td width="25%"></td>
+					<td width="25%"><?= $user->company_afm ?></td>
 				</tr>
 				<tr>
 					<td>Επώνυμο:</td>
-					<td></td>
+					<td><?= $advisor->advisor_lastname ?? '' ?></td>
 					<td>Επωνυμία νομικού προσώπου:</td>
-					<td></td>
+					<td><?= $user->company_name ?></td>
 				</tr>
 				<tr>
 					<td>Όνομα:</td>
-					<td></td>
+					<td><?= $advisor->advisor_firstname ?? '' ?></td>
 					<td colspan="2">Σχέση εργασίας τεχνικού συμβούλου με το νομικό πρόσωπο (τσεκάρετε με «Χ» κατά περίπτωση: </td>
 				</tr>
 				<tr>
 					<td rowspan="4" colspan="2"></td>
 					<td>Μισθωτός</td>
-					<td></td>
+					<td><?= ($advisor && $advisor->advisor_employment == 1)?'X':'' ?></td>
 				</tr>
 				<tr>
 					<td>Μέτοχος</td>
-					<td></td>
+					<td><?= ($advisor && $advisor->advisor_employment == 2)?'X':'' ?></td>
 				</tr>
 				<tr>
 					<td>Με δελτίο παροχής υπηρεσιών </td>
-					<td></td>
+					<td><?= ($advisor && $advisor->advisor_employment == 3)?'X':'' ?></td>
 				</tr>
 				<tr>
 					<td style="height: 50px; vertical-align: top;">Άλλο (συνοπτική περιγραφή)</td>

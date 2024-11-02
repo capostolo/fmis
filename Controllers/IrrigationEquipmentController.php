@@ -63,7 +63,7 @@ class IrrigationEquipmentController extends BaseController
         
       }
       
-      return redirect()->to('irrigation-equipment/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+      return redirect()->to('fmis/irrigation-equipment/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }
     else {
       return redirect()->back()->withInput()->with('error', "Σφάλμα.");

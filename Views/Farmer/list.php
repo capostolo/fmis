@@ -34,6 +34,7 @@
 			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
+						<?php if ($advisor){?><th>Σύμβουλος</th><?php }?>
 						<th>ΑΦΜ</th>
 						<th>Ονοματεπώνυμο</th>
 						<th>Έδρα</th>
@@ -44,6 +45,7 @@
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
+							<?php if ($advisor){?><td><?= $r->company_name?></td><?php }?>
 							<td><a href="<?= site_url('fmis/farmer/'.$r->id) ?>" > <?= $r->farmer_afm ?> </a></td>
 							<td><?= $r->farmer_firstname.' '.$r->farmer_lastname?></td>
 							<td></td>
@@ -62,7 +64,7 @@
       </div>
       <div class='col-12'>
         <p class='text-center'>
-          <a class='btn btn-custom-green' href='<?= site_url('fmis/farming-stage/new') ?>'><?= lang('Fmis.new_item');?></a>
+          <a class='btn btn-custom-green' href='<?= site_url('fmis/openid-connect') ?>'><?= lang('Fmis.new_item');?></a>
         </p>
       </div>
 			<?php } ?>

@@ -63,7 +63,7 @@ class FertiliserApplicationController extends BaseController
         
       }
       
-      return redirect()->to('fertiliser-application/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+      return redirect()->to('fmis/fertiliser-application/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }
     else {
       return redirect()->back()->withInput()->with('error', "Σφάλμα.");

@@ -44,6 +44,7 @@ class SprayController extends BaseController
 		$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
 		$data['spray_equipment'] = $SprayEquipment->findAll(); 
+	$data['disabled'] = '';	
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);

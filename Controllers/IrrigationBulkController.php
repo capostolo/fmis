@@ -103,10 +103,12 @@ class IrrigationBulkController extends BaseController
 
 	public function saveGlobal()
 	{   
+    	$Irrigation = new \Fmis\Models\IrrigationModel();
 		$IrrigationParcel = new \Fmis\Models\IrrigationParcelModel();
 		$Parcel = new \Fmis\Models\ParcelModel();
 		$postdata = $this->request->getPost();
 		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+		$farmer_id = '';
 
 		// If cultivar_code is provided, further filter the parcels
 		if (!empty($postdata['cultivar_code'])) {
@@ -116,10 +118,24 @@ class IrrigationBulkController extends BaseController
 		$parcels = $Parcel->getByAdvisor($where);
 
 		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\IrrigationEntity();
+			$item->fill($postdata);
+			$item->dir_date = randomDirDate($postdata['start_date']);
+			if ($farmer_id != $parcel->farmer_id){
+				$farmer_id = $parcel->farmer_id;
+				$item->farmer_id = $farmer_id;
+				if (!$Irrigation->insert($item)) {
+					return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταχώριση της συμβουλής.");
+				}
+				else {
+					$irrigation_id = $Irrigation->insertID();
+				}
+			}
 			$item = new \Fmis\Entities\IrrigationParcelEntity();
 			$item->fill($postdata);
 			$item->parcel_id = $parcel->id;
 			$item->irrigation_date = randomDate($postdata['start_date'], $postdata['end_date']);
+			$item->irrigation_id = $irrigation_id;
 
 			if (!$IrrigationParcel->save($item)) {
 				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);

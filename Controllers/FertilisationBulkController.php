@@ -144,10 +144,12 @@ class FertilisationBulkController extends BaseController
   
 	public function saveGlobal()
 	{
+    	$Fertilisation = new \Fmis\Models\FertilisationModel();
 		$FertilisationParcel = new \Fmis\Models\FertilisationParcelModel();
 		$Parcel = new \Fmis\Models\ParcelModel();
 		$postdata = $this->request->getPost();
 		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+		$farmer_id = '';
 	
 		// If cultivar_code is provided, further filter the parcels
 		if (!empty($postdata['cultivar_code'])) {
@@ -157,10 +159,24 @@ class FertilisationBulkController extends BaseController
 		$parcels = $Parcel->getByAdvisor($where);
 	
 		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\FertilisationEntity();
+			$item->fill($postdata);
+			$item->dir_date = randomDirDate($postdata['start_date']);
+			if ($farmer_id != $parcel->farmer_id){
+				$farmer_id = $parcel->farmer_id;
+				$item->farmer_id = $farmer_id;
+				if (!$Fertilisation->insert($item)) {
+					return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταχώριση της συμβουλής.");
+				}
+				else {
+					$fertilisation_id = $Fertilisation->insertID();
+				}
+			}
 			$item = new \Fmis\Entities\FertilisationParcelEntity();
 			$item->fill($postdata);
 			$item->parcel_id = $parcel->id;
 			$item->fertilisation_date = randomDate($postdata['start_date'], $postdata['end_date']);
+			$item->fertilisation_id = $fertilisation_id;
 	
 			if ($item->unit_measurement_id == 1 || $item->unit_measurement_id == 3) {
 				$item->total_quantity = $item->quantity_description * ($parcel->trees_number_ge4_years + $parcel->trees_number_l4_years);

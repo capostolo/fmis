@@ -7,7 +7,7 @@ class FarmerController extends BaseController
   {
     helper(['form', 'url', 'session']);
     $this->model = new \Fmis\Models\FarmerModel();
-	  $this->user = auth()->user();
+	$this->user = auth()->user();
   }
   
   public function index()
@@ -16,8 +16,11 @@ class FarmerController extends BaseController
     session()->remove('farmer_name');
     session()->remove('farmer_afm');
     session()->remove('farmer_fathername');
-    if ($this->user->inGroup('admin') || $this->user->inGroup('test')) {
-      $data['rows'] = $this->model->findAll();
+    session()->remove('advisor_id');
+	$data['advisor'] = false;
+    if ($this->user->inGroup('admin')) {
+      $data['rows'] = $this->model->getList();
+	  $data['advisor'] = true;
       return view('\Fmis\Views\Farmer\list', $data);
     }
     else if ($this->user->inGroup('advisor')){
@@ -57,6 +60,7 @@ class FarmerController extends BaseController
       session()->set('farmer_name', $data['row']->farmer_firstname.' '.$data['row']->farmer_lastname);
       session()->set('farmer_afm', $data['row']->farmer_afm);
       session()->set('farmer_fathername', $data['row']->farmer_fathername);
+      session()->set('advisor_id', $data['row']->advisor_id);
     }
     return view('\Fmis\Views\Farmer\update', $data);
     

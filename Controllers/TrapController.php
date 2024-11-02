@@ -63,7 +63,7 @@ class TrapController extends BaseController
         
       }
       
-      return redirect()->to('trap/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+      return redirect()->to('fmis/trap/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }
     else {
       return redirect()->back()->withInput()->with('error', "Σφάλμα.");

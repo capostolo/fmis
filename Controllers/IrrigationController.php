@@ -40,6 +40,7 @@ class IrrigationController extends BaseController
     $data['unit_measurement'] = $UnitMeasurement->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
 		$data['irrigation_equipment'] = $IrrigationEquipment->findAll(); 
+	$data['disabled'] = '';	
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 		$data['crops'] = $this->model->parcelList(session()->get('farmer_id'), $id);

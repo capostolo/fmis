@@ -63,7 +63,7 @@ class CoverCropSpeciesController extends BaseController
         
       }
       
-      return redirect()->to('cover-crop-species/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
+      return redirect()->to('fmis/cover-crop-species/'.$item_id)->with('message', 'Τα στοιχεία ενημερώθηκαν με επιτυχία!');
     }
     else {
       return redirect()->back()->withInput()->with('error', "Σφάλμα.");

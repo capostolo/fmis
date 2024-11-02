@@ -43,9 +43,11 @@ class IrrigationParcelController extends BaseController
     if($data['row']){
       session()->set('irrigation_parcel_id', $id);
       $dirData = $Irrigation->find($data['row']->irrigation_id);
-      if($dirData && !$data['row']->irrigation_date){
+      if($dirData){
         $data['directive'] = $dirData;
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή άρδευσης.');
+		if (!$data['row']->irrigation_date){  
+        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή άρδευσης.');
+		}
       }
     }
     return view('\Fmis\Views\Irrigationparcel\update', $data);

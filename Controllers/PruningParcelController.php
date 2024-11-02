@@ -43,9 +43,11 @@ class PruningParcelController extends BaseController
     if($data['row']){
       session()->set('pruning_parcel_id', $id);
       $dirData = $Pruning->find($data['row']->pruning_id);
-      if($dirData && !$data['row']->pruning_date){
+      if($dirData){
         $data['directive'] = $dirData;
-        session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή κλαδέματος.');
+		if (!$data['row']->pruning_date){
+        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή κλαδέματος.');
+		}
       }
     }
     return view('\Fmis\Views\Pruningparcel\update', $data);

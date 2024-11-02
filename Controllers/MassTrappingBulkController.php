@@ -97,10 +97,12 @@ class MassTrappingBulkController extends BaseController
 
 	public function saveGlobal()
 	{
+    	$MassTrapping = new \Fmis\Models\MassTrappingModel();
 		$MassTrappingParcel = new \Fmis\Models\MassTrappingParcelModel();
 		$Parcel = new \Fmis\Models\ParcelModel();
 		$postdata = $this->request->getPost();
 		$where = ['advisor_id' => user_id(), 'cultivation_code' => $postdata['cultivation_code']];
+		$farmer_id = '';
 
 		// If cultivar_code is provided, further filter the parcels
 		if (!empty($postdata['cultivar_code'])) {
@@ -110,10 +112,24 @@ class MassTrappingBulkController extends BaseController
 		$parcels = $Parcel->getByAdvisor($where);
 
 		foreach ($parcels as $parcel) {
+			$item = new \Fmis\Entities\MassTrappingEntity();
+			$item->fill($postdata);
+			$item->dir_date = randomDirDate($postdata['start_date']);
+			if ($farmer_id != $parcel->farmer_id){
+				$farmer_id = $parcel->farmer_id;
+				$item->farmer_id = $farmer_id;
+				if (!$MassTrapping->insert($item)) {
+					return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταχώριση της συμβουλής.");
+				}
+				else {
+					$mass_trapping_id = $MassTrapping->insertID();
+				}
+			}
 			$item = new \Fmis\Entities\MassTrappingParcelEntity();
 			$item->fill($postdata);
 			$item->parcel_id = $parcel->id;
 			$item->mass_trapping_date = randomDate($postdata['start_date'], $postdata['end_date']);
+			$item->mass_trapping_id = $mass_trapping_id;
 
 			if (!$MassTrappingParcel->save($item)) {
 				return redirect()->back()->withInput()->with('error', "Σφάλμα κατά την καταγραφή για το αγροτεμάχιο " . $parcel->code);
