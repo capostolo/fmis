@@ -3,7 +3,8 @@ return [
 'newRegistration'	=>	'Νέα εγγραφή στο Schemis',   
 'newRegistrationBody'	=>	'Πραγματοποιήθηκε νέα εγγραφή στο Schemis. Ακολουθήστε τον παρακάτω σύνδεσμο για να δώσετε τα κατάλληλα δικαιώματα στο νέο χρήστη.',   
 'firstname'	=>	'Όνομα',   
-'lastname'	=>	'Επώνυμο',   
+'lastname'	=>	'Επώνυμο',
+'fullName'	=>	'Ονοματεπώνυμο',
 'email'	=>	'Διεύθυνση email',   
 'username'	=>	'Όνομα χρήστη',   
 'password'	=>	'Κωδικός χρήστη',   
@@ -19,4 +20,5 @@ return [
 'companyWeb'	=>	'Website',   
 'weNeverShare'  => 'Η Agrenaos είναι πιστοποιημένη κατά ISO 27001 για την ασφάλεια των πληροφοριών που διαχειρίζεται.',
 'assignGroup'  => 'Απόδοση δικαιωμάτων',
+'group'	=>	'Ομάδα',
 ];
