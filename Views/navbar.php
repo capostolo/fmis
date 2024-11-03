@@ -67,8 +67,10 @@
           <i class="bi bi-person"></i>  <?= $user->company_name ?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="<?= site_url('logout') ?>">Αποσύνδεση</a>
+          <a class="dropdown-item" href="<?= site_url('profile') ?>"> <?= lang('Fmis.user') ?></a>
           <a class="dropdown-item" href="<?= site_url('add-logo') ?>">Το logo σας</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?= site_url('logout') ?>">Αποσύνδεση</a>
         </div>
       </div>
       <?php } 
