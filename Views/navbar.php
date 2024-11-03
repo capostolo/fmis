@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="nav-item ">
-        <a class="nav-link text-white" href="<?= site_url('list-users')  ?>" id="navbarUsers">
+        <a class="nav-link text-white" href="<?= site_url('users/list')  ?>" id="navbarUsers">
           Διαχείριση χρηστών
         </a>
       </div>
