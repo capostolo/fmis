@@ -19,13 +19,18 @@ class ParcelModel extends Model
                               'cultivation_code', 
                               'cultivar_code', 
                               'farmer_id',
-							  'iacs_year',
+                              'iacs_year',
                               'location', 
                               'community_code', 
                               'geomwkt',
                               'balance_n',
                               'balance_p',
-                              'balance_k'
+                              'balance_k',
+                              'is_irrigated',
+                              'irrigation_method_code',
+                              'trees_number_ge4_years',
+                              'trees_number_l4_years',
+                              'is_cultivation_ge3_years'
                              ];
 
   protected $useTimestamps = false;
