@@ -72,35 +72,37 @@ class OpenIDController extends BaseController
 	$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
 	if($existing_parcel){
 		session()->setFlashdata("error", "Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024");
+		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");
 	}
-	$parcel->farmer_id = $farmer_id;
-	$parcel->iacs_year = 2024;
-	foreach ($data->field_list as $p) {
-		$parcel->code = $p->field_geospatial_data->cartographic_background;
-		$parcel->location = $p->field_info->location;
-		$parcel->geomwkt = $p->field_geospatial_data->geom;
-		$parcel->community_code = $p->field_geospatial_data->community_code;
-		$parcel->co_ownership_percent = $p->field_info->co_ownership_percent;	
-		foreach($p->field_cultivation_list as $c){
-			$parcel->total_area = $c->total_area;
-			$parcel->cultivation_code = $c->cultivation_code;
-			$parcel->cultivar_code = $c->cultivar_code;
-			$parcel->is_irrigated = $c->is_irrigated;
-			$parcel->irrigation_method_code = $c->irrigation_method_code;
-			$parcel->trees_number_ge4_years = $c->trees_number_ge4_years;
-			$parcel->trees_number_l4_years = $c->trees_number_l4_years;
-			$parcel->is_cultivation_ge3_years = $c->is_cultivation_ge3_years;
-			$parcelModel->insert($parcel);
-			$parcel_id = $parcelModel->getInsertID();
-			foreach ($p->field_ecoscheme_subsidy_list as $e) {
-				$parcel_scheme->parcel_id = $parcel_id;
-				$parcel_scheme->ecoscheme_subsidy_code = $e->ecoscheme_subsidy_code;
-				$parcelSchemeModel->insert($parcel_scheme);
+	else{
+		$parcel->farmer_id = $farmer_id;
+		$parcel->iacs_year = 2024;
+		foreach ($data->field_list as $p) {
+			$parcel->code = $p->field_geospatial_data->cartographic_background;
+			$parcel->location = $p->field_info->location;
+			$parcel->geomwkt = $p->field_geospatial_data->geom;
+			$parcel->community_code = $p->field_geospatial_data->community_code;
+			$parcel->co_ownership_percent = $p->field_info->co_ownership_percent;	
+			foreach($p->field_cultivation_list as $c){
+				$parcel->total_area = $c->total_area;
+				$parcel->cultivation_code = $c->cultivation_code;
+				$parcel->cultivar_code = $c->cultivar_code;
+				$parcel->is_irrigated = $c->is_irrigated;
+				$parcel->irrigation_method_code = $c->irrigation_method_code;
+				$parcel->trees_number_ge4_years = $c->trees_number_ge4_years;
+				$parcel->trees_number_l4_years = $c->trees_number_l4_years;
+				$parcel->is_cultivation_ge3_years = $c->is_cultivation_ge3_years;
+				$parcelModel->insert($parcel);
+				$parcel_id = $parcelModel->getInsertID();
+				foreach ($p->field_ecoscheme_subsidy_list as $e) {
+					$parcel_scheme->parcel_id = $parcel_id;
+					$parcel_scheme->ecoscheme_subsidy_code = $e->ecoscheme_subsidy_code;
+					$parcelSchemeModel->insert($parcel_scheme);
+				}
 			}
 		}
+		session()->setFlashdata("message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");
+		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
 	}
-	session()->setFlashdata("message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");
-	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
-	
   }
 }
