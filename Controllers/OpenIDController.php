@@ -18,8 +18,8 @@ class OpenIDController extends BaseController
 	$secret = '04C6n2ZtfuoL82cFG9Ql5IF55olSV98x';
 	$oidc = new \Jumbojett\OpenIDConnectClient($cid, $secret, $issuer, $provider);
 	//$oidc->setVerifyHost(false);
-	$oidc->setVerifyPeer(false);
-	//$oidc->setCertPath(APPPATH . 'Modules\Fmis\Certificates\opekepe.pem');
+	//$oidc->setVerifyPeer(false);
+	$oidc->setCertPath(APPPATH . 'Modules\Fmis\Certificates\opekepe_bundle.cer');
 
 	$oidc->authenticate();
 	$oidc->requestUserInfo();
@@ -71,7 +71,7 @@ class OpenIDController extends BaseController
 	$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
 	$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
 	if($existing_parcel){
-		session()->setFlashdata("error", "Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024");
+		session()->setFlashdata("error", "Η διαδικασία εισαγωγής δεδομένων ματαιώθηκε. Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024.");
 		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");
 	}
 	else{
