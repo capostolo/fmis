@@ -19,7 +19,7 @@ class OpenIDController extends BaseController
 	$oidc = new \Jumbojett\OpenIDConnectClient($cid, $secret, $issuer, $provider);
 	//$oidc->setVerifyHost(false);
 	//$oidc->setVerifyPeer(false);
-	$oidc->setCertPath(APPPATH . 'Modules\Fmis\Certificates\opekepe_bundle.cer');
+	$oidc->setCertPath('/var/www/vhosts/quercus.com.gr/_ci_core/fmis_app/app/Modules/Fmis/Certificates/opekepe_bundle.cer');
 
 	$oidc->authenticate();
 	$oidc->requestUserInfo();
