@@ -42,7 +42,14 @@ class OpenIDController extends BaseController
 	$data = json_decode($response->getBody());
 
 	//Create new farmer
+	$farmerModel = new \Fmis\Models\FarmerModel();
+	$existing_farmer = $farmerModel->where(['farmer_afm' => $data->tin, 'advisor_id' => user_id()])->first();
 	$farmer = new \Fmis\Entities\FarmerEntity(); 
+	$farmer_id = 0;
+	if ($existing_farmer){
+		$farmer->id = $existing_farmer->id;
+		$farmer_id = $existing_farmer->id;
+	}
 	$farmer->farmer_afm = $data->tin;
 	$farmer->farmer_firstname = $data->applicant_detail->first_name;
 	$farmer->farmer_lastname = $data->applicant_detail->last_name;
@@ -51,15 +58,20 @@ class OpenIDController extends BaseController
 	$farmer->farmer_email = $data->applicant_detail->email;
 	$farmer->farmer_dtebirth = $data->applicant_detail->birth_date;
 	$farmer->advisor_id = user_id();
-	$farmerModel = new \Fmis\Models\FarmerModel();
 	$farmerModel->save($farmer);
-	$farmer_id = $farmerModel->getInsertID();
+	if($farmer_id == 0){	
+		$farmer_id = $farmerModel->getInsertID();
+	}
 	
 	//Create new parcel
 	$parcelModel = new \Fmis\Models\ParcelModel();
 	$parcelSchemeModel = new \Fmis\Models\ParcelSchemeModel();
 	$parcel = new \Fmis\Entities\ParcelEntity(); 
 	$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
+	$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
+	if($existing_parcel){
+		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer")->with('error', 'Υπάρχουν ήδη δεδομένα για το χρήστη με τον ΑΦΜ '.$data->tin.' και έτος 2024');
+	}
 	$parcel->farmer_id = $farmer_id;
 	$parcel->iacs_year = 2024;
 	foreach ($data->field_list as $p) {
