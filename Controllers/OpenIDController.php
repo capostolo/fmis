@@ -70,7 +70,7 @@ class OpenIDController extends BaseController
 	$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
 	$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
 	if($existing_parcel){
-		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer")->with('error', 'Υπάρχουν ήδη δεδομένα για το χρήστη με τον ΑΦΜ '.$data->tin.' και έτος 2024');
+		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer", "error", "Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024");
 	}
 	$parcel->farmer_id = $farmer_id;
 	$parcel->iacs_year = 2024;
@@ -98,7 +98,7 @@ class OpenIDController extends BaseController
 			}
 		}
 	}
-	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
+	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer", "message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");  
 	
   }
 }
