@@ -17,14 +17,15 @@ class OpenIDController extends BaseController
 	$cid = 'schemis';
 	$secret = '04C6n2ZtfuoL82cFG9Ql5IF55olSV98x';
 	$oidc = new \Jumbojett\OpenIDConnectClient($cid, $secret, $issuer, $provider);
+	//$oidc->setVerifyHost(false);
+	//$oidc->setVerifyPeer(false);
+	$oidc->setCertPath(APPPATH . 'Modules\Fmis\Certificates\opekepe.crt');
 
 	$oidc->authenticate();
 	$oidc->requestUserInfo();
 	$token = $oidc->getAccessToken();
 	$idtoken = $oidc->getIdToken();
 	$afm = $oidc->getVerifiedClaims('tin');
-	//echo $token;
-	//echo 'AFM: '.$afm;
 	  
 	$options = [
 		'baseURI' => 'https://eae.opekepe.gr/api/v1/',
@@ -70,7 +71,7 @@ class OpenIDController extends BaseController
 	$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
 	$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
 	if($existing_parcel){
-		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer", "error", "Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024");
+		session()->setFlashdata("error", "Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024");
 	}
 	$parcel->farmer_id = $farmer_id;
 	$parcel->iacs_year = 2024;
@@ -98,7 +99,8 @@ class OpenIDController extends BaseController
 			}
 		}
 	}
-	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer", "message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");  
+	session()->setFlashdata("message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");
+	$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
 	
   }
 }
