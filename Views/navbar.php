@@ -8,13 +8,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <?php if(auth()->loggedIn()){
-        if (auth()->user()->inGroup('admin')) { ?>
-      <div class="nav-item ">
-        <a class="nav-link text-white" href="<?= site_url('fmis/farmer')  ?>" id="navbarHome">
+    <div class="nav-item ">
+        <a class="nav-link text-white" href="<?= site_url()  ?>" id="navbarHome">
 			Αρχική
         </a>
       </div>
+    <?php if(auth()->loggedIn()){
+        if (auth()->user()->inGroup('admin')) { ?>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuParams" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Παράμετροι
@@ -28,20 +28,8 @@
           Διαχείριση χρηστών
         </a>
       </div>
-      <?php } 
-      if (!auth()->user()->inGroup('nogroup')) { ?>
-      <div class="nav-item ">
-        <a class="nav-link text-white" href="<?= site_url('helpdesk/ticket-list')  ?>" id="navbarHelpdesk">
-          Επικοινωνία
-        </a>
-      </div>
-      <?php } }
-	  else { ?>
-      <div class="nav-item ">
-        <a class="nav-link text-white" href="<?= site_url()  ?>" id="navbarHome">
-			Αρχική
-        </a>
-      </div>
+      <?php }
+      if (auth()->user()->inGroup('advisor')) { ?>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuParams" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Παράμετροι
@@ -50,7 +38,22 @@
           <a class="dropdown-item" href="<?= site_url('fmis/advisor') ?>"><?= lang('Fmis.advisor') ?></a>
           <a class="dropdown-item" href="<?= site_url('fmis/supplier') ?>"><?= lang('Fmis.supplier') ?></a>
         </div>
-      </div>      <div class="nav-item ">
+      </div>            
+      <?php } 
+      if (!auth()->user()->inGroup('nogroup')) { ?>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="<?= site_url('fmis#manual') ?>" id="navbarManual" target="_blank">
+          Εγχειρίδιο χρήσης
+        </a>
+      </div>
+      <div class="nav-item ">
+        <a class="nav-link text-white" href="<?= site_url('helpdesk/ticket-list')  ?>" id="navbarHelpdesk">
+          Επικοινωνία
+        </a>
+      </div>
+      <?php } }
+	  else { ?>
+      <div class="nav-item ">
         <a class="nav-link text-white" href="#manual" id="navbarManual">
           Εγχειρίδιο χρήσης
         </a>

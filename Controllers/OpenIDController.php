@@ -41,7 +41,6 @@ class OpenIDController extends BaseController
 	$client = service('curlrequest', $options);
 	$response = $client->get('applications');
 	$data = json_decode($response->getBody());
-	log_message('debug', print_r($data, TRUE));
 	//Create new farmer
 	$farmerModel = new \Fmis\Models\FarmerModel();
 	$existing_farmer = $farmerModel->where(['farmer_afm' => $data->tin, 'advisor_id' => user_id()])->first();
