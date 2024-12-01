@@ -13,7 +13,8 @@ class ParcelModel extends Model
   protected $returnType     = 'Fmis\Entities\ParcelEntity';
   protected $useSoftDeletes = false;
 
-  protected $allowedFields = ['code', 
+  protected $allowedFields = ['code',
+                              'aa', 
                               'total_area', 
                               'co_ownership_percent', 
                               'cultivation_code', 

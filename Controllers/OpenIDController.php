@@ -41,7 +41,7 @@ class OpenIDController extends BaseController
 	$client = service('curlrequest', $options);
 	$response = $client->get('applications');
 	$data = json_decode($response->getBody());
-
+	log_message('debug', print_r($data, TRUE));
 	//Create new farmer
 	$farmerModel = new \Fmis\Models\FarmerModel();
 	$existing_farmer = $farmerModel->where(['farmer_afm' => $data->tin, 'advisor_id' => user_id()])->first();
@@ -78,6 +78,7 @@ class OpenIDController extends BaseController
 		$parcel->farmer_id = $farmer_id;
 		$parcel->iacs_year = 2024;
 		foreach ($data->field_list as $p) {
+			$parcel->aa = $p->code;
 			$parcel->code = $p->field_geospatial_data->cartographic_background;
 			$parcel->location = $p->field_info->location;
 			$parcel->geomwkt = $p->field_geospatial_data->geom;
