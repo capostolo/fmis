@@ -229,6 +229,7 @@
       <thead>
         <tr>
           <th>Κωδικός αγροτεμαχίου</th>
+          <th>A/A</th>
           <th>Περιγραφή</th>
           <th class="">Τοποθεσία</th>
           <th class="">Οικοσχήματα</th>
@@ -240,6 +241,7 @@
        <?php foreach($crops As $f){?>
          <tr>
           <td><a href="<?= site_url('fmis/parcel/'.$f->id) ?>"><?= $f->code ?></a></td>
+          <td><?= $f->aa?></td>
           <td><?= $f->poiDescription?></td>
           <td class="text-right"><?= $f->location ?></td>
           <td class="text-right"><?= $f->ecoschemes ?></td>
