@@ -79,6 +79,25 @@ class PruningParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Pruningparcel\list');
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    
+    if(!$item_data->pruning_id){
+        $this->model->delete($item_id);
+    }
+    else {
+        $item = new \Fmis\Entities\PruningParcelEntity();
+        $item->id = $item_id;
+        $item->pruning_date = null;
+        $item->pruning_type_id = null;
+        $item->pruning_equipment_id = null;
+        $item->farming_stage_id = null;
+        $this->model->save($item);
+    }
+    
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }

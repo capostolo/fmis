@@ -109,6 +109,31 @@ class FertilisationParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Fertilisationparcel\list');
+    
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    if(!$item_data->fertilisation_id){
+      $this->model->delete($item_id);
+    }
+    else {
+      $item = new \Fmis\Entities\FertilisationParcelEntity();
+      $item->id = $item_id;
+      $item->fertilisation_date = null;
+      $item->fertiliser_id = null;
+      $item->quantity_description = null;
+      $item->unit_measurement_id = null;
+      $item->parcel_quantity = null;
+      $item->fertiliser_application_id = null;
+      $item->farming_stage_id = null;
+      $item->fertilise_equipment_id = null;
+      $item->specialised_fertiliser_id = null;
+      $item->total_quantity = null;
+      $item->carbon_footprint = null; 
+      $this->model->save($item);
+    }
+    return $this->response->setJSON([
+      'status' => 'success',
+      'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }

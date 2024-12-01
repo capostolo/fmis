@@ -75,6 +75,25 @@ class MassTrappingParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Masstrappingparcel\list');
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    
+    if(!$item_data->mass_trapping_id){
+        $this->model->delete($item_id);
+    } else {
+        $item = new \Fmis\Entities\MassTrappingParcelEntity();
+        $item->id = $item_id;
+        $item->mass_trapping_date = null;
+        $item->trap_id = null;
+        $item->traps_hectare = null;
+        $item->farming_stage_id = null;
+        $item->carbon_footprint = null;
+        $this->model->save($item);
+    }
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }

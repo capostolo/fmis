@@ -83,6 +83,31 @@ class SprayParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Sprayparcel\list');
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    
+    if(!$item_data->spray_id){
+        $this->model->delete($item_id);
+    }
+    else {
+        $item = new \Fmis\Entities\SprayParcelEntity();
+        $item->id = $item_id;
+        $item->spray_date = null;
+        $item->protective_product_id = null;
+        $item->dose = null;
+        $item->unit_measurement_id = null;
+        $item->parcel_quantity = null;
+        $item->target = null;
+        $item->conditions = null;
+        $item->days_before_harvest = null;
+        $item->farming_stage_id = null;
+        $item->spray_equipment_id = null;
+        $this->model->save($item);
+    }
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }

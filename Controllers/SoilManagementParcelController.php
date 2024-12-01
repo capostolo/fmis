@@ -87,6 +87,31 @@ class SoilManagementParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Soilmanagementparcel\list');
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    
+    if(!$item_data->soil_management_id){
+        $this->model->delete($item_id);
+    }
+    else {
+        $item = new \Fmis\Entities\SoilManagementParcelEntity();
+        $item->id = $item_id;
+        $item->soil_management_date = null;
+        $item->work_type_id = null;
+        $item->purpose_description = null;
+        $item->biodiversity_zone = null;
+        $item->plant_species_sow_id = null;
+        $item->seed_needed = null;
+        $item->cover_crop_species_id = null;
+        $item->cover_crop_seed = null;
+        $item->farming_stage_id = null;
+        $item->plough_equipment_id = null;
+        $this->model->save($item);
+    }
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }

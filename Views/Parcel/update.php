@@ -166,6 +166,7 @@
                   <th>Εργασία</th>
                   <th><?= lang('Fmis.dir_date');?></th>
                   <th><?= lang('Fmis.application_date');?></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -199,6 +200,13 @@
                     <td data-sort="'<?= $r->dir_date?>'"><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
                     <td data-sort="'<?= $r->application_date?>'">
                       <?= ($r->dir_date && !$r->application_date)? 'Εκκρεμής' : $r->application_date->toLocalizedString('d/M/Y') ?>
+                    </td>
+                    <td>
+                      <?php if($r->application_date){ ?>
+                        <a href="#" class="delete-item text-danger" data-practice="<?= $practice ?>" data-practice-parcel-id="<?= $r->practice_parcel_id ?>"><i class="bi bi-trash"></i></a>
+                      <?php } else {?>
+                        <a role="button" tabindex="0" href="#" class="info-item text-danger" data-toggle="popover" data-title="Δεν υπάρχουν καταχωρισμένες εργασίες." data-content="Πατήστε <a href='<?= site_url('fmis/'.$practice) ?>'>εδώ</a> αν θέλετε να τροποποιήσετε την οδηγία"><i class="bi bi-info-circle"></i></a>
+                      <?php } ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -371,6 +379,29 @@
   var viewextent = base.getSource().getProjection();
   var extent = vector.getSource().getExtent();
   map.getView().fit(extent,  {size: map.getSize(), padding: [200, 100, 200, 100]});  
+
+  $('.delete-item').click(function(e){
+    e.preventDefault();
+    if(confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την εγγραφή;')){
+      var practice = $(this).data('practice');
+      var practice_parcel_id = $(this).data('practice-parcel-id');
+      var theurl = "<?= site_url('fmis/') ?>" + practice + "-parcel/delete";
+      $.ajax({
+        url: theurl,
+        type: 'POST',
+        data: {item_id: practice_parcel_id},
+        success: function(response){
+          location.reload();
+          alert(response.message);
+        }
+      });
+    }
+  });
+
+  $('.info-item').click(function(e){
+    e.preventDefault();
+    $(this).popover({html:true})
+  });
 
   </script>
 <?= $this->endSection() ?>

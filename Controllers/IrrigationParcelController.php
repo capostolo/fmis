@@ -79,6 +79,28 @@ class IrrigationParcelController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Irrigationparcel\list');
+    $item_id = $this->request->getPost('item_id');
+    $item_data = $this->model->find($item_id);
+    
+    if(!$item_data->irrigation_id){
+        $this->model->delete($item_id);
+    }
+    else {
+        $item = new \Fmis\Entities\IrrigationParcelEntity();
+        $item->id = $item_id;
+        $item->irrigation_date = null;
+        $item->water_quantity_description = null;
+        $item->unit_measurement_id = null;
+        $item->suppling_hours = null;
+        $item->farming_stage_id = null;
+        $item->irrigation_equipment_id = null;
+        
+        $this->model->save($item);
+    }
+    
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
+    ]);
   }
 }
