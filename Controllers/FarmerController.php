@@ -17,7 +17,10 @@ class FarmerController extends BaseController
     session()->remove('farmer_afm');
     session()->remove('farmer_fathername');
     session()->remove('advisor_id');
-	$data['advisor'] = false;
+    if (session('magicLogin')) {
+      return redirect()->route('change-password')->with('message', lang('Auth.forceChangePassword'));
+    }
+	  $data['advisor'] = false;
     if ($this->user->inGroup('admin')) {
       $data['rows'] = $this->model->getList();
 	  $data['advisor'] = true;

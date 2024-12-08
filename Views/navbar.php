@@ -76,6 +76,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="<?= site_url('profile') ?>"> <?= lang('Fmis.user') ?></a>
+          <a class="dropdown-item" href="<?= site_url('change-password') ?>"> <?= lang('Auth.changeYourPassword') ?></a>
           <a class="dropdown-item" href="<?= site_url('add-logo') ?>">Το logo σας</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<?= site_url('logout') ?>">Αποσύνδεση</a>
