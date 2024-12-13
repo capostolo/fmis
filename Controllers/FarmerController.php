@@ -60,7 +60,7 @@ class FarmerController extends BaseController
     if ($this->user->inGroup('user')){
       $data['farmer'] = true;
     }
-    $data['row'] = $this->model->find($id);
+    $data['row'] = $this->model->getFarmer(['id' => $id]);
     if($data['row']){
       session()->set('farmer_id', $id);
       session()->set('farmer_name', $data['row']->farmer_firstname.' '.$data['row']->farmer_lastname);
@@ -72,7 +72,6 @@ class FarmerController extends BaseController
       session()->set('advisor_id', $data['row']->advisor_id);
     }
     return view('\Fmis\Views\Farmer\update', $data);
-    
   }
   
   public function showPendingDir()

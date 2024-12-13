@@ -26,6 +26,15 @@ class FarmerModel extends Model
     return $query->getResult('Fmis\Entities\FarmerEntity');
   }
 
+  public function getFarmer($where = null){
+    $builder = $this->db->table('farmer_list');
+    if($where){
+      $builder->where($where);
+    }
+    $query = $builder->get();
+    return $query->getRow(0, 'Fmis\Entities\FarmerEntity');
+  }
+
   public function getPendingDir($where = null){
     $builder = $this->db->table('farm_dir_pending');
     if($where){
