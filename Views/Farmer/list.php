@@ -48,7 +48,7 @@
 							<?php if ($advisor){?><td><?= $r->company_name?></td><?php }?>
 							<td><a href="<?= site_url('fmis/farmer/'.$r->id) ?>" > <?= $r->farmer_afm ?> </a></td>
 							<td><?= $r->farmer_firstname.' '.$r->farmer_lastname?></td>
-							<td></td>
+							<td><?= $r->farmer_location?></td>
 							<td><?= $r->farmer_mobile?></td>
 							<td><?= $r->farmer_email?></td>
 						</tr>
