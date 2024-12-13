@@ -17,7 +17,10 @@ class FarmerController extends BaseController
     session()->remove('farmer_afm');
     session()->remove('farmer_fathername');
     session()->remove('advisor_id');
-    if (session('magicLogin')) {
+    session()->remove('farmer_location');
+    session()->remove('farmer_pen');
+    session()->remove('farmer_reg');
+  if (session('magicLogin')) {
       return redirect()->route('change-password')->with('message', lang('Auth.forceChangePassword'));
     }
 	  $data['advisor'] = false;
@@ -63,6 +66,9 @@ class FarmerController extends BaseController
       session()->set('farmer_name', $data['row']->farmer_firstname.' '.$data['row']->farmer_lastname);
       session()->set('farmer_afm', $data['row']->farmer_afm);
       session()->set('farmer_fathername', $data['row']->farmer_fathername);
+      session()->set('farmer_location', $data['row']->farmer_location);
+      session()->set('farmer_pen', $data['row']->farmer_pen);
+      session()->set('farmer_reg', $data['row']->farmer_reg);
       session()->set('advisor_id', $data['row']->advisor_id);
     }
     return view('\Fmis\Views\Farmer\update', $data);

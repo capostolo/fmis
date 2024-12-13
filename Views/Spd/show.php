@@ -68,15 +68,15 @@ th, td {
 				</tr>
 				<tr>
 					<td width="50%">Περιφέρεια έδρας εκμετάλλευσης:</td>
-					<td width="50%"></td>
+					<td width="50%"><?= session()->get('farmer_reg')?></td>
 				</tr>
 				<tr>
 					<td>Περιφερειακή ενότητα έδρας εκμετάλλευσης:</td>
-					<td></td>
+					<td><?= session()->get('farmer_pen')?></td>
 				</tr>
 				<tr>
 					<td>Δημοτική – Τοπική Κοινότητα έδρας εκμετάλλευσης:</td>
-					<td></td>
+					<td><?= session()->get('farmer_location')?></td>
 				</tr>
 			</table>
 		</div>
