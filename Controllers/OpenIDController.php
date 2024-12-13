@@ -57,6 +57,7 @@ class OpenIDController extends BaseController
 	$farmer->farmer_mobile = $data->applicant_detail->mobile_phone_number;
 	$farmer->farmer_email = $data->applicant_detail->email;
 	$farmer->farmer_dtebirth = $data->applicant_detail->birth_date;
+	$farmer->farmer_location = $data->applicant_holding->administrative_division_code;
 	$farmer->advisor_id = user_id();
 	$farmerModel->save($farmer);
 	if($farmer_id == 0){	
