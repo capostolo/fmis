@@ -34,23 +34,25 @@
 			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
-						<?php if ($advisor){?><th>Σύμβουλος</th><?php }?>
+						<?php if ($admin){?><th>Σύμβουλος</th><?php }?>
 						<th>ΑΦΜ</th>
 						<th>Ονοματεπώνυμο</th>
 						<th>Έδρα</th>
 						<th>Τηλέφωνο</th>
 						<th>email</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<?php if ($advisor){?><td><?= $r->company_name?></td><?php }?>
+							<?php if ($admin){?><td><?= $r->company_name?></td><?php }?>
 							<td><a href="<?= site_url('fmis/farmer/'.$r->id) ?>" > <?= $r->farmer_afm ?> </a></td>
 							<td><?= $r->farmer_firstname.' '.$r->farmer_lastname?></td>
 							<td><?= $r->farmer_location?></td>
 							<td><?= $r->farmer_mobile?></td>
 							<td><?= $r->farmer_email?></td>
+							<td><?php if ($admin) { ?><a role="button" href="#" class="delete-item text-danger" data-name="<?= $r->farmer_firstname.' '.$r->farmer_lastname ?>" data-id="<?= $r->id ?>"><i class="bi bi-trash"></i></a><?php } ?></td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -74,5 +76,25 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<?php if($admin){ ?>
+<script>
+  $('.delete-item').click(function(e){
+    e.preventDefault();
+	var thename = $(this).data('name');
+	var theid = $(this).data('id');
+    if(confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε τα δεδομένα για τον παραγωγό ' + thename + '; Δεν θα έχετε τη δυνατότητα αναίρεσης.')){
+      var theurl = "<?= site_url('fmis/farmer/delete') ?>";
+      $.ajax({
+        url: theurl,
+        type: 'POST',
+        data: {item_id: theid},
+        success: function(response){
+          location.reload();
+          alert(response.message);
+        }
+      });
+    }
+  });
+</script>
+<?php } ?>
 <?= $this->endSection() ?>

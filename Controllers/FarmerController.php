@@ -7,7 +7,7 @@ class FarmerController extends BaseController
   {
     helper(['form', 'url', 'session']);
     $this->model = new \Fmis\Models\FarmerModel();
-	$this->user = auth()->user();
+	  $this->user = auth()->user();
   }
   
   public function index()
@@ -23,10 +23,10 @@ class FarmerController extends BaseController
   if (session('magicLogin')) {
       return redirect()->route('change-password')->with('message', lang('Auth.forceChangePassword'));
     }
-	  $data['advisor'] = false;
+	  $data['admin'] = false;
     if ($this->user->inGroup('admin')) {
       $data['rows'] = $this->model->getList();
-	  $data['advisor'] = true;
+	    $data['admin'] = true;
       return view('\Fmis\Views\Farmer\list', $data);
     }
     else if ($this->user->inGroup('advisor')){
@@ -78,5 +78,24 @@ class FarmerController extends BaseController
   {
 	$data['rows'] = $this->model->getPendingDir(['farmer_id' => session()->get('farmer_id')]);
     return view('\Fmis\Views\Farmer\pending', $data);
+  }
+
+  public function delete()
+  {
+    if ($this->request->isAJAX() && $this->user->inGroup('admin')) {
+      $id = $this->request->getPost('item_id');
+      if ($this->model->delete($id)) {
+        $response = [
+          'status' => 'success',
+          'message' => lang('Fmis.delete_success')
+        ];
+      } else {
+        $response = [
+          'status' => 'error', 
+          'message' => lang('Fmis.delete_failure')
+        ];
+      }
+      return $this->response->setJSON($response);
+    }
   }
 }

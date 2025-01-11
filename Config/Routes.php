@@ -6,6 +6,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('farmer/new', 'FarmerController::newItem'); 
 	$routes->get('farmer/(:num)', 'FarmerController::showItem/$1', ['filter' => 'restrict-farm']);
 	$routes->get('farmer/pending', 'FarmerController::showPendingDir');
+	$routes->post('farmer/delete', 'FarmerController::delete');
 	$routes->get('parcel/(:num)', 'ParcelController::showItem/$1', ['filter' => 'restrict-parcel']);
 	$routes->get('fertiliser', 'FertiliserController::index'); 
 	$routes->get('fertiliser/new', 'FertiliserController::newItem'); 
