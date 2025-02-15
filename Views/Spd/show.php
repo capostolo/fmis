@@ -150,6 +150,7 @@ th, td {
 			<table>
 				<thead>
 					<tr>
+						<th rowspan="3">α/α αγροτεμαχίου (ΕΑΕ)</th>
 						<th rowspan="3">Τοποθεσία</th>
 						<th rowspan="3">Κωδικός Χαρτογραφικού Υποβάθρου</th>
 						<th rowspan="3">Επιλέξιμη έκταση ΕΑΕ (ha)</th>
@@ -183,6 +184,7 @@ th, td {
 					$eco = $t->ecoB + $t->ecoC + $t->ecoD + $t->ecoE + $t->ecoST + $t->ecoZ + $t->ecoH + $t->ecoU + $t->ecoI + $t->ecoIA + $t->ecoIB + $t->ecoIC;
 					if ($eco > 0) {?>
 					<tr>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->location ?></td>
 						<td><?= $t->code ?></td>
 						<td><?= $t->total_area ?></td>
@@ -192,13 +194,7 @@ th, td {
 						<td><?= ($t->ecoC == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoD == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoIC == 1)? 'Ναι' : '' ?></td>
-						<td><?= ($t->ecoE == 1)? 'Ναι' : ''
-
-
-
-
-						
-						?></td>
+						<td><?= ($t->ecoE == 1)? 'Ναι' : ''?></td>
 						<td><?= ($t->ecoST == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoZ == 1)? 'Ναι' : '' ?></td>
 						<td><?= ($t->ecoH == 1)? 'Ναι' : '' ?></td>
@@ -220,27 +216,31 @@ th, td {
 			<table>
 				<thead>
 					<tr>
+						<th>Ημνία</th>
+						<th>α/α αγροτεμαχίου (ΕΑΕ)</th>
 						<th>Δράση</th>
-						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
-						<th>Εχθρός</th>
+						<th>Επιλέξιμη έκταση ΕΑΕ  (ha)</th>
+						<th>Καλλιέργεια</th>
 						<th>Εμπορική Ονομασία</th>
 						<th>Αριθμός ΑΑΔΑ / Απόφαση εγγραφή ΕΚΣΦΜ σκευάσματος</th>
+						<th>Εχθρός</th>
 						<th>Συνιστώμενη ποσότητα</th>
-						<th>Εύρος ημερομηνιών εφαρμογής / εξαπόλυσης</th>
-						<th>Εφαρμοσθείσα ποσότητα</th>
+						<th>Συνιστώμενο διάστημα εφαρμογής / εξαπόλυσης</th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($table2 as $t) {?>
 					<tr>
+						<td><?= $t->dir_date->toLocalizedString('d/M/Y') ?></td>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
-						<td><?= $t->targets ?></td>
+						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td><?= $t->product?></td>
 						<td><?= $t->aada?></td>
+						<td><?= $t->targets ?></td>
 						<td><?= $t->recommended_dose.' '.$t->unit?></td>
-						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
-						<td><?= $t->applied_dose.' '.$t->unit?></td>
+						<td><?= $t->dir_dates?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -255,8 +255,11 @@ th, td {
 			<table>
 				<thead>
 					<tr>
+						<th>Ημνία</th>
+						<th>α/α αγροτεμαχίου (ΕΑΕ)</th>
 						<th>Δράση</th>
-						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
+						<th>Επιλέξιμη έκταση ΕΑΕ  (ha)</th>
+						<th>Καλλιέργεια</th>
 						<th>Τύπος εξοπλισμού (31.6-Ε)</th>
 						<th>Τύπος φυτικού υλικού εδαφοκάλυψης (31.6-Ε)</th>
 						<th>Αριθμός καλοκαιρινών κλαδεμάτων (31.6-ΣΤ)</th>
@@ -266,22 +269,28 @@ th, td {
 				<tbody>
 				<?php foreach ($table3b as $t) {?>
 					<tr>
+						<td><?= $t->dir_date->toLocalizedString('d/M/Y') ?></td>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
+						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td><?= $t->equipment_type ?></td>
 						<td><?= $t->cover_crop ?></td>
 						<td></td>
-						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
+						<td><?= $t->dir_dates?></td>
 					</tr>
 				<?php } ?>
 				<?php foreach ($table3a as $t) {?>
 					<tr>
+						<td><?= $t->dir_date->toLocalizedString('d/M/Y') ?></td>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
+						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td></td>
 						<td></td>
 						<td><?= $t->num_pruning ?></td>
-						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
+						<td><?= $t->dir_dates?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -296,8 +305,11 @@ th, td {
 			<table>
 				<thead>
 					<tr>
+						<th>Ημνία</th>
+						<th>α/α αγροτεμαχίου (ΕΑΕ)</th>
 						<th>Δράση</th>
-						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
+						<th>Επιλέξιμη έκταση ΕΑΕ  (ha)</th>
+						<th>Καλλιέργεια</th>
 						<th>Τύπος ακροφυσίων (31.6-Ζ)</th>
 						<th>Αριθμός ακροφυσίων (31.6-Ζ)</th>
 						<th>Έτος αγοράς εξοπλισμού (31.6-Ζ, -Θ)</th>
@@ -308,8 +320,11 @@ th, td {
 				<tbody>
 				<?php foreach ($table4 as $t) {?>
 					<tr>
+						<td><?= $t->dir_date->toLocalizedString('d/M/Y') ?></td>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
+						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td><?= $beck_type ?></td>
 						<td><?= $beck_num ?></td>
 						<td><?= $equip_year ?></td>
@@ -329,8 +344,11 @@ th, td {
 			<table>
 				<thead>
 					<tr>
+					<th>Ημνία</th>
+						<th>α/α αγροτεμαχίου (ΕΑΕ)</th>
 						<th>Δράση</th>
-						<th>Συνολική έκταση αγροτεμαχίων (ha)</th>
+						<th>Επιλέξιμη έκταση ΕΑΕ  (ha)</th>
+						<th>Καλλιέργεια</th>
 						<th>Τύπος λιπάσματος</th>
 						<th>Εμπορική ονομασία</th>
 						<th>Κατηγορία προϊόντος λίπανσης</th>
@@ -341,13 +359,16 @@ th, td {
 				<tbody>
 				<?php foreach ($table5 as $t) {?>
 					<tr>
+						<td><?= $t->dir_date->toLocalizedString('d/M/Y') ?></td>
+						<td><?= $t->aa ?></td>
 						<td><?= $t->action ?></td>
 						<td><?= $t->total_area ?></td>
+						<td><?= $t->poiCategoryName.' - '.$t->poiDescription ?></td>
 						<td><?= $t->type ?></td>
 						<td><?= $t->name ?></td>
 						<td><?= $t->category ?></td>
 						<td><?= $t->total_quantity.' '.$t->unit?></td>
-						<td><?= $t->min_date->toLocalizedString('d/M/Y').' έως '.$t->max_date->toLocalizedString('d/M/Y')?></td>
+						<td><?= $t->dir_dates?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -372,7 +393,7 @@ th, td {
 				<tbody>
 				<?php foreach ($table6 as $t) {?>
 					<tr>
-						<td><?= $t->farm_practice. ' ('. $t->location. ', '. $t->dir_date->toLocalizedString('d/M/Y'). ')' ?></td>
+						<td><?= $t->farm_practice. ' (A/A EAE: '. $t->aa. ', '. $t->location. ', '. $t->dir_date->toLocalizedString('d/M/Y'). ')' ?></td>
 						<td>
 							<?php
 								$nonadoption = "";

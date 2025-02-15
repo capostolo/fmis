@@ -16,7 +16,7 @@ class SpdModel extends Model
 
   public function getTable2($where = null)
   {
-    $builder = $this->db->table('spd_2');
+    $builder = $this->db->table('spd_2_new');
     if($where){
       $builder->where($where);
     }
@@ -26,7 +26,7 @@ class SpdModel extends Model
 
   public function getTable3a($where = null)
   {
-    $builder = $this->db->table('spd_3a');
+    $builder = $this->db->table('spd_3a_new');
     if($where){
       $builder->where($where);
     }
@@ -36,7 +36,7 @@ class SpdModel extends Model
 
   public function getTable3b($where = null)
   {
-    $builder = $this->db->table('spd_3b');
+    $builder = $this->db->table('spd_3b_new');
     if($where){
       $builder->where($where);
     }
@@ -46,7 +46,7 @@ class SpdModel extends Model
 
   public function getTable4($where = null)
   {
-    $builder = $this->db->table('spd_4');
+    $builder = $this->db->table('spd_4_new');
     if($where){
       $builder->where($where);
     }
@@ -56,7 +56,7 @@ class SpdModel extends Model
 
   public function getTable5($where = null)
   {
-    $builder = $this->db->table('spd_5');
+    $builder = $this->db->table('spd_5_new');
     if($where){
       $builder->where($where);
     }

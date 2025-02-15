@@ -20,4 +20,12 @@ class SpdEntity extends Entity
     }
     return $this->mutateDate($this->attributes['max_date']);
   }
+  
+  protected function getDirDate()
+  {
+    if($this->attributes['dir_date'] === null){
+      return null;
+    }
+    return $this->mutateDate($this->attributes['dir_date']);
+  }
 }

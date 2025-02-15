@@ -6,8 +6,10 @@
 		<p class="lead"></p>
 		<p class=""></p>
 	</div>
-	<form method="get" action="<?= site_url('fmis/spd/'.$iacs_year) ?>">
+	<form method="post" action="<?= site_url('fmis/spd/') ?>">
 	<div class='row'>
+		  <input type="hidden" class="form-control" name="iacs_year" id="iacs_year" value="<?= $iacs_year ?>" >
+		  <input type="hidden" class="form-control" name="advisor_id" id="advisor_id" value="<?= $advisor_id ?>" >
           <div class="form-group col-4">
             <label for="beck_type" class="control-label"><?= lang('Fmis.beck_type');?> </label>
             <input type="text" class="form-control" name="beck_type" id="beck_type" required>

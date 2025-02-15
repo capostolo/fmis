@@ -28,11 +28,10 @@ class SpdController extends BaseController
 	$advisors = new \Fmis\Models\AdvisorModel();
 	$data['user'] = $user = auth()->user();
 	$data['advisor'] = $advisors->find($postdata['advisor_id']);
-	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL');
+	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL AND ecoscheme_id IS NOT NULL');
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	$data['iacs_year'] = $year;
-	if (count($_GET) == 0) {
-		$data['iacs_year'] = $year;
+	if (!isset($postdata['beck_type'])) {
 		$data['advisor_id'] = $postdata['advisor_id'];
 		$data['ecoZ'] = false;
 		$data['ecoU'] = false;
@@ -48,7 +47,12 @@ class SpdController extends BaseController
 			return view('\Fmis\Views\Spd\additional', $data);
 		}
 	}
-
+	else {
+		$data['equip_year'] = $postdata['equip_year'] ?? '';
+		$data['beck_type'] =  $postdata['beck_type'] ?? '';
+		$data['beck_num'] =  $postdata['beck_num'] ?? '';
+	}
+	
 	$data['table1'] = $this->model->where(['farmer_id' => $farmer, 'iacs_year' => $year])->findAll();
 	$data['table2'] = $this->model->getTable2(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	$data['table3a'] = $this->model->getTable3a(['farmer_id' => $farmer, 'iacs_year' => $year]);
@@ -56,9 +60,6 @@ class SpdController extends BaseController
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	$data['table5'] = $this->model->getTable5(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	
-	$data['equip_year'] = $_GET['equip_year'] ?? '';
-	$data['beck_type'] =  $_GET['beck_type'] ?? '';
-	$data['beck_num'] =  $_GET['beck_num'] ?? '';
 
     $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 	$mpdf->use_kwt = true;
