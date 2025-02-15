@@ -66,7 +66,7 @@ class SpdController extends BaseController
 	$content = view('\Fmis\Views\Spd\show', $data);
 	$mpdf->WriteHTML($content);
     $this->response->setHeader('Content-Type', 'application/pdf');
-    $mpdf->Output('filename.pdf', 'I');
+    $mpdf->Output('filename.pdf', 'D');
   }
 
 }

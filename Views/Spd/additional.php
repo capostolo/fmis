@@ -6,7 +6,7 @@
 		<p class="lead"></p>
 		<p class=""></p>
 	</div>
-	<form method="post" action="<?= site_url('fmis/spd/') ?>">
+	<form method="post" action="<?= site_url('fmis/spd') ?>">
 	<div class='row'>
 		  <input type="hidden" class="form-control" name="iacs_year" id="iacs_year" value="<?= $iacs_year ?>" >
 		  <input type="hidden" class="form-control" name="advisor_id" id="advisor_id" value="<?= $advisor_id ?>" >

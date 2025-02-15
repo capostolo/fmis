@@ -176,6 +176,7 @@
         <div class="manual-container pb-5">
             <div class="row">
                 <div class="col-12 mb-5">
+                    <h2 class="section-title text-center"><small>Τρέχουσα έκδοση: 1.2.0</small></h2>
                     <h2 class="section-title text-center">Διαβάστε το Εγχειρίδιο Χρήσης για:</h2>
                 </div>
                 <div class="col-lg-6 my-lg-0 my-4">
