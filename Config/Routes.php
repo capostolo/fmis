@@ -250,5 +250,6 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('advisor', 'AdvisorController::saveItem');
 	
 	$routes->get('openid-connect', 'OpenIDController::index');
+	$routes->get('eco', 'OpenIDController::getEco');
 });
 	
