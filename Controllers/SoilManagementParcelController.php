@@ -25,7 +25,7 @@ class SoilManagementParcelController extends BaseController
 		$CoverCropSpecies = new \Fmis\Models\CoverCropSpeciesModel(); 
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		$PloughEquipment = new \Fmis\Models\PloughEquipmentModel(); 
-    $data['work_type'] = $WorkType->findAll(); 
+    $data['work_type'] = $WorkType->modelList(); 
 		$data['plant_species_sow'] = $PlantSpeciesSow->findAll(); 
 		$data['cover_crop_species'] = $CoverCropSpecies->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 

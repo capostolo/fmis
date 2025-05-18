@@ -196,8 +196,26 @@
                   }
                 ?>
                   <tr class="<?= ($r->dir_date && !$r->application_date)? 'text-danger' : '' ?>">
-                    <td><a href="<?= site_url('fmis/'.$practice.'-parcel/'.$r->practice_parcel_id) ?>" > <?= $r->farm_practice ?> </a> <a href='<?= site_url('fmis/'.$practice.'-parcel') ?>'><i class="bi bi-search"></i></a></td>
-                    <td data-sort="'<?= $r->dir_date?>'"><?= ($r->dir_date)? $r->dir_date->toLocalizedString('d/M/Y') : 'Χωρίς συμβουλή' ?></td>
+                    <td>
+                      <a href="<?= site_url('fmis/'.$practice.'-parcel/'.$r->practice_parcel_id) ?>" > 
+                        <?= $r->farm_practice ?> 
+                      </a>
+                      <a href='<?= site_url('fmis/'.$practice.'-parcel') ?>'>
+                        <i class="bi bi-search"></i>
+                      </a>
+                    </td>
+                    <td data-sort="'<?= $r->dir_date?>'">
+                      <?php 
+                        if($r->dir_date){
+                          echo $r->dir_date->toLocalizedString('d/M/Y');
+                        }
+                        else {
+                      ?>
+                          <a href="<?= site_url('fmis/'.$practice.'-from-parcel/'.$r->practice_parcel_id) ?>">Χωρίς συμβουλή</a>
+                      <?php
+                        } 
+                      ?>
+                    </td>
                     <td data-sort="'<?= $r->application_date?>'">
                       <?= ($r->dir_date && !$r->application_date)? 'Εκκρεμής' : $r->application_date->toLocalizedString('d/M/Y') ?>
                     </td>

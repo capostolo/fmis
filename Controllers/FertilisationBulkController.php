@@ -17,7 +17,7 @@ class FertilisationBulkController extends BaseController
 	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
-    $data['fertiliser'] = $Fertiliser->findAll(); 
+    $data['fertiliser'] = $Fertiliser->modelList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
@@ -40,7 +40,7 @@ class FertilisationBulkController extends BaseController
     $SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel();
     $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
-    $data['fertiliser'] = $Fertiliser->findAll();
+    $data['fertiliser'] = $Fertiliser->modelList();
     $data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll();
     $data['fertiliser_application'] = $FertiliserApplication->findAll();
     $data['farming_stage'] = $FarmingStage->findAll();
@@ -62,7 +62,7 @@ class FertilisationBulkController extends BaseController
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
     $Fertilisation = new \Fmis\Models\FertilisationModel();
 		
-    $data['fertiliser'] = $Fertiliser->findAll(); 
+    $data['fertiliser'] = $Fertiliser->modelList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 

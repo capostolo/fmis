@@ -15,7 +15,7 @@ class PruningTypeController extends BaseController
       $data['rows'] = $this->model->modelList(['pruning_type_where' => session()->get('pruning_type_where')]);
     }
     else{
-      $data['rows'] = $this->model->findAll();
+      $data['rows'] = $this->model->modelList();
     }
     return view('\Fmis\Views\Pruningtype\list', $data);
   }
@@ -26,6 +26,8 @@ class PruningTypeController extends BaseController
     
     
     session()->remove('pruning_type_id');
+    $Ecoscheme = new \Fmis\Models\EcoschemeModel();
+  	$data['ecoscheme'] = $Ecoscheme->findAll();
     return view('\Fmis\Views\Pruningtype\add', $data ?? array());
   }
 
@@ -34,6 +36,8 @@ class PruningTypeController extends BaseController
     
     
     
+    $Ecoscheme = new \Fmis\Models\EcoschemeModel();
+  	$data['ecoscheme'] = $Ecoscheme->findAll();
     $data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('pruning_type_id', $id);
@@ -73,6 +77,34 @@ class PruningTypeController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Pruningtype\list');
+    $id = $this->request->getPost('item_id');
+    try {
+        // Check if record exists
+        $record = $this->model->find($id);
+        if (!$record) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Record not found'
+            ]);
+        }
+
+        // Delete the record
+        if ($this->model->delete($id)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Record deleted successfully'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error deleting record'
+            ]);
+        }
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
   }
 }

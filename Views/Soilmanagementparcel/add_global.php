@@ -39,7 +39,7 @@
 			<select class='form-control selectpicker' name='work_type_id' id='work_type_id' data-live-search='true' required>
 				<option value=''><?= lang('Fmis.work_type_id') ?></option>
 				<?php foreach($work_type As $r) { ?>
-				<option value='<?= $r->id ?>' > <?= $r->work_type_description ?> </option>
+				<option value='<?= $r->id ?>' > <?= $r->work_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
 				<?php } ?>
 			</select>
 		</div> 

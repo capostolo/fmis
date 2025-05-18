@@ -20,7 +20,7 @@
           <select class='form-control selectpicker' name='fertiliser_id' id='fertiliser_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required <?= $disabled ?>>
             <option value=''><?= lang('Fmis.fertiliser_id') ?></option>
             <?php foreach($fertiliser As $r) { ?>
-            <option value='<?= $r->id ?>' <?= set_select('fertiliser_id', $r->id, $r->id == $row->fertiliser_id) ?>> <?= $r->fertiliser_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('fertiliser_id', $r->id, $r->id == $row->fertiliser_id) ?>> <?= $r->fertiliser_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 
@@ -95,10 +95,10 @@
 			<?php foreach($crops As $f){?>
 				<tr>
 					<td>
-						<input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->parcel_id ?>" <?= ($f->fertilisation_parcel_id) ? 'checked' : '' ?> <?= $disabled ?>/>
+						<input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>" <?= ($f->fertilisation_parcel_id) ? 'checked' : '' ?> <?= $disabled ?>/>
 					</td>
-					<td><a href="<?= site_url('crop/'.$f->id) ?>"><?= $f->code ?></a></td>
-					<td class="text-right"><?= $f->location ?></td>
+					<td><a href="<?= site_url('fmis/parcel/'.$f->id) ?>"><?= $f->code ?></a></td>
+					<td><?= $f->location ?></td>
 					<td><?= $f->poiDescription?></td>
 					<td class="text-right"><?= $f->total_area ?></td>
 					<td></td>

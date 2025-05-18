@@ -24,7 +24,7 @@
             <?php foreach($fertiliser As $r) { 
             $fertiliser_value = $row->fertiliser_id ?? $directive->fertiliser_id;
             ?>
-            <option value='<?= $r->id ?>' <?= set_select('fertiliser_id', $r->id, $r->id == $fertiliser_value) ?>> <?= $r->fertiliser_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('fertiliser_id', $r->id, $r->id == $fertiliser_value) ?>> <?= $r->fertiliser_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 

@@ -23,7 +23,7 @@ class PruningParcelController extends BaseController
     $PruningType = new \Fmis\Models\PruningTypeModel(); 
 		$PruningEquipment = new \Fmis\Models\PruningEquipmentModel(); 
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
-    $data['pruning_type'] = $PruningType->findAll(); 
+    $data['pruning_type'] = $PruningType->modelList(); 
 		$data['pruning_equipment'] = $PruningEquipment->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
     session()->remove('pruning_parcel_id');
@@ -36,7 +36,7 @@ class PruningParcelController extends BaseController
 		$PruningEquipment = new \Fmis\Models\PruningEquipmentModel(); 
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
     $Pruning = new \Fmis\Models\PruningModel();
-    $data['pruning_type'] = $PruningType->findAll(); 
+    $data['pruning_type'] = $PruningType->modelList(); 
 		$data['pruning_equipment'] = $PruningEquipment->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
     $data['row'] = $this->model->find($id);

@@ -12,37 +12,34 @@
 	?>
 	<div class='row'>
 		<div class='form-group col-3' > 
-
-          <label class='control-label' for='dir_date'><?= lang('Fmis.dir_date') ?></label>
-          <input type='text' class='form-control datepicker' name='dir_date' id='dir_date' required />
+          <label class='control-label' for='dir_date'><?= lang('Fmis.dir_date') ?> <span class="text-danger">*</span></label>
+          <input type='text' class='form-control datepicker' name='dir_date' id='dir_date' value="<?= old('dir_date') ?>" required />
+          <small class="text-muted">Μορφή: ΗΗ/ΜΜ/ΕΕΕΕ</small>
         </div> 
 <div class='form-group col-3' > 
-
-          <label class='control-label' for='pruning_type_id'><?= lang('Fmis.pruning_type_id') ?></label>
+          <label class='control-label' for='pruning_type_id'><?= lang('Fmis.pruning_type_id') ?> <span class="text-danger">*</span></label>
           <select class='form-control' name='pruning_type_id' id='pruning_type_id' required>
             <option value=''><?= lang('Fmis.pruning_type_id') ?></option>
             <?php foreach($pruning_type As $r) { ?>
-            <option value='<?= $r->id ?>' > <?= $r->pruning_type_description ?> </option>
+            <option value='<?= $r->id ?>' <?= (old('pruning_type_id') == $r->id) ? 'selected' : '' ?>> <?= $r->pruning_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 
 <div class='form-group col-3' > 
-
-          <label class='control-label' for='pruning_equipment_id'><?= lang('Fmis.pruning_equipment_id') ?></label>
+          <label class='control-label' for='pruning_equipment_id'><?= lang('Fmis.pruning_equipment_id') ?> <span class="text-danger">*</span></label>
           <select class='form-control' name='pruning_equipment_id' id='pruning_equipment_id' required>
             <option value=''><?= lang('Fmis.pruning_equipment_id') ?></option>
             <?php foreach($pruning_equipment As $r) { ?>
-            <option value='<?= $r->id ?>' > <?= $r->pruning_equipment_description ?> </option>
+            <option value='<?= $r->id ?>' <?= (old('pruning_equipment_id') == $r->id) ? 'selected' : '' ?>> <?= $r->pruning_equipment_description ?> </option>
             <?php } ?>
           </select>
         </div> 
 <div class='form-group col-3' > 
-
-          <label class='control-label' for='farming_stage_id'><?= lang('Fmis.farming_stage_id') ?></label>
+          <label class='control-label' for='farming_stage_id'><?= lang('Fmis.farming_stage_id') ?> <span class="text-danger">*</span></label>
           <select class='form-control' name='farming_stage_id' id='farming_stage_id' required>
             <option value=''><?= lang('Fmis.farming_stage_id') ?></option>
             <?php foreach($farming_stage As $r) { ?>
-            <option value='<?= $r->id ?>' > <?= $r->farming_stage_description ?> </option>
+            <option value='<?= $r->id ?>' <?= (old('farming_stage_id') == $r->id) ? 'selected' : '' ?>> <?= $r->farming_stage_description ?> </option>
             <?php } ?>
           </select>
         </div> 
@@ -50,13 +47,14 @@
 	</div>
       <div class="row mt-3">
       <h4 class="mx-auto">
-         Αγροτεμάχια που αφορά η συμβουλή
+         Αγροτεμάχια που αφορά η συμβουλή <span class="text-danger">*</span>
       </h4>
       <div class="col-12">
+      <?= $this->include('Fmis\Views\_message_block') ?>
       <table class="table table-striped dstable text-custom-anthrax">
         <thead>
           <tr>
-            <th><a href='#'><i class="far fa-square" aria-hidden="true" id="selectAll"></i></a></th>
+            <th><a href='#'><i class="bi bi-square" aria-hidden="true" id="selectAll"></i></a></th>
             <th>Κωδικός αγροτεμαχίου</th>
             <th>Τοποθεσία</th>
             <th>Περιγραφή</th>
@@ -68,7 +66,7 @@
          <?php foreach($crops As $f){?>
            <tr>
             <td>
-              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>"/>
+              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>" <?= (is_array(old('fi_selected')) && in_array($f->id, old('fi_selected'))) ? 'checked' : '' ?>/>
             </td>
             <td><a href="<?= site_url('crop/'.$f->id) ?>"><?= $f->code ?></a></td>
             <td class="text-right"><?= $f->location ?></td>
@@ -95,5 +93,103 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
+<script>
+$(document).ready(function() {
+  // Check if we have any checkboxes selected initially
+  const initialSelectedCount = $('.selectMe:checked').length;
+  const selectAllIcon = $('#selectAll');
+  
+  // Set the correct icon for the "Select All" button based on initial state
+  if (initialSelectedCount > 0 && initialSelectedCount === $('.selectMe').length) {
+    selectAllIcon.removeClass('fa-square').addClass('fa-check-square');
+  }
 
+  // Select all checkboxes functionality
+  selectAllIcon.on('click', function(e) {
+    e.preventDefault();
+    const isSelected = $(this).hasClass('fa-check-square');
+    
+    $('.selectMe').prop('checked', !isSelected);
+    
+    if (isSelected) {
+      $(this).removeClass('fa-check-square').addClass('fa-square');
+    } else {
+      $(this).removeClass('fa-square').addClass('fa-check-square');
+    }
+  });
+
+  // Form validation
+  $('#add-pruning').on('submit', function(e) {
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Check date
+    const dirDate = $('#dir_date');
+    if (!dirDate.val()) {
+      isValid = false;
+      errorMessage += 'Η ημερομηνία εφαρμογής είναι υποχρεωτική.\n';
+      dirDate.addClass('is-invalid');
+    } else {
+      // Simple date format validation (dd/mm/yyyy)
+      const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+      if (!dateRegex.test(dirDate.val())) {
+        isValid = false;
+        errorMessage += 'Η ημερομηνία πρέπει να είναι της μορφής ΗΗ/ΜΜ/ΕΕΕΕ.\n';
+        dirDate.addClass('is-invalid');
+      } else {
+        dirDate.removeClass('is-invalid');
+      }
+    }
+    
+    // Check dropdowns
+    const requiredSelects = [
+      { id: 'pruning_type_id', message: 'Ο τύπος κλαδέματος είναι υποχρεωτικός.' },
+      { id: 'pruning_equipment_id', message: 'Ο εξοπλισμός κλαδέματος είναι υποχρεωτικός.' },
+      { id: 'farming_stage_id', message: 'Το στάδιο καλλιέργειας είναι υποχρεωτικό.' }
+    ];
+    
+    $.each(requiredSelects, function(index, item) {
+      const select = $('#' + item.id);
+      if (!select.val()) {
+        isValid = false;
+        errorMessage += item.message + '\n';
+        select.addClass('is-invalid');
+      } else {
+        select.removeClass('is-invalid');
+      }
+    });
+    
+    // Check if at least one parcel is selected
+    if ($('.selectMe:checked').length === 0) {
+      isValid = false;
+      errorMessage += 'Πρέπει να επιλέξετε τουλάχιστον ένα αγροτεμάχιο.\n';
+      
+      // Add visual indication that parcels need to be selected
+      $('.dstable').addClass('table-danger');
+      setTimeout(function() {
+        $('.dstable').removeClass('table-danger');
+      }, 2000);
+    }
+    
+    if (!isValid) {
+      e.preventDefault();
+      alert('Παρακαλώ διορθώστε τα ακόλουθα λάθη:\n\n' + errorMessage);
+    }
+  });
+  
+  // Add visual feedback to form elements
+  $('input, select').on('focus', function() {
+    $(this).addClass('border-primary');
+  }).on('blur', function() {
+    $(this).removeClass('border-primary');
+    
+    // Validate on blur
+    if ($(this).prop('required') && !$(this).val()) {
+      $(this).addClass('is-invalid');
+    } else {
+      $(this).removeClass('is-invalid');
+    }
+  });
+});
+</script>
 <?= $this->endSection() ?>

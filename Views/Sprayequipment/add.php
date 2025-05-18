@@ -31,6 +31,15 @@
           <label class='control-label' for='capacity'><?= lang('Fmis.capacity') ?></label>
           <input type='text' class='form-control ' name='capacity' id='capacity' required />
         </div> 
+        <div class='form-group col-12' > 
+          <label class='control-label' for='ecoscheme_id'><?= lang('Fmis.ecoscheme_id') ?></label>
+          <select class='form-control' name='ecoscheme_id' id='ecoscheme_id' >
+          <option value=''><?= lang('Fmis.ecoscheme_id') ?></option>
+          <?php foreach($ecoscheme As $r) { ?>
+          <option value='<?= $r->id ?>' > <?= $r->code.' - '.$r->name ?> </option>
+          <?php } ?>
+          </select>
+        </div>   
 
 	</div>
   

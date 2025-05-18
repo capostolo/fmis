@@ -9,6 +9,23 @@
     </h1>
   </div>
   <div class="row d-flex flex-row justify-content-around mb-3">
+    <h3 class="text-center">
+      <?php
+        if($row->po_name){ 
+      ?>
+          <small>Οργάνωση Παραγωγών: <?= $row->po_name ?> 
+          <a class="btn btn-small btn-custom-green" title="Ενημέρωση ΟΠ" href="<?= site_url('fmis/farmer/show-po')?>"><i class="bi bi-pencil "></i></a>
+          <a class="btn btn-small btn-danger" id="remove-po" data-item="<?= $row->id ?>" title="Αφαίρεση ΟΠ" href="#"><i class="bi bi-x-lg "></i></a></small>
+      <?php
+        } 
+        else{ ?>
+          <small>Οργάνωση Παραγωγών: <a class="btn btn-custom-green" href="<?= site_url('fmis/farmer/add-po')?>"><?= lang('Fmis.new_item');?></a></small>
+      <?php    
+        }
+      ?>
+    </h3>
+  </div>
+  <div class="row d-flex flex-row justify-content-around mb-3">
 	<?php if(! $farmer) { ?>
 	<div class="d-flex align-items-center text-custom-green setprop" data-toggle="collapse" data-target="#practices">
 	  <div class="display-4">
@@ -219,10 +236,28 @@
         <a class="overlay-link" href="<?= site_url('fmis/farm-outputs')?>"></a>
       </div>
     </div>
+    <div class="col-lg-3 col-md-4 col-sm-12 route-card">
+      <div class="route-card-container-small px-4 pt-4 pb-4 my-2">
+        <div class="route-card-small-front">
+          <div class="mt-md-0 mt-4">
+            <h2>Μητρώο</h2>
+            <h3>Προβολή και εκτύπωση μητρώου</h3>
+            <p>Προβάλετε και εκτυπώστε το μητρώο εισροών - εκροών της εκμετάλλευσης</p>
+          </div>
+        </div>
+        <div class="route-card-small-back">
+          <div class="d-flex flex-column align-items-start">
+            <h3 class="mt-2 mb-2">Προβολή και εκτύπωση μητρώου</h3>
+            <p>Προβάλετε και εκτυπώστε το μητρώο εισροών - εκροών της εκμετάλλευσης</p>
+          </div>
+        </div>
+        <a class="overlay-link" href="<?= site_url('fmis/farm-input-output')?>"></a>
+      </div>
+    </div>
   </div>
   <div class='row mt-3'>
     <h4 class="mx-auto">
-        Αγροτεμάχια στην εκμετάλλευση
+        Αγροτεμάχια στην εκμετάλλευση για το έτος <?= session()->get('iacs_year') ?>
     </h4>
     <div class="col-12">
      <table class="table table-striped text-custom-anthrax dtable">
@@ -306,5 +341,22 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<script>
+  $('#remove-po').click(function(e){
+    e.preventDefault();
+    if(confirm('Είστε σίγουροι ότι θέλετε να αφαιρέσετε την ΟΠ;')){
+      var item_id = $(this).data('item'); 
+      var theurl = "<?= site_url('fmis/farmer/remove-po') ?>";
+      $.ajax({
+        url: theurl,
+        type: 'POST',
+        data: {item_id: item_id},
+        success: function(response){
+          location.reload();
+          alert(response.message);
+        }
+      });
+    }
+  });
+</script>
 <?= $this->endSection() ?>

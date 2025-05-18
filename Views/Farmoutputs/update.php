@@ -27,7 +27,7 @@
           <select class='form-control' name='buyer_id' id='buyer_id' required>
             <option value=''><?= lang('Fmis.buyer_id') ?></option>
             <?php foreach($buyer As $r) { ?>
-            <option value='<?= $r->id ?>' <?= set_select('buyer_id', $r->id, $r->id == $row->buyer_id) ?>> <?= $r->buyer_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('buyer_id', $r->id, $r->id == $row->buyer_id) ?>> <?= $r->buyer_name ?> </option>
             <?php } ?>
           </select>
         </div> 

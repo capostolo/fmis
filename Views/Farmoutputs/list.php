@@ -19,13 +19,17 @@
 			<table class='table table-hover table-striped'>
 				<thead>
 					<tr>
-            <th></th>
+					<th><?= lang('Fmis.output_name');?></th>
+					<th><?= lang('Fmis.invoice_date');?></th>
+					<th><?= lang('Fmis.output_quantity');?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
-							<td><a href="<?= site_url('fmis/farm-outputs/'.$r->id) ?>" > <?= $r->farm_outputs_description ?> </a></td>
+							<td><a href="<?= site_url('fmis/farm-outputs/'.$r->id) ?>" > <?= $r->output_name ?> </a></td>
+							<td><?= $r->invoice_date->toLocalizedString('d/M/Y') ?></td>
+							<td><?= $r->output_quantity.' '.$r->unit ?></td>
 						</tr>
 					<?php } ?>
 				</tbody>

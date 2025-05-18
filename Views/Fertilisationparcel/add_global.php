@@ -37,7 +37,7 @@
           <select class='form-control selectpicker' name='fertiliser_id' id='fertiliser_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required>
             <option value=''><?= lang('Fmis.fertiliser_id') ?></option>
             <?php foreach($fertiliser As $r) { ?>
-            <option value='<?= $r->id ?>' > <?= $r->fertiliser_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('fertiliser_id', $r->id) ?>> <?= $r->fertiliser_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 

@@ -15,10 +15,10 @@ class SprayBulkController extends BaseController
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 	$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
 		
-    $data['protective_product'] = $ProtectiveProduct->findAll(); 
+    $data['protective_product'] = $ProtectiveProduct->getPpList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
-	$data['spray_equipment'] = $SprayEquipment->findAll(); 
+	$data['spray_equipment'] = $SprayEquipment->modelList(); 
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 	$data['crops'] = $crops->getShortList(['farmer_id' => session()->get('farmer_id')]);
@@ -34,10 +34,10 @@ class SprayBulkController extends BaseController
     $SprayEquipment = new \Fmis\Models\SprayEquipmentModel();
     $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
-    $data['protective_product'] = $ProtectiveProduct->findAll();
+    $data['protective_product'] = $ProtectiveProduct->getPpList();
     $data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll();
     $data['farming_stage'] = $FarmingStage->findAll();
-    $data['spray_equipment'] = $SprayEquipment->findAll();
+    $data['spray_equipment'] = $SprayEquipment->modelList();
     $data['cultivation_codes'] = $ParamCatso->findAll();
 
     session()->remove('spray_id');
@@ -52,10 +52,10 @@ class SprayBulkController extends BaseController
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 	$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
 		
-    $data['protective_product'] = $ProtectiveProduct->findAll(); 
+    $data['protective_product'] = $ProtectiveProduct->getPpList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
-	$data['spray_equipment'] = $SprayEquipment->findAll(); 
+	$data['spray_equipment'] = $SprayEquipment->modelList(); 
 		
     $crops = new \Fmis\Models\ParcelModel(); 
 	$data['crops'] = $Spray->parcelList(session()->get('farmer_id'), $id);

@@ -28,9 +28,10 @@ class SpdController extends BaseController
 	$advisors = new \Fmis\Models\AdvisorModel();
 	$data['user'] = $user = auth()->user();
 	$data['advisor'] = $advisors->find($postdata['advisor_id']);
-	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND dir_date IS NOT NULL AND ecoscheme_id IS NOT NULL');
+	$data['table6'] = $parcels->getCalendar('farmer_id = '. $farmer. ' AND ecoscheme_id IS NOT NULL');
 	$data['table4'] = $this->model->getTable4(['farmer_id' => $farmer, 'iacs_year' => $year]);
 	$data['iacs_year'] = $year;
+	$data['spd_date'] = $postdata['spd_date'];
 	if (!isset($postdata['beck_type'])) {
 		$data['advisor_id'] = $postdata['advisor_id'];
 		$data['ecoZ'] = false;

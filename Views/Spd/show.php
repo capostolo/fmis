@@ -30,7 +30,7 @@ th, td {
 					<td width="25%">Έτος ΕΑΕ:</td>
 					<td width="25%"><?= $iacs_year?></td>
 					<td width="25%">Ημερομηνία κατάρτισης:</td>
-					<td width="25%"></td>
+					<td width="25%"><?= $spd_date ?> </td>
 				</tr>
 			</table>
 		</div>
@@ -393,36 +393,50 @@ th, td {
 				<tbody>
 				<?php foreach ($table6 as $t) {?>
 					<tr>
-						<td><?= $t->farm_practice. ' (A/A EAE: '. $t->aa. ', '. $t->location. ', '. $t->dir_date->toLocalizedString('d/M/Y'). ')' ?></td>
+						<td>
+							<?php
+								if ($t->dir_date == null) {
+									echo $t->farm_practice. ' (A/A EAE: '. $t->aa. ', '. $t->location. ', '. $t->application_date->toLocalizedString('d/M/Y'). ')'; 
+								}
+								else {
+									echo $t->farm_practice. ' (A/A EAE: '. $t->aa. ', '. $t->location. ', '. $t->dir_date->toLocalizedString('d/M/Y'). ')' ;
+								}
+							?>
+						</td>
 						<td>
 							<?php
 								$nonadoption = "";
 								$adoption = array();
-								if ($t->application_date == null) {
-									$nonadoption = "Η συμβουλή δεν υλοποιήθηκε.";
+								if ($t->dir_date == null) {
+									echo "Χωρίς συμβουλή";
 								}
 								else {
-									if ($t->product_check == 0) {
-										$adoption[] = "στο προϊόν";
+									if ($t->application_date == null) {
+										$nonadoption = "Η συμβουλή δεν υλοποιήθηκε.";
 									}
-									if ($t->quantity_check == 0) {
-										$adoption[] = "στην ποσότητα";
+									else {
+										if ($t->product_check == 0) {
+											$adoption[] = "στο προϊόν";
+										}
+										if ($t->quantity_check == 0) {
+											$adoption[] = "στην ποσότητα";
+										}
+										if ($t->application_check == 0) {
+											$adoption[] = "στον τρόπο εφαρμογής";
+										}
+										if ($t->stage_check == 0) {
+											$adoption[] = "στο στάδιο καλλιέργειας";
+										}
 									}
-									if ($t->application_check == 0) {
-										$adoption[] = "στον τρόπο εφαρμογής";
+									if ($nonadoption != "") {
+										echo $nonadoption;
 									}
-									if ($t->stage_check == 0) {
-										$adoption[] = "στο στάδιο καλλιέργειας";
+									else if(count($adoption) > 0) {
+										echo "Η συμβουλή υιοθετήθηκε στις ".$t->application_date->toLocalizedString('d/M/Y'). " με διαφορά ".implode(', ', $adoption);
 									}
-								}
-								if ($nonadoption != "") {
-									echo $nonadoption;
-								}
-								else if(count($adoption) > 0) {
-									echo "Η συμβουλή υιοθετήθηκε στις ".$t->application_date->toLocalizedString('d/M/Y'). " με διαφορά ".implode(', ', $adoption);
-								}
-								else {
-									echo "Η συμβουλή υιοθετήθηκε πλήρως στις ".$t->application_date->toLocalizedString('d/M/Y');
+									else {
+										echo "Η συμβουλή υιοθετήθηκε πλήρως στις ".$t->application_date->toLocalizedString('d/M/Y');
+									}
 								}
 							?>
 						</td>

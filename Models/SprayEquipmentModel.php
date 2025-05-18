@@ -21,7 +21,6 @@ class SprayEquipmentModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
   public function modelList($where = null)
   {
     $builder = $this->db->table('spray_equipment_list');
@@ -31,5 +30,5 @@ class SprayEquipmentModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\SprayEquipmentEntity');
   }
-  */
+
 }

@@ -27,7 +27,7 @@ class FertilisationParcelController extends BaseController
 	$FertiliseEquipment = new \Fmis\Models\FertiliseEquipmentModel(); 
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
 		
-    $data['fertiliser'] = $Fertiliser->findAll(); 
+    $data['fertiliser'] = $Fertiliser->modelList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
@@ -49,7 +49,7 @@ class FertilisationParcelController extends BaseController
 	$SpecialisedFertiliser = new \Fmis\Models\SpecialisedFertiliserModel(); 
     $Fertilisation = new \Fmis\Models\FertilisationModel();
 		
-    $data['fertiliser'] = $Fertiliser->findAll(); 
+    $data['fertiliser'] = $Fertiliser->modelList(); 
 	$data['unit_measurement'] = $UnitMeasurement->where(['practice' => 'fertilisation'])->findAll(); 
 	$data['fertiliser_application'] = $FertiliserApplication->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
@@ -60,13 +60,15 @@ class FertilisationParcelController extends BaseController
     $data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('fertilisation_parcel_id', $id);
-      $dirData = $Fertilisation->find($data['row']->fertilisation_id);
-	  $data['directive'] = new \Fmis\Entities\FertilisationParcelEntity();
-      if($dirData){ 
-        $data['directive']->fill($dirData->toArray());
-		if (!$data['row']->fertilisation_date){
-        	session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή λίπανσης.');
-		}
+      if($data['row']->fertilisation_id){
+        $dirData = $Fertilisation->find($data['row']->fertilisation_id);
+        $data['directive'] = new \Fmis\Entities\FertilisationParcelEntity();
+        if($dirData){ 
+          $data['directive']->fill($dirData->toArray());
+          if (!$data['row']->fertilisation_date){
+            session()->set('message', 'Προσοχή! Τα στοιχεία έχουν προσυμπληρωθεί με βάση την υφιστάμενη συμβουλή λίπανσης.');
+          }
+        }
       }
     }
     return view('\Fmis\Views\Fertilisationparcel\update', $data);
@@ -135,5 +137,11 @@ class FertilisationParcelController extends BaseController
       'status' => 'success',
       'message' => 'Η διαγραφή ολοκληρώθηκε με επιτυχία'
     ]);
+  }
+
+  public function createDirective($id)
+  {    
+    $Fertilisation = new \Fmis\Controllers\FertilisationController();
+    return $Fertilisation->createDirectiveFromParcel($id);
   }
 }

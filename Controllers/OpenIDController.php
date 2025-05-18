@@ -8,6 +8,10 @@ class OpenIDController extends BaseController
   public function __construct()
   {
     helper(['form', 'url', 'session']);
+  }
+  
+  public function index()
+  {
 	$issuer = 'https://accounts.opekepe.gr/realms/eco-schemes';
 	$provider = 'https://accounts.opekepe.gr/realms/eco-schemes';
 	$cid = 'schemis';
@@ -19,21 +23,17 @@ class OpenIDController extends BaseController
 
 	$oidc->authenticate();
 	$oidc->requestUserInfo();
-	$this->token = $oidc->getAccessToken();
-	$this->idtoken = $oidc->getIdToken();
-	$this->afm = $oidc->getVerifiedClaims('tin');
-  }
-  
-  public function index()
-  {
+	$token = $oidc->getAccessToken();
+	$idtoken = $oidc->getIdToken();
+	$afm = $oidc->getVerifiedClaims('tin');
 	$options = [
 		'baseURI' => 'https://eae.opekepe.gr/api/v1/',
 		'headers' => [
-			'Authorization' => 'Bearer '. $this->token,
+			'Authorization' => 'Bearer '. $token,
 		],
 		'query' => [
-			'tin' => $this->afm, 
-			'year' => '2024', 
+			'tin' => $afm, 
+			'year' => session()->get('iacs_year'), 
 			'initial' => 'false'
 		],		
 	];
@@ -69,14 +69,14 @@ class OpenIDController extends BaseController
 		$parcelSchemeModel = new \Fmis\Models\ParcelSchemeModel();
 		$parcel = new \Fmis\Entities\ParcelEntity(); 
 		$parcel_scheme = new \Fmis\Entities\ParcelEntity(); 
-		$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => 2024])->first();
+		$existing_parcel = $parcelModel->where(['farmer_id' => $farmer_id, 'iacs_year' => session()->get('iacs_year')])->first();
 		if($existing_parcel){
-			session()->setFlashdata("error", "Η διαδικασία εισαγωγής δεδομένων ματαιώθηκε. Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος 2024.");
-			$oidc->signOut($this->idtoken, "https://schemis.agrenaos.gr/fmis/farmer");
+			session()->setFlashdata("error", "Η διαδικασία εισαγωγής δεδομένων ματαιώθηκε. Υπάρχουν ήδη δεδομένα για τον παραγωγό με τον ΑΦΜ ".$data->tin." και το έτος ".session()->get('iacs_year').".");
+			$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");
 		}
 		else{
 			$parcel->farmer_id = $farmer_id;
-			$parcel->iacs_year = 2024;
+			$parcel->iacs_year = session()->get('iacs_year');
 			foreach ($data->field_list as $p) {
 				$parcel->aa = $p->code;
 				$parcel->code = $p->field_geospatial_data->cartographic_background;
@@ -102,13 +102,13 @@ class OpenIDController extends BaseController
 					}
 				}
 			}
-			session()->setFlashdata("message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος 2024 καταχωρίστηκαν!");
-			$oidc->signOut($this->idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
+			session()->setFlashdata("message", "Τα δεδομένα του παραγωγού με τον ΑΦΜ ".$data->tin." και το έτος ".session()->get('iacs_year')." καταχωρίστηκαν!");
+			$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
 		}
 	}
 	catch(\Exception $e) {
 		if(mb_substr(trim($e->getMessage()), -3) == '404'){
-			session()->setFlashdata("error", "Δεν βρέθηκαν στοιχεία στη βάση δεδομένων του ΟΠΕΚΕΠΕ για τον ΑΦΜ ".$afm." και το έτος 2024.");
+			session()->setFlashdata("error", "Δεν βρέθηκαν στοιχεία στη βάση δεδομένων του ΟΠΕΚΕΠΕ για τον ΑΦΜ ".$afm." και το έτος ".session()->get('iacs_year').".");
 		}
 		else if(mb_substr(trim($e->getMessage()), -3) == '401'){
 			session()->setFlashdata("error", "Δεν έχετε τα κατάλληλα δικαιώματα για πρόσβαση στα δεδομένα ΕΑΕ του ΑΦΜ ".$afm.".");
@@ -116,29 +116,7 @@ class OpenIDController extends BaseController
 		else {
 			session()->setFlashdata("error", "Άγνωστο σφάλμα κατά την προσπάθεια πρόσβασης στα δεδομένα ΕΑΕ για τον ΑΦΜ ".$afm.". Επικοινωνήστε με τον διαχειριστή του Schemis.");
 		}
-		$oidc->signOut($this->idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
-	}
-
-  }
-
-  public function getEco()
-  {
-	$options = [
-		'baseURI' => 'https://eae.opekepe.gr/api/v1/',
-		'headers' => [
-			'Authorization' => 'Bearer '. $this->token,
-		],
-		'query' => [
-		],		
-	];
-	$client = service('curlrequest', $options);
-	try {
-		$response = $client->get('/params/2024/ecoschemeEcoschemeSubsidy');
-		$data = json_decode($response->getBody());
-		var_dump($data);
-	}
-	catch(\Exception $e) {
-		echo $e->getMessage();
+		$oidc->signOut($idtoken, "https://schemis.agrenaos.gr/fmis/farmer");  
 	}
 
   }

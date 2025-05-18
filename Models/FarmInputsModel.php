@@ -46,4 +46,14 @@ class FarmInputsModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\FarmInputsEntity');
   }
+
+  public function modelList($where = null)
+  {
+    $builder = $this->db->table('farm_inputs_list');
+    if($where){
+      $builder->where($where);
+    }
+    $query = $builder->get();
+    return $query->getResult('Fmis\Entities\FarmInputsEntity');
+  }
 }

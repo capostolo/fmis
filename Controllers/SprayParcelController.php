@@ -24,10 +24,10 @@ class SprayParcelController extends BaseController
 		$UnitMeasurement = new \Fmis\Models\UnitMeasurementModel(); 
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
-    $data['protective_product'] = $ProtectiveProduct->findAll(); 
+    $data['protective_product'] = $ProtectiveProduct->getPpList(); 
 		$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['spray_equipment'] = $SprayEquipment->findAll(); 
+		$data['spray_equipment'] = $SprayEquipment->modelList(); 
     session()->remove('spray_parcel_id');
     return view('\Fmis\Views\Sprayparcel\add', $data ?? array());
   }
@@ -39,10 +39,10 @@ class SprayParcelController extends BaseController
 		$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		$SprayEquipment = new \Fmis\Models\SprayEquipmentModel(); 
     $Spray = new \Fmis\Models\SprayModel();
-    $data['protective_product'] = $ProtectiveProduct->findAll(); 
+    $data['protective_product'] = $ProtectiveProduct->getPpList(); 
 		$data['unit_measurement'] = $UnitMeasurement->where("practice = 'protection'")->findAll(); 
 		$data['farming_stage'] = $FarmingStage->findAll(); 
-		$data['spray_equipment'] = $SprayEquipment->findAll(); 
+		$data['spray_equipment'] = $SprayEquipment->modelList(); 
     $data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('spray_parcel_id', $id);

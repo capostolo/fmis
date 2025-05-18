@@ -11,7 +11,7 @@ class ProtectiveProductController extends BaseController
   
   public function index()
   {    
-    $data['rows'] = $this->model->findAll();
+    $data['rows'] = $this->model->getPplist();
     return view('\Fmis\Views\Protectiveproduct\list', $data);
   }
 
@@ -20,6 +20,8 @@ class ProtectiveProductController extends BaseController
     session()->remove('protective_product_id');
     $activeModel = new \Fmis\Models\ActiveSubstanceModel();
     $data['activesubstance'] = $activeModel->findAll();
+    $Ecoscheme = new \Fmis\Models\EcoschemeModel();
+  	$data['ecoscheme'] = $Ecoscheme->findAll();
     return view('\Fmis\Views\Protectiveproduct\add', $data ?? array());
   }
 
@@ -29,6 +31,8 @@ class ProtectiveProductController extends BaseController
     
     $activeModel = new \Fmis\Models\ProductActiveModel();
     $data['activesubstance'] = $activeModel->modelList(['product_id' => $id]);
+    $Ecoscheme = new \Fmis\Models\EcoschemeModel();
+  	$data['ecoscheme'] = $Ecoscheme->findAll();
     $data['row'] = $this->model->find($id);
     if($data['row']){
       session()->set('protective_product_id', $id);
@@ -68,7 +72,35 @@ class ProtectiveProductController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Protectiveproduct\list');
+    $id = $this->request->getPost('item_id');
+    try {
+        // Check if record exists
+        $record = $this->model->find($id);
+        if (!$record) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Record not found'
+            ]);
+        }
+
+        // Delete the record
+        if ($this->model->delete($id)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Record deleted successfully'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error deleting record'
+            ]);
+        }
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
   }
   
   public function deleteActive()

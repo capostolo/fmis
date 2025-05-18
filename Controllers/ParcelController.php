@@ -2,7 +2,8 @@
 
 class ParcelController extends BaseController
 {
-
+  protected $model;
+  protected $user;
   public function __construct()
   {
     helper(['form', 'url', 'session', 'calculations']);

@@ -18,7 +18,6 @@ class PruningTypeModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
   public function modelList($where = null)
   {
     $builder = $this->db->table('pruning_type_list');
@@ -28,5 +27,4 @@ class PruningTypeModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\PruningTypeEntity');
   }
-  */
 }

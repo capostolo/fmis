@@ -33,7 +33,7 @@
       <select class='form-control selectpicker' name='protective_product_id' id='protective_product_id' data-live-search='true' data-style='' data-style-base='form-control' data-virtual-scroll='200' required>
         <option value=''><?= lang('Fmis.protective_product_id') ?></option>
         <?php foreach($protective_product As $r) { ?>
-        <option value='<?= $r->id ?>' <?= set_select('protective_product_id', $r->id, $r->id == $row->protective_product_id) ?> data-scheme = '<?= $r->ecoscheme_id ?>' > <?= $r->protective_product_description ?> </option>
+        <option value='<?= $r->id ?>' data-scheme = '<?= $r->ecoscheme_id ?>' > <?= $r->protective_product_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
         <?php } ?>
       </select>
     </div> 
@@ -42,7 +42,7 @@
       <select class='form-control' name='spray_equipment_id' id='spray_equipment_id' required>
         <option value=''><?= lang('Fmis.spray_equipment_id') ?></option>
         <?php foreach($spray_equipment As $r) { ?>
-        <option value='<?= $r->id ?>' <?= set_select('spray_equipment_id', $r->id, $r->id == $row->spray_equipment_id) ?>> <?= $r->spray_equipment_description ?> </option>
+        <option value='<?= $r->id ?>' <?= set_select('spray_equipment_id', $r->id, $r->id == $row->spray_equipment_id) ?>> <?= $r->spray_equipment_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
         <?php } ?>
       </select>
     </div> 
@@ -89,10 +89,10 @@
          <?php foreach($crops As $f){?>
            <tr>
             <td>
-              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->parcel_id ?>" <?= ($f->spray_parcel_id) ? 'checked' : '' ?>/>
+              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>" <?= ($f->spray_parcel_id) ? 'checked' : '' ?>/>
             </td>
             <td><a href="<?= site_url('crop/'.$f->id) ?>"><?= $f->code ?></a></td>
-            <td class="text-right"><?= $f->location ?></td>
+            <td><?= $f->location ?></td>
             <td><?= $f->poiDescription?></td>
             <td class="text-right"><?= $f->total_area ?></td>
             <td></td>

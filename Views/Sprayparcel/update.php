@@ -22,7 +22,7 @@
         <?php foreach($protective_product As $r) { 
         $protective_product_value = $row->protective_product_id ?? $directive->protective_product_id;
         ?>
-        <option value='<?= $r->id ?>' <?= set_select('protective_product_id', $r->id, $r->id == $protective_product_value) ?> data-scheme = '<?= $r->ecoscheme_id ?>' > <?= $r->protective_product_description ?> </option>
+        <option value='<?= $r->id ?>' <?= set_select('protective_product_id', $r->id, $r->id == $protective_product_value) ?> data-scheme = '<?= $r->ecoscheme_id ?>' > <?= $r->protective_product_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
         <?php } ?>
       </select>
     </div> 
@@ -37,7 +37,7 @@
         <?php foreach($spray_equipment As $r) { 
         $spray_equipment_value = $row->spray_equipment_id ?? $directive->spray_equipment_id;
         ?>
-        <option value='<?= $r->id ?>' <?= set_select('spray_equipment_id', $r->id, $r->id == $spray_equipment_value) ?>> <?= $r->spray_equipment_description ?> </option>
+        <option value='<?= $r->id ?>' <?= set_select('spray_equipment_id', $r->id, $r->id == $spray_equipment_value) ?>> <?= $r->spray_equipment_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
         <?php } ?>
       </select>
     </div> 

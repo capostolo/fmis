@@ -24,7 +24,7 @@
             <?php foreach($work_type As $r) { 
             $work_type_value = $row->work_type_id ?? $directive->work_type_id;
             ?>
-            <option value='<?= $r->id ?>' <?= set_select('work_type_id', $r->id, $r->id == $work_type_value) ?>> <?= $r->work_type_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('work_type_id', $r->id, $r->id == $work_type_value) ?>> <?= $r->work_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 

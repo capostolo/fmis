@@ -74,6 +74,35 @@ class FertiliserController extends BaseController
 
   public function deleteItem()
   {    
-     return view('\Fmis\Views\Fertiliser\list');
+    $id = $this->request->getPost('item_id');
+    try {
+        // Check if record exists
+        $record = $this->model->find($id);
+        if (!$record) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Record not found'
+            ]);
+        }
+
+        // Delete the record
+        if ($this->model->delete($id)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Record deleted successfully'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error deleting record'
+            ]);
+        }
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
   }
+
 }

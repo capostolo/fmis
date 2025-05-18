@@ -19,8 +19,13 @@
 			</div>
 		</div>        
     </div>
-    <div class='col-6'>
+    <div class='col-3'>
     </div>
+    <div class='col-3'>
+	<?php if (auth()->user()->inGroup('admin')) { ?>	
+      <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/farmer/add-from-json') ?>'><?= lang('Fmis.new_json_item');?></a>
+    <?php } ?>
+	</div>
     <div class='col-3'>
       <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/openid-connect') ?>'><?= lang('Fmis.new_item');?></a>
     </div>
@@ -40,6 +45,7 @@
 						<th>Έδρα</th>
 						<th>Τηλέφωνο</th>
 						<th>email</th>
+						<th>ΟΠ</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -52,6 +58,7 @@
 							<td><?= $r->farmer_location?></td>
 							<td><?= $r->farmer_mobile?></td>
 							<td><?= $r->farmer_email?></td>
+							<td><?= $r->po_name ?></td>
 							<td><?php if ($admin) { ?><a role="button" href="#" class="delete-item text-danger" data-name="<?= $r->farmer_firstname.' '.$r->farmer_lastname ?>" data-id="<?= $r->id ?>"><i class="bi bi-trash"></i></a><?php } ?></td>
 						</tr>
 					<?php } ?>

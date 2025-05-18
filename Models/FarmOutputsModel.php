@@ -25,7 +25,6 @@ class FarmOutputsModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
   public function modelList($where = null)
   {
     $builder = $this->db->table('farm_outputs_list');
@@ -35,5 +34,4 @@ class FarmOutputsModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\FarmOutputsEntity');
   }
-  */
 }

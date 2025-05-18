@@ -16,16 +16,24 @@
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped dmtable'>
+			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
-            <th><?= lang('Fmis.protective_product_id') ?> </th>
+            			<th><?= lang('Fmis.protective_product_id') ?> </th>
+						<th width="15%"><?= lang('Fmis.ecoscheme_id');?></th>
+						<th class="text-right"><?= lang('Fmis.actions');?></th>
  					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/protective-product/'.$r->id) ?>" > <?= $r->protective_product_description ?> </a></td>
+							<td><?= $r->code ?> </td>
+							<td class="text-right">
+								<button class="btn btn-default btn-sm delItem" data-controller="protective-product" data-item-id="<?= $r->id ?>">
+									<i class="bi bi-trash"></i>
+								</button>
+							</td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -49,5 +57,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<script src="<?= base_url('js/delete.js') ?>"></script>
 <?= $this->endSection() ?>

@@ -2,11 +2,21 @@
 
 $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($routes) {
 	$routes->get('', 'HomeController::index'); 
+	$routes->get('set-year', 'HomeController::selectYear'); 
+	$routes->post('set-year', 'HomeController::setYear'); 
 	$routes->get('farmer', 'FarmerController::index'); 
 	$routes->get('farmer/new', 'FarmerController::newItem'); 
 	$routes->get('farmer/(:num)', 'FarmerController::showItem/$1', ['filter' => 'restrict-farm']);
 	$routes->get('farmer/pending', 'FarmerController::showPendingDir');
+	$routes->get('farmer/add-from-json', 'FarmerController::addJson');
+	$routes->post('farmer/add-from-json', 'FarmerController::importFromJson');
+	$routes->get('farmer/add-po', 'FarmerController::newPo');
+	$routes->get('farmer/show-po', 'FarmerController::showPo');
+	$routes->post('farmer/add-po', 'FarmerController::savePo');
+	$routes->post('farmer/remove-po', 'FarmerController::removePo');
 	$routes->post('farmer/delete', 'FarmerController::delete');
+	$routes->get('farmer-user/link', 'UserFarmerController::index');
+	$routes->post('farmer-user/link', 'UserFarmerController::linkUserToFarmer');
 	$routes->get('parcel/(:num)', 'ParcelController::showItem/$1', ['filter' => 'restrict-parcel']);
 	$routes->get('fertiliser', 'FertiliserController::index', ['filter' => 'restrict-param']); 
 	$routes->get('fertiliser/new', 'FertiliserController::newItem', ['filter' => 'restrict-param']); 
@@ -43,6 +53,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('fertilisation', 'FertilisationController::saveItem'); 
 	$routes->get('fertilisation/(:num)', 'FertilisationController::showItem/$1'); 
 	$routes->post('fertilisation/delete', 'FertilisationController::deleteItem'); 
+	$routes->get('fertilisation-from-parcel/(:num)', 'FertilisationController::createDirectiveFromParcel/$1'); 
 	$routes->get('fertilisation-parcel', 'FertilisationParcelController::index'); 
 	$routes->get('fertilisation-parcel/new', 'FertilisationParcelController::newItem'); 
 	$routes->post('fertilisation-parcel', 'FertilisationParcelController::saveItem'); 
@@ -60,6 +71,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('trap/(:num)', 'TrapController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('trap/delete', 'TrapController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('mass-trapping', 'MassTrappingController::index'); 
+	$routes->get('mass-trapping-from-parcel/(:num)', 'MassTrappingController::createDirectiveFromParcel/$1');
 	$routes->get('mass-trapping/new', 'MassTrappingController::newItem'); 
 	$routes->post('mass-trapping', 'MassTrappingController::saveItem'); 
 	$routes->get('mass-trapping/(:num)', 'MassTrappingController::showItem/$1'); 
@@ -90,6 +102,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('spray-equipment/(:num)', 'SprayEquipmentController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('spray-equipment/delete', 'SprayEquipmentController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('spray', 'SprayController::index'); 
+	$routes->get('spray-from-parcel/(:num)', 'SprayController::createDirectiveFromParcel/$1');
 	$routes->get('spray/new', 'SprayController::newItem'); 
 	$routes->post('spray', 'SprayController::saveItem'); 
 	$routes->get('spray/(:num)', 'SprayController::showItem/$1'); 
@@ -116,6 +129,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('pruning-equipment/(:num)', 'PruningEquipmentController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('pruning-equipment/delete', 'PruningEquipmentController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('pruning', 'PruningController::index'); 
+	$routes->get('pruning-from-parcel/(:num)', 'PruningController::createDirectiveFromParcel/$1');
 	$routes->get('pruning/new', 'PruningController::newItem'); 
 	$routes->post('pruning', 'PruningController::saveItem'); 
 	$routes->get('pruning/(:num)', 'PruningController::showItem/$1'); 
@@ -152,6 +166,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('plough-equipment/(:num)', 'PloughEquipmentController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('plough-equipment/delete', 'PloughEquipmentController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('soil-management', 'SoilManagementController::index'); 
+	$routes->get('soil-management-from-parcel/(:num)', 'SoilManagementController::createDirectiveFromParcel/$1');
 	$routes->get('soil-management/new', 'SoilManagementController::newItem'); 
 	$routes->post('soil-management', 'SoilManagementController::saveItem'); 
 	$routes->get('soil-management/(:num)', 'SoilManagementController::showItem/$1'); 
@@ -173,6 +188,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('irrigation-equipment/(:num)', 'IrrigationEquipmentController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('irrigation-equipment/delete', 'IrrigationEquipmentController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('irrigation', 'IrrigationController::index'); 
+	$routes->get('irrigation-from-parcel/(:num)', 'IrrigationController::createDirectiveFromParcel/$1');
 	$routes->get('irrigation/new', 'IrrigationController::newItem'); 
 	$routes->post('irrigation', 'IrrigationController::saveItem'); 
 	$routes->get('irrigation/(:num)', 'IrrigationController::showItem/$1'); 
@@ -194,6 +210,7 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('harvest-equipment/(:num)', 'HarvestEquipmentController::showItem/$1', ['filter' => 'restrict-param']); 
 	$routes->post('harvest-equipment/delete', 'HarvestEquipmentController::deleteItem', ['filter' => 'restrict-param']); 
 	$routes->get('harvesting', 'HarvestingController::index'); 
+	$routes->get('harvesting-from-parcel/(:num)', 'HarvestingController::createDirectiveFromParcel/$1');
 	$routes->get('harvesting/new', 'HarvestingController::newItem'); 
 	$routes->post('harvesting', 'HarvestingController::saveItem'); 
 	$routes->get('harvesting/(:num)', 'HarvestingController::showItem/$1'); 
@@ -232,6 +249,8 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->post('farm-outputs', 'FarmOutputsController::saveItem'); 
 	$routes->get('farm-outputs/(:num)', 'FarmOutputsController::showItem/$1'); 
 	$routes->post('farm-outputs/delete', 'FarmOutputsController::deleteItem'); 
+	$routes->get('farm-input-output', 'FarmInputOutputController::index');
+	$routes->get('farm-input-output/download', 'FarmInputOutputController::downloadPdf');	
 	$routes->get('supplier', 'SupplierController::index'); 
 	$routes->get('supplier/new', 'SupplierController::newItem'); 
 	$routes->post('supplier', 'SupplierController::saveItem'); 
@@ -248,8 +267,12 @@ $routes->group('fmis', ['namespace' => 'Fmis\Controllers'], static function ($ro
 	$routes->get('advisor/new', 'AdvisorController::newItem');
 	$routes->get('advisor/(:num)', 'AdvisorController::showItem/$1');
 	$routes->post('advisor', 'AdvisorController::saveItem');
+	$routes->get('po', 'PoController::index', ['filter' => 'restrict-param']); 
+	$routes->get('po/new', 'PoController::newItem', ['filter' => 'restrict-param']); 
+	$routes->post('po', 'PoController::saveItem', ['filter' => 'restrict-param']); 
+	$routes->get('po/(:num)', 'PoController::showItem/$1', ['filter' => 'restrict-param']); 
+	$routes->post('po/delete', 'PoController::deleteItem', ['filter' => 'restrict-param']); 
 	
 	$routes->get('openid-connect', 'OpenIDController::index');
-	$routes->get('eco', 'OpenIDController::getEco');
 });
 	

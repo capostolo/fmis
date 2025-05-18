@@ -24,7 +24,7 @@
             <?php foreach($pruning_type As $r) { 
             $pruning_type_value = $row->pruning_type_id ?? $directive->pruning_type_id;
             ?>
-            <option value='<?= $r->id ?>' <?= set_select('pruning_type_id', $r->id, $r->id == $pruning_type_value) ?>> <?= $r->pruning_type_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('pruning_type_id', $r->id, $r->id == $pruning_type_value) ?>> <?= $r->pruning_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 

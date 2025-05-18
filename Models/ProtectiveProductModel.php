@@ -27,4 +27,15 @@ class ProtectiveProductModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\ProtectiveProductEntity');
   }
+
+  public function getPpList($where = null)
+  {
+    $builder = $this->db->table('pp_list');
+    if($where){
+      $builder->where($where);
+    }
+    $query = $builder->get();
+    return $query->getResult('Fmis\Entities\ProtectiveProductEntity');
+  }
+
 }

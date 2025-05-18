@@ -15,7 +15,7 @@ class FarmOutputsController extends BaseController
       $data['rows'] = $this->model->modelList(['farm_outputs_where' => session()->get('farm_outputs_where')]);
     }
     else{
-      $data['rows'] = $this->model->findAll();
+      $data['rows'] = $this->model->modelList(['farmer_id' => session()->get('farmer_id')]);
     }
     return view('\Fmis\Views\Farmoutputs\list', $data);
   }
@@ -55,6 +55,7 @@ class FarmOutputsController extends BaseController
     
     $item = new \Fmis\Entities\FarmOutputsEntity();
     $item->fill($postdata);
+    $item->farmer_id = session()->get('farmer_id');
     if(session()->get('farm_outputs_id')){
       $item->id = session()->get('farm_outputs_id');
     }

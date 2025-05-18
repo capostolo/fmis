@@ -14,7 +14,7 @@ class PruningBulkController extends BaseController
 	$PruningEquipment = new \Fmis\Models\PruningEquipmentModel(); 
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		
-    $data['pruning_type'] = $PruningType->findAll(); 
+    $data['pruning_type'] = $PruningType->modelList(); 
 	$data['pruning_equipment'] = $PruningEquipment->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 		
@@ -31,7 +31,7 @@ class PruningBulkController extends BaseController
     $FarmingStage = new \Fmis\Models\FarmingStageModel();
     $ParamCatso = new \Fmis\Models\ParamCatsoModel();
 
-    $data['pruning_type'] = $PruningType->findAll();
+    $data['pruning_type'] = $PruningType->modelList();
     $data['pruning_equipment'] = $PruningEquipment->findAll();
     $data['farming_stage'] = $FarmingStage->findAll();
     $data['cultivation_codes'] = $ParamCatso->findAll();
@@ -47,7 +47,7 @@ class PruningBulkController extends BaseController
 	$PruningEquipment = new \Fmis\Models\PruningEquipmentModel(); 
 	$FarmingStage = new \Fmis\Models\FarmingStageModel(); 
 		
-    $data['pruning_type'] = $PruningType->findAll(); 
+    $data['pruning_type'] = $PruningType->modelList(); 
 	$data['pruning_equipment'] = $PruningEquipment->findAll(); 
 	$data['farming_stage'] = $FarmingStage->findAll(); 
 		

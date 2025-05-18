@@ -55,7 +55,7 @@ class ParcelModel extends Model
   }
   
   public function getShortList($where = null){
-    $builder = $this->db->table('crop_list');
+    $builder = $this->db->table('crop_short_list');
     if($where){
       $builder->where($where);
     }

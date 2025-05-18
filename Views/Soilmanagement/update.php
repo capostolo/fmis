@@ -22,7 +22,7 @@
           <select class='form-control' name='work_type_id' id='work_type_id' required>
             <option value=''><?= lang('Fmis.work_type_id') ?></option>
             <?php foreach($work_type As $r) { ?>
-            <option value='<?= $r->id ?>' <?= set_select('work_type_id', $r->id, $r->id == $row->work_type_id) ?>> <?= $r->work_type_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('work_type_id', $r->id, $r->id == $row->work_type_id) ?>> <?= $r->work_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 
@@ -112,10 +112,10 @@
          <?php foreach($crops As $f){?>
            <tr>
             <td>
-              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->parcel_id ?>" <?= ($f->soil_management_parcel_id) ? 'checked' : '' ?>/>
+              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>" <?= ($f->soil_management_parcel_id) ? 'checked' : '' ?>/>
             </td>
             <td><a href="<?= site_url('crop/'.$f->id) ?>"><?= $f->code ?></td>
-            <td class="text-right"><?= $f->location ?></td>
+            <td><?= $f->location ?></td>
             <td><?= $f->poiDescription?></td>
             <td class="text-right"><?= $f->total_area ?></td>
             <td></td>

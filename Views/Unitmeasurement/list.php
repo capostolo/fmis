@@ -16,16 +16,22 @@
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped dmtable'>
+			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
-            <th></th>
+            			<th><?= lang('Fmis.unit_measurement');?></th>
+						<th class="text-right"><?= lang('Fmis.actions');?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/unit-measurement/'.$r->id) ?>" > <?= $r->unit_measurement_description ?> </a></td>
+							<td class="text-right">
+								<button class="btn btn-default btn-sm delItem" data-controller="unit-measurement" data-item-id="<?= $r->id ?>">
+									<i class="bi bi-trash"></i>
+								</button>
+							</td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -49,5 +55,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<script src="<?= base_url('js/delete.js') ?>"></script>
 <?= $this->endSection() ?>

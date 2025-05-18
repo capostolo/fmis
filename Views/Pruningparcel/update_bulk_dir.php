@@ -22,7 +22,7 @@
           <select class='form-control' name='pruning_type_id' id='pruning_type_id' required <?= $disabled ?>>
             <option value=''><?= lang('Fmis.pruning_type_id') ?></option>
             <?php foreach($pruning_type As $r) { ?>
-            <option value='<?= $r->id ?>' <?= set_select('pruning_type_id', $r->id, $r->id == $row->pruning_type_id) ?>> <?= $r->pruning_type_description ?> </option>
+            <option value='<?= $r->id ?>' <?= set_select('pruning_type_id', $r->id, $r->id == $row->pruning_type_id) ?>> <?= $r->pruning_type_description ?><?= !empty($r->code) ? " ($r->code)" : "" ?> </option>
             <?php } ?>
           </select>
         </div> 

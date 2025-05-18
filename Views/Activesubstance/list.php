@@ -16,16 +16,21 @@
  </div>
 	<div class='row mt-3'>
 		<div class='col-12'>
-			<table class='table table-hover table-striped dmtable'>
+			<table class='table table-hover table-striped dtable'>
 				<thead>
 					<tr>
-            <th></th>
-					</tr>
+            			<th><?= lang('Fmis.active_substance');?></th>
+						<th><?= lang('Fmis.actions');?></th>
 				</thead>
 				<tbody>
 					<?php foreach ($rows As $r) { ?>
 						<tr>
 							<td><a href="<?= site_url('fmis/active-substance/'.$r->id) ?>" > <?= $r->description ?> </a></td>
+							<td>
+								<a class="btn btn-default btn-sm delItem" data-controller="fertiliser" data-id="<?= $r->id ?>">
+									<i class="bi bi-trash"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 				</tbody>

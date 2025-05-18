@@ -78,10 +78,10 @@
          <?php foreach($crops As $f){?>
            <tr>
             <td>
-              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->parcel_id ?>" <?= ($f->irrigation_parcel_id) ? 'checked' : '' ?>/>
+              <input type='checkbox' class="selectMe" name='fi_selected[]' value="<?= $f->id ?>" <?= ($f->irrigation_parcel_id) ? 'checked' : '' ?>/>
             </td>
             <td><a href="<?= site_url('crop/'.$f->id) ?>"><?= $f->code ?></a></td>
-            <td class="text-right"><?= $f->location ?></td>
+            <td><?= $f->location ?></td>
             <td><?= $f->poiDescription?></td>
             <td class="text-right"><?= $f->total_area ?></td>
             <td></td>

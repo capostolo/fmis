@@ -18,7 +18,6 @@ class WorkTypeModel extends Model
 
   protected $useTimestamps = false;
 
-  /*
   public function modelList($where = null)
   {
     $builder = $this->db->table('work_type_list');
@@ -28,5 +27,5 @@ class WorkTypeModel extends Model
     $query = $builder->get();
     return $query->getResult('Fmis\Entities\WorkTypeEntity');
   }
-  */
+
 }
