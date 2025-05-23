@@ -20,7 +20,7 @@ class FarmerController extends BaseController
     session()->remove('farmer_location');
     session()->remove('farmer_pen');
     session()->remove('farmer_reg');
-  if (session('magicLogin')) {
+    if (session('magicLogin')) {
       return redirect()->route('change-password')->with('message', lang('Auth.forceChangePassword'));
     }
 	  $data['admin'] = false;

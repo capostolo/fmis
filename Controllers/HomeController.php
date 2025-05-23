@@ -24,7 +24,7 @@ class HomeController extends BaseController
   {    
     $iacs_year = $this->request->getPost('iacs_year');
     session()->set(['iacs_year' => $iacs_year]);
-    return redirect()->to('fmis/farmer');
+    return redirect()->back();
   }
 
 }
