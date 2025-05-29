@@ -22,9 +22,9 @@
     <div class='col-3'>
     </div>
     <div class='col-3'>
-	<?php if (auth()->user()->inGroup('admin')) { ?>	
+	<?php if ($admin || in_groups(['advisor'])): ?>
       <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/farmer/add-from-json') ?>'><?= lang('Fmis.new_json_item');?></a>
-    <?php } ?>
+	  <?php endif; ?>
 	</div>
     <div class='col-3'>
       <a class='btn btn-custom-green form-control' href='<?= site_url('fmis/openid-connect') ?>'><?= lang('Fmis.new_item');?></a>

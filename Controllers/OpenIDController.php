@@ -62,6 +62,11 @@ class OpenIDController extends BaseController
 		$farmerModel->save($farmer);
 		if($farmer_id == 0){	
 			$farmer_id = $farmerModel->getInsertID();
+			$farmerYearModel = new \Fmis\Models\FarmerYearModel();
+			$farmerYear = new \Fmis\Entities\FarmerYearEntity();
+			$farmerYear->farmer_id = $farmer_id;
+			$farmerYear->iacs_year = $data->year;
+			$farmerYearModel->save($farmerYear);
 		}
 
 		//Create new parcel

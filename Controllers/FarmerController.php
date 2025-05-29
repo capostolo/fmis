@@ -20,17 +20,18 @@ class FarmerController extends BaseController
     session()->remove('farmer_location');
     session()->remove('farmer_pen');
     session()->remove('farmer_reg');
+        session()->remove('advisor_id');
     if (session('magicLogin')) {
       return redirect()->route('change-password')->with('message', lang('Auth.forceChangePassword'));
     }
 	  $data['admin'] = false;
     if ($this->user->inGroup('admin')) {
-      $data['rows'] = $this->model->getList();
+      $data['rows'] = $this->model->getList(['iacs_year' => session()->get('iacs_year')]);
 	    $data['admin'] = true;
       return view('\Fmis\Views\Farmer\list', $data);
     }
     else if ($this->user->inGroup('advisor')){
-      $data['rows'] = $this->model->where('advisor_id', user_id())->findAll();
+      $data['rows'] = $this->model->getList(['advisor_id' => user_id(), 'iacs_year' => session()->get('iacs_year')]);
       return view('\Fmis\Views\Farmer\list', $data);
     }
     else if ($this->user->inGroup('user')){
@@ -148,7 +149,14 @@ class FarmerController extends BaseController
         $farmerModel->save($farmer);
         if($farmer_id == 0){    
             $farmer_id = $farmerModel->getInsertID();
+            $farmerYearModel = new \Fmis\Models\FarmerYearModel();
+            $farmerYear = new \Fmis\Entities\FarmerYearEntity();
+            $farmerYear->farmer_id = $farmer_id;
+            $farmerYear->iacs_year = $data->year;
+            $farmerYearModel->save($farmerYear);
         }
+
+      
 
         // Create new parcel
         $parcelModel = new \Fmis\Models\ParcelModel();
